@@ -9,7 +9,7 @@
 /dist
 /tags
 
-*/.sass-cache/
+*/.sass-cache/*
 
 # OS generated files #
 ######################
