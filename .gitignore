@@ -9,6 +9,8 @@
 /dist
 /tags
 
+*/.sass-cache/
+
 # OS generated files #
 ######################
 .DS_Store
