@@ -29,7 +29,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
+		echo $this->Html->css('style');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -37,25 +37,26 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	?>
 </head>
 <body>
-	<div id="container">
+	<div id="container" class="container">
 		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
+			<h1>Lead Deals Productions</h1>
+			<ul>
+				<li><?php echo $this->Html->link('News', array('controller' => 'articles', 'action' => 'index')); ?></li>
+				<li><?php echo $this->Html->link('Projects', array('controller' => 'projects', 'action' => 'index')); ?></li>
+				<li><?php echo $this->Html->link('Contact', array('controller' => 'pages', 'action' => 'display', 'contact')); ?></li>
+			</ul>
 		</div>
-		<div id="content">
-
+		<div id="content" class="container">
 			<?php echo $this->Session->flash(); ?>
-
 			<?php echo $this->fetch('content'); ?>
 		</div>
-		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false)
-				);
-			?>
+		<div id="footer" class="container">
+			<h3>Lead Deals Productions</h3>
+			<p>Copyright <?php echo date('Y'); ?></p>
 		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	<div class="container">
+		<?php echo $this->element('sql_dump'); ?>
+	</div>
 </body>
 </html>
