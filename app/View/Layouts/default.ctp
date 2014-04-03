@@ -28,10 +28,11 @@
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('style');
-
+		echo $this->Html->css('Layout.style');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
+		echo $this->Asset->output();
 	?>
 </head>
 <body>

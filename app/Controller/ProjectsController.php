@@ -2,7 +2,7 @@
 
 class ProjectsController extends AppController {
 	public $name = 'Projects';
-	public $helpers = array('Html', 'Time');
+	public $helpers = array('Time');
 	public function index(){
 		$projects = $this->Project->find('all');
 		$this->set('projects', $projects);
