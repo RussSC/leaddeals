@@ -34,7 +34,7 @@ class AppController extends Controller {
 	public function beforeFilter() {
 		if (Configure::read('maintenance') == 1) {
 			$this->layout = 'ajax';
-			$this->render('/Layouts/maintenance');
+			$this->render('/Layouts/splash');
 			return false;
 		}
 		return parent::beforeFilter();
