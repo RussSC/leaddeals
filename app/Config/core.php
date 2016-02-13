@@ -50,11 +50,11 @@
  *
  * @see ErrorHandler for more information on error handling and configuration.
  */
-	Configure::write('Error', array(
+	Configure::write('Error', [
 		'handler' => 'ErrorHandler::handleError',
 		'level' => E_ALL & ~E_DEPRECATED,
 		'trace' => true
-	));
+	]);
 
 /**
  * Configure the Exception handler used for uncaught exceptions. By default,
@@ -72,15 +72,15 @@
  * - `log` - boolean - Should Exceptions be logged?
  * - `skipLog` - array - list of exceptions to skip for logging. Exceptions that
  *   extend one of the listed exceptions will also be skipped for logging.
- *   Example: `'skipLog' => array('NotFoundException', 'UnauthorizedException')`
+ *   Example: `'skipLog' => ['NotFoundException', 'UnauthorizedException']`
  *
  * @see ErrorHandler for more information on exception handling and configuration.
  */
-	Configure::write('Exception', array(
+	Configure::write('Exception', [
 		'handler' => 'ErrorHandler::handleException',
 		'renderer' => 'ExceptionRenderer',
 		'log' => true
-	));
+	]);
 
 /**
  * Application wide charset encoding
@@ -144,14 +144,14 @@
  * Set to an array of prefixes you want to use in your application. Use for
  * admin or other prefixed routes.
  *
- * 	Routing.prefixes = array('admin', 'manager');
+ * 	Routing.prefixes = ['admin', 'manager'];
  *
  * Enables:
  *	`admin_index()` and `/admin/controller/index`
  *	`manager_index()` and `/manager/controller/index`
  *
  */
-	//Configure::write('Routing.prefixes', array('admin'));
+	//Configure::write('Routing.prefixes', ['admin']);
 
 /**
  * Turn off all caching application-wide.
@@ -217,9 +217,9 @@
  * the cake shell command: cake schema create Sessions
  *
  */
-	Configure::write('Session', array(
+	Configure::write('Session', [
 		'defaults' => 'php'
-	));
+	]);
 
 /**
  * A random string used in security hashing methods.
@@ -286,7 +286,7 @@
  *
  * File storage engine.
  *
- * 	 Cache::config('default', array(
+ * 	 Cache::config('default', [
  *		'engine' => 'File', //[required]
  *		'duration' => 3600, //[optional]
  *		'probability' => 100, //[optional]
@@ -295,7 +295,7 @@
  * 		'lock' => false, //[optional]  use file locking
  * 		'serialize' => true, //[optional]
  * 		'mask' => 0664, //[optional]
- *	));
+ *	]);
  *
  * APC (http://pecl.php.net/package/APC)
  *
@@ -324,9 +324,9 @@
  *		'duration' => 3600, //[optional]
  *		'probability' => 100, //[optional]
  * 		'prefix' => Inflector::slug(APP_DIR) . '_', //[optional]  prefix every cache file with this string
- * 		'servers' => array(
+ * 		'servers' => [
  * 			'127.0.0.1:11211' // localhost, default port 11211
- * 		), //[optional]
+ * 		], //[optional]
  * 		'persistent' => true, // [optional] set this to false for non-persistent connections
  * 		'compress' => false, // [optional] compress data in Memcache (slower, but uses less memory)
  *	));

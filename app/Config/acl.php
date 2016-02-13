@@ -27,14 +27,14 @@
  * 1. In your application you created a User model with the following properties:
  *    username, group_id, password, email, firstname, lastname and so on.
  * 2. You configured AuthComponent to authorize actions via
- *    $this->Auth->authorize = array('Actions' => array('actionPath' => 'controllers/'),...)
+ *    $this->Auth->authorize = ['Actions' => ['actionPath' => 'controllers/'],...]
  *
  * Now, when a user (i.e. jeff) authenticates successfully and requests a controller action (i.e. /invoices/delete)
  * that is not allowed by default (e.g. via $this->Auth->allow('edit') in the Invoices controller) then AuthComponent
  * will ask the configured ACL interface if access is granted. Under the assumptions 1. and 2. this will be
  * done via a call to Acl->check() with
  *
- *    array('User' => array('username' => 'jeff', 'group_id' => 4, ...))
+ *    ['User' => ['username' => 'jeff', 'group_id' => 4, ...]]
  *
  * as ARO and
  *
@@ -44,29 +44,29 @@
  *
  * If the configured map looks like
  *
- *    $config['map'] = array(
+ *    $config['map'] = [
  *       'User' => 'User/username',
  *       'Role' => 'User/group_id',
- *    );
+ *    ];
  *
  * then PhpAcl will lookup if we defined a role like User/jeff. If that role is not found, PhpAcl will try to
  * find a definition for Role/4. If the definition isn't found then a default role (Role/default) will be used to
  * check rules for the given ACO. The search can be expanded by defining aliases in the alias configuration.
  * E.g. if you want to use a more readable name than Role/4 in your definitions you can define an alias like
  *
- *    $config['alias'] = array(
+ *    $config['alias'] = [
  *       'Role/4' => 'Role/editor',
- *    );
+ *    ];
  *
  * In the roles configuration you can define roles on the lhs and inherited roles on the rhs:
  *
- *    $config['roles'] = array(
+ *    $config['roles'] = [
  *       'Role/admin' => null,
  *       'Role/accountant' => null,
  *       'Role/editor' => null,
  *       'Role/manager' => 'Role/editor, Role/accountant',
  *       'User/jeff' => 'Role/manager',
- *    );
+ *    ];
  *
  * In this example manager inherits all rules from editor and accountant. Role/admin doesn't inherit from any role.
  * Lets define some rules:
@@ -102,32 +102,32 @@
  * The role map defines how to resolve the user record from your application
  * to the roles you defined in the roles configuration.
  */
-$config['map'] = array(
+$config['map'] = [
 	'User' => 'User/username',
 	'Role' => 'User/group_id',
-);
+];
 
 /**
  * define aliases to map your model information to
  * the roles defined in your role configuration.
  */
-$config['alias'] = array(
+$config['alias'] = [
 	'Role/4' => 'Role/editor',
-);
+];
 
 /**
  * role configuration
  */
-$config['roles'] = array(
+$config['roles'] = [
 	'Role/admin' => null,
-);
+];
 
 /**
  * rule configuration
  */
-$config['rules'] = array(
-	'allow' => array(
+$config['rules'] = [
+	'allow' => [
 		'*' => 'Role/admin',
-	),
-	'deny' => array(),
-);
+	],
+	'deny' => [],
+];

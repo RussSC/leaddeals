@@ -39,9 +39,9 @@
 		<div id="header">
 			<h1><?php echo $this->Html->link('Lead Deals Productions', '/'); ?></h1>
 			<ul>
-				<li><?php echo $this->Html->link('News', array('controller' => 'articles', 'action' => 'index')); ?></li>
-				<li><?php echo $this->Html->link('Projects', array('controller' => 'projects', 'action' => 'index')); ?></li>
-				<li><?php echo $this->Html->link('Contact', array('controller' => 'pages', 'action' => 'display', 'contact')); ?></li>
+				<li><?php echo $this->Html->link('News', ['controller' => 'articles', 'action' => 'index']); ?></li>
+				<li><?php echo $this->Html->link('Projects', ['controller' => 'projects', 'action' => 'index']); ?></li>
+				<li><?php echo $this->Html->link('Contact', ['controller' => 'pages', 'action' => 'display', 'contact']); ?></li>
 			</ul>
 		</div>
 		<div id="content" class="container">

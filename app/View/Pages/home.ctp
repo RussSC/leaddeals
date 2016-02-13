@@ -165,7 +165,7 @@ You can also add some CSS styles for your pages at: %s.',
 		echo $this->Html->link(
 			sprintf('<strong>%s</strong> %s', __d('cake_dev', 'New'), __d('cake_dev', 'CakePHP 2.0 Docs')),
 			'http://book.cakephp.org/2.0/en/',
-			array('target' => '_blank', 'escape' => false)
+			['target' => '_blank', 'escape' => false]
 		);
 	?>
 </p>
@@ -174,7 +174,7 @@ You can also add some CSS styles for your pages at: %s.',
 		echo $this->Html->link(
 			__d('cake_dev', 'The 15 min Blog Tutorial'),
 			'http://book.cakephp.org/2.0/en/tutorials-and-examples/blog/blog.html',
-			array('target' => '_blank', 'escape' => false)
+			['target' => '_blank', 'escape' => false]
 		);
 	?>
 </p>
