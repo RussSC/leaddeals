@@ -21,3 +21,8 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+
+# Grunt Files
+#############
+/node_modules
+.sublime-grunt.cache
