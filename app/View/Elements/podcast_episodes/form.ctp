@@ -31,6 +31,7 @@ $this->Form->inputDefaults([
 <?php
 $this->Form->inputDefaults($inputDefaults);
 
+echo $this->Form->input('posted');
 
 // Add these fields
 echo $this->Form->input('download_url');
