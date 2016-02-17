@@ -20,6 +20,7 @@
  */
 
 App::uses('Controller', 'Controller');
+App::uses('Inflector', 'Utility');
 
 /**
  * Application Controller
@@ -31,12 +32,101 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-	public function beforeFilter() {
-		if (Configure::read('maintenance') == 1) {
-			$this->layout = 'ajax';
-			$this->render('/Layouts/splash');
-			return false;
+	public $components = [
+		'Session',
+		'Cookie',
+		'Auth' => [
+			'loginAction' => [
+				'controller' => 'users', 'action' => 'login',
+				'staff' => false, 'admin' => false, 'ajax' => false, 'json' => false, 'plugin' => false, 
+			],
+			'ajaxLogin' => [
+				'controller' => 'users', 'action' => 'login',
+				'staff' => false, 'admin' => false, 'ajax' => false, 'json' => false, 'plugin' => false
+			],
+			'logoutRedirect' => [
+				'controller' => 'users', 'action' => 'logout',
+				'staff' => false, 'admin' => false, 'ajax' => false, 'json' => false, 'plugin' => false
+			],
+			'loginRedirect' => [
+				'controller' => 'users', 'action' => 'you', 
+				'staff' => false, 'admin' => false, 'ajax' => false, 'json' => false, 'plugin' => false
+			],
+			'authError' => 'Sorry, you do not have access to this page',
+			'authorize' => ['Controller'],
+			'authenticate' => [
+				'Form' => ['userModel' => 'User', 'fields' => ['username' => 'email']],
+			]
+		],
+		'Flash',
+		'LayoutData',
+		'RememberMe',
+		'RequestHandler',
+	];
+
+	public $helpers = [
+		'Html' => [
+			'className' => 'BoostCake.BoostCakeHtml',
+		],
+		'Form' => [
+			'className' => 'AppForm',
+		],
+		'Paginator' => [
+			'className' => 'BoostCake.BoostCakePaginator',
+		],
+		'Layout.Bootstrap',
+		'CakeAssets.Asset',
+	];
+
+	public function beforeFilter($options = []) {
+		$params = $this->request->params;
+
+		$action = $params['action'];
+		$prefix = null;
+		if (!empty($params['prefix'])) {
+			$prefix = $params['prefix'];
+			$this->layout = $prefix;
+			$action = substr($action, strlen($prefix) + 1);
+			$this->layout .= '/' . $action;
+
+			foreach (["$prefix/$action", $prefix] as $layout) {
+				if ($this->LayoutData->checkLayout($layout)) {
+					$this->layout = $layout;
+					break;
+				}
+			}
 		}
-		return parent::beforeFilter();
+		if (empty($prefix)) {
+			//exit($prefix);
+			$this->Auth->allow();
+		}
+		return parent::beforeFilter($options);
+	}
+
+	public function beforeRender($options = []) {
+		$this->setNavMenu();
+		return parent::beforeRender($options);
+	}
+
+	public function isAuthorized() {
+		$allow = false;
+		if (empty($this->params['prefix'])) {
+			$allow = true;
+		} else {
+			if ($this->params['prefix'] == 'admin' && $this->Auth->user('is_admin')) {
+				$allow = true;
+			}
+		}
+		return $allow;
+	}
+
+	private function setNavMenu() {
+		$menu = [
+			// ['News', ['controller' => 'articles', 'action' => 'index']],
+			//['Projects', ['controller' => 'projects', 'action' => 'index']],
+			['Podcasts', ['controller' => 'podcasts', 'action' => 'index']],
+			['Contact', ['controller' => 'pages', 'action' => 'display', 'contact']],
+		];
+		$this->set('navMenu', $menu);
 	}
 }
