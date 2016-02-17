@@ -1,0 +1,27 @@
+.media-list {
+	overflow: hidden;
+	> a.media {
+		margin: 0;
+	}
+}
+.panel > .media-list {
+	margin-bottom: 0;
+}
+
+a.media {
+	display: block;
+	overflow: hidden;
+	text-decoration: none;
+	&:hover {
+		background-color: $gray-lighter;
+	}
+}
+
+.media {
+	& > img.media-object, & > a > img.media-object {
+		max-width: 33%;
+	}
+	&.active {
+		background-color: $gray-lighter;
+	}
+}

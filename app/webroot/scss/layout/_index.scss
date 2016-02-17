@@ -1,0 +1,24 @@
+
+#content {
+	padding-top: $line-height-computed;
+	> .breadcrumb {
+		margin-top: -$line-height-computed;
+	}
+}
+
+.layout-slim {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+#header, #content, #footer {
+	position: relative;
+	z-index: 1;
+}
+#header, #footer {
+	z-index: 2;
+}
+
+
+@import "header";
+@import "footer";

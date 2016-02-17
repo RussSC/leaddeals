@@ -1,0 +1,78 @@
+$layout-header-height: 60px;
+
+#header {
+	background-color: black;
+	color: white;
+}
+@media (min-width: $grid-float-breakpoint) {
+	#header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+	body {
+		margin-top: $layout-header-height;
+	}
+}
+
+.layout-header {
+	overflow: hidden;
+	&-logo {
+		float: left;
+		height: $layout-header-height;
+		> a > img {
+			height: 100%;	
+		}
+		margin-right: 10px;
+	}
+	&-body {
+		overflow: hidden;
+	}
+	&-title {
+		margin: 0;
+		padding: 0;
+		line-height: $layout-header-height;
+		display: inline-block;
+		vertical-align: top;
+		font-size: $font-size-large;
+		font-weight: bold;
+		margin-right: 10px;
+		> a {
+			color: white;
+		}
+	}
+
+	&-nav {
+		&, & > li {
+			display: inline-block;
+			vertical-align: top;
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+		}
+		& > li > a {
+			display: block;
+			line-height: $layout-header-height;
+			text-decoration: none;
+			padding: 0 $padding-base-horizontal;
+			font-size: $font-size-large;
+			font-weight: normal;
+			color: white;
+			opacity: .75;
+			&:hover {
+				opacity: 1;
+			}
+		}
+		& > li.active {
+			> a {
+				background-color: #FFF;
+				color: $text-color;
+			}
+		}
+	}
+	&-login {
+		float: right;
+		line-height: $layout-header-height;
+	}
+}

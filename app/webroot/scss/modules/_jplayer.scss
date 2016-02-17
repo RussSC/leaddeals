@@ -1,0 +1,64 @@
+$component-padding-vertical: $padding-base-vertical;
+$component-padding-horizontal: $padding-base-horizontal;
+
+$no-button-padding-vertical: $padding-base-vertical + 1;
+$component-padding-no-button-vertical: $component-padding-vertical + $no-button-padding-vertical;
+$progress-bar-height: $line-height-computed;
+
+.jp-audio {
+	width: auto;
+	overflow: hidden;
+}
+.jp-controls {
+	float: left;
+	overflow: hidden;
+	padding: $component-padding-vertical $component-padding-horizontal;
+}
+.jp-progress {
+	overflow: hidden;
+}
+
+// Seek Bar
+.jp-progress {
+	line-height: $progress-bar-height;
+	padding: $component-padding-no-button-vertical 0;
+}
+.jp-seek-bar {
+	height: $progress-bar-height;
+	&.progress {
+		margin-bottom: 0;
+	}
+}
+.jp-play-bar {
+	height: $progress-bar-height;
+	&.progress-bar {
+		@include transition(none);
+	}
+}
+
+// Time Holder
+.jp-current-time, .jp-duration, .jp-toggles {
+	float: left;
+	line-height: $line-height-computed;
+	font-size: $font-size-small;
+}
+.jp-current-time, .jp-duration {
+	padding: $no-button-padding-vertical $padding-small-horizontal;
+	opacity: .5;
+}
+
+
+.jp-volume-controls, .jp-time-holder {
+	float: right;
+	overflow: hidden;
+	padding: $component-padding-vertical $component-padding-horizontal;
+}
+
+.jp-details {
+	margin: $component-padding-vertical $component-padding-horizontal;
+	padding: $padding-small-vertical $padding-small-horizontal;
+	background-color: $gray-lighter;
+	clear: both;
+}
+
+

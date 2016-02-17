@@ -1,0 +1,14 @@
+@import "../utilities/index";
+
+.podcast-view {
+	&-heading-banner {
+		> img {
+			width: 100%;
+		}
+	}
+	&-subtitle {
+		margin: 0;
+		font-size: $font-size-large;
+		font-weight: normal;
+	}
+}

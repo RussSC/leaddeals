@@ -1,0 +1,21 @@
+$panel-admin-border: $orange;
+$panel-admin-text:	#FFF;
+$panel-admin-heading-bg: $orange;
+
+.panel-admin {
+  @include panel-variant($panel-admin-border, $panel-admin-text, $panel-admin-heading-bg, $panel-admin-border);
+}
+.panel-heading {
+	.btn {
+		margin-top: -$padding-base-vertical;
+	}
+	.btn-lg {
+		margin-top: -$padding-large-vertical;
+	}
+	.btn-sm {
+		margin-top: -$padding-small-vertical;
+	}
+	.btn-xs {
+		margin-top: -$padding-xs-vertical;
+	}
+}
