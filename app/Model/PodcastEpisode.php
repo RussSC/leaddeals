@@ -23,32 +23,28 @@ class PodcastEpisode extends AppModel {
 		return parent::afterSave($created, $options);
 	}
 
-	public function findNeighbors($id) {
-		$result = $this->find('first', [
-			'fields' => '*',
-			'joins' => [
-				[
-					'table' => 'podcast_episodes',
-					'alias' => 'NextEpisode',
-					'type' => 'LEFT',
-					'conditions' => [
-						'NextEpisode.podcast_id = ' . $this->escapeField('podcast_id'),
-						'NextEpisode.episode_number = ' . $this->escapeField('episode_number') . ' + 1',
-					]
-				], [
-					'table' => 'podcast_episodes',
-					'alias' => 'PrevEpisode',
-					'type' => 'LEFT',
-					'conditions' => [
-						'PrevEpisode.podcast_id = ' . $this->escapeField('podcast_id'),
-						'PrevEpisode.episode_number = ' . $this->escapeField('episode_number') . ' - 1',
-					]
-				]
-			],
+	public function findNeighbors($id, $query = []) {
+		$query['fields'] = '*';
+		$query['joins'][] = [
+			'table' => 'podcast_episodes',
+			'alias' => 'NextEpisode',
+			'type' => 'LEFT',
 			'conditions' => [
-				$this->escapeField() => $id,
+				'NextEpisode.podcast_id = ' . $this->escapeField('podcast_id'),
+				'NextEpisode.episode_number = ' . $this->escapeField('episode_number') . ' + 1',
 			]
-		]);
+		];
+		$query['joins'][] =  [
+			'table' => 'podcast_episodes',
+			'alias' => 'PrevEpisode',
+			'type' => 'LEFT',
+			'conditions' => [
+				'PrevEpisode.podcast_id = ' . $this->escapeField('podcast_id'),
+				'PrevEpisode.episode_number = ' . $this->escapeField('episode_number') . ' - 1',
+			]
+		];
+		$query['conditions'][$this->escapeField()] = $id;
+		$result = $this->find('first', $query);
 
 		$return = [];
 		foreach (['prev' => 'PrevEpisode', 'next' => 'NextEpisode'] as $key => $field) {

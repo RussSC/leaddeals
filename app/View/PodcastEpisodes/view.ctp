@@ -43,13 +43,8 @@ $pagerNav = [
 
 					</div>
 
-					<div class="podcast-episode-view-player">
-						<?php echo $this->element('jplayer/player', [
-							'title' => $podcastEpisode['PodcastEpisode']['full_title'],
-							'file' => $podcastEpisode['PodcastEpisode']['download_url'],
-						]); ?>
-					</div>
-
+					<?php echo $this->element('podcast_episodes/player'); ?>
+					
 					<div class="podcast-episode-view-body">
 						<?php echo nl2br($podcastEpisode['PodcastEpisode']['description']); ?>		
 					</div>
@@ -79,7 +74,7 @@ $pagerNav = [
 			<div class="panel-heading">
 				<div class="panel-title">Recent Episodes</div>
 			</div>
-			<?php echo $this->element('podcast_episodes/thumbnail_link_list', [
+			<?php echo $this->element('podcast_episodes/thumbnail_media_list', [
 				'result' => $recentEpisodes,
 			]); ?>
 		</div>

@@ -78,7 +78,7 @@
 			<div class="panel-heading">
 				<div class="panel-title">Recent Episodes</div>
 			</div>
-			<?php echo $this->element('podcast_episodes/thumbnail_link_list', [
+			<?php echo $this->element('podcast_episodes/thumbnail_media_list', [
 				'result' => $recentEpisodes,
 			]); ?>
 		</div>

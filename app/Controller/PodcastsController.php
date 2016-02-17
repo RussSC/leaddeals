@@ -27,6 +27,9 @@ class PodcastsController extends AppController {
 				'public' => !$this->Auth->user('is_admin'),
 				'conditions' => [
 					'PodcastEpisode.podcast_id' => $id,
+				],
+				'order' => [
+					'PodcastEpisode.episode_number' => 'DESC',
 				]
 			]
 		];
