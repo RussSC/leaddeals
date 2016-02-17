@@ -1,60 +1,65 @@
 <?php
-/**
- *
- *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       app.View.Layouts
- * @since         CakePHP(tm) v 0.10.0.1076
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
+$socialMedia = [
+	'Facebook' => [
+		'icon' => '<i class="fa fa-facebook"></i>',
+		'url' => 'https://',
+	],
+	'Twitter' => [
+		'icon' => '<i class="fa fa-twitter"></i>',
+		'url' => 'htts://',
+	]
+];
 
-?>
-<!DOCTYPE html>
-<html>
-<head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $title_for_layout; ?>
-	</title>
-	<?php
-		echo $this->Html->meta('icon');
+echo $this->element('layout_data/crumbs');
 
-		echo $this->Html->css('style');
-
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
-	?>
-</head>
-<body>
-	<div id="container" class="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link('Lead Deals Productions', '/'); ?></h1>
-			<ul>
-				<li><?php echo $this->Html->link('News', ['controller' => 'articles', 'action' => 'index']); ?></li>
-				<li><?php echo $this->Html->link('Projects', ['controller' => 'projects', 'action' => 'index']); ?></li>
-				<li><?php echo $this->Html->link('Contact', ['controller' => 'pages', 'action' => 'display', 'contact']); ?></li>
-			</ul>
+$this->extend('html');
+$this->start('header'); ?>
+	<div class="layout-header">
+		<div class="layout-header-logo">
+			<?php echo $this->Html->image('layout/logo-sq.jpg', [
+				'url' => '/',
+			]); ?>
 		</div>
-		<div id="content" class="container">
-			<?php echo $this->Session->flash(); ?>
-			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer" class="container">
-			<h3>Lead Deals Productions</h3>
-			<p>Copyright <?php echo date('Y'); ?></p>
+		<div class="layout-header-body">
+			<h1 class="layout-header-title"><?php echo $this->Html->link('Lead Deals', '/'); ?></h1>
+			<?php echo $this->Bootstrap->linkList($navMenu, ['class' => 'layout-header-nav', 'urlActive' => true]); ?>
+
+			<div class="layout-header-login">
+				<?php if ($this->Session->check('Auth.User.id')): ?>
+					<?php echo $this->Html->link(
+						$this->Session->read('Auth.User.name'),
+						['controller' => 'users', 'action' => 'view', $this->Session->read('Auth.User.id')]
+					); ?>
+
+					<?php echo $this->Html->link(
+						'Log out',
+						['controller' => 'users', 'action' => 'logout']
+					); ?>
+				<?php else: ?>
+					<?php echo $this->Html->link('Login',
+						['controller' => 'users', 'action' => 'login']
+					); ?>
+				<?php endif; ?>
+			</div>
 		</div>
 	</div>
-	<div class="container">
-		<?php echo $this->element('sql_dump'); ?>
+<?php $this->end();
+
+$this->start('footer'); ?>
+	<div class="layout-footer">
+		<?php echo $this->Bootstrap->linkList($navMenu, ['class' => 'layout-footer-nav', 'urlActive' => true]); ?>
+		<h3>Lead Deals Productions</h3>
+		<p>Copyright <?php echo date('Y'); ?></p>
+
+		<div class="layout-footer-social">
+			<?php foreach ($socialMedia as $title => $config): 
+				echo $this->Html->link(
+					$config['icon'], $config['url'], [
+						'escape' => false,
+					]); 
+			endforeach; ?>
+		</div>
 	</div>
-</body>
-</html>
+<?php $this->end();
+
+echo $this->fetch('content');
