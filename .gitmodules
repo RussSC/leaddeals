@@ -1,0 +1,18 @@
+[submodule "app/Plugin/FormData"]
+	path = app/Plugin/FormData
+	url = https://github.com/jamiebclark/FormData.git
+[submodule "app/Plugin/CakeAssets"]
+	path = app/Plugin/CakeAssets
+	url = https://github.com/jamiebclark/CakeAssets.git
+[submodule "app/Plugin/TalkBack"]
+	path = app/Plugin/TalkBack
+	url = https://github.com/jamiebclark/TalkBack.git
+[submodule "app/Plugin/Uploadable"]
+	path = app/Plugin/Uploadable
+	url = https://github.com/jamiebclark/Uploadable.git
+[submodule "app/Plugin/BoostCake"]
+	path = app/Plugin/BoostCake
+	url = https://github.com/slywalker/cakephp-plugin-boost_cake
+[submodule "app/Plugin/Layout"]
+	path = app/Plugin/Layout
+	url = https://github.com/jamiebclark/Layout.git
