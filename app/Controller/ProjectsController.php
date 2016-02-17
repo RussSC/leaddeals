@@ -2,20 +2,20 @@
 
 class ProjectsController extends AppController {
 	public $name = 'Projects';
+	public $components = ['FormData.Crud'];
 	public $helpers = ['Html', 'Time'];
 	
-	public function index(){
+	public function index (){
 		$projects = $this->Project->find('all');
 		$this->set('projects', $projects);
 	}
 
-	public function view($id=null){
+	public function view ($id = null){
 		$project = $this->Project->find('first', [
 			'conditions' => [
 				'Project.id' => $id
 			]
 		]);
-		
 		$this->set('project', $project);
 	}
 }

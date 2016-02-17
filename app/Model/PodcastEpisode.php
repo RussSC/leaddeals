@@ -1,0 +1,118 @@
+<?php
+class PodcastEpisode extends AppModel {
+	public $name = 'PodcastEpisode';
+	public $actsAs = [
+		'Uploadable.ContainFieldUpload',
+		'Uploadable.FieldUpload' => [
+			'banner' => [],
+		],
+		'PublicConditions'
+	];
+	public $hasMany = ['PodcastEpisodeDownload'];
+	public $belongsTo = [
+		'Podcast' => [
+			'counterCache' => 'podcast_episode_count',
+		]
+	];
+
+	public $hasAndBelongsToMany = ['User'];
+
+	public function afterSave($created, $options = []) {
+		$this->setTitle($this->id);
+		$this->setDuration($this->id);
+		return parent::afterSave($created, $options);
+	}
+
+	public function findNeighbors($id) {
+		$result = $this->find('first', [
+			'fields' => '*',
+			'joins' => [
+				[
+					'table' => 'podcast_episodes',
+					'alias' => 'NextEpisode',
+					'type' => 'LEFT',
+					'conditions' => [
+						'NextEpisode.podcast_id = ' . $this->escapeField('podcast_id'),
+						'NextEpisode.episode_number = ' . $this->escapeField('episode_number') . ' + 1',
+					]
+				], [
+					'table' => 'podcast_episodes',
+					'alias' => 'PrevEpisode',
+					'type' => 'LEFT',
+					'conditions' => [
+						'PrevEpisode.podcast_id = ' . $this->escapeField('podcast_id'),
+						'PrevEpisode.episode_number = ' . $this->escapeField('episode_number') . ' - 1',
+					]
+				]
+			],
+			'conditions' => [
+				$this->escapeField() => $id,
+			]
+		]);
+
+		$return = [];
+		foreach (['prev' => 'PrevEpisode', 'next' => 'NextEpisode'] as $key => $field) {
+			$return[$key] = !empty($result[$field]['id']) ? [$this->alias => $result[$field]] : null;
+		}
+		return $return;
+	}
+
+/**
+ * Records a download of a podcast episode
+ *
+ * @param int $id The podcast episode id
+ * @param string $p The IP address of the download
+ * @return bool;
+ **/
+	public function setDownloaded($id, $ip = null) {
+		return $this->PodcastEpisodeDownload->save([
+			'podcast_episode_id' => $id,
+			'ip' => $ip,
+		]);
+	}
+
+/**
+ * Uses the individual components of an episode's duration to calculate the full length in minutes
+ *
+ * @param int $id The episode id
+ * @return bool;
+ **/
+	protected function setDuration($id) {
+		$result = $this->read(['duration_hh', 'duration_mm', 'duration_ss'], $id);
+		$result = $result[$this->alias];
+		$duration = $result['duration_mm'] + 60 * $result['duration_hh'] + $result['duration_ss'] / 60;
+		return $this->save(compact('id', 'duration'), ['callbacks' => false]);
+	}
+
+/**
+ * Updates the various titles after the regular title is updated
+ *
+ * @param int $id The podcast episode number
+ * @return bool;
+ **/
+	protected function setTitle($id) {
+		$result = $this->find('first', [
+			'contain' => ['Podcast'],
+			'conditions' => [
+				$this->escapeField() => $id,
+			]
+		]);
+
+		$data = compact('id');
+		$data['full_title'] = sprintf('%s Episode #%d: "%s"',
+			$result['Podcast']['title'],
+			$result['PodcastEpisode']['episode_number'],
+			$result['PodcastEpisode']['title']
+		);
+		$data['numeric_title'] = sprintf('%d: %s', 
+			$result['PodcastEpisode']['episode_number'],
+			$result['PodcastEpisode']['title']
+		);
+		return $this->save($data, ['callbacks' => false]);
+	}
+
+	public function publicConditions($conditions) {
+		$conditions[$this->escapeField('active')] = 1;
+		return $conditions;
+	}	
+}
