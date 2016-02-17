@@ -1,8 +1,13 @@
 <?php 
+// Directories
 $dir = '/jPlayer-2.9.2/';
 $distDir = $dir . 'dist/';
 $libDir = $dir . 'lib/';
 $jPlayerDir = $distDir . 'jplayer/';
+
+if (empty($playerId)) {
+	$playerId = 'jquery_jplayer_1';
+}
 
 //$this->Html->css($distDir . 'skin/blue.monday/css/jplayer.blue.monday.min', null, ['inline' => false]);
 $this->Html->script([
@@ -16,7 +21,7 @@ $files = [
 
 $this->Html->scriptStart(['inline' => false]); ?>
 $(document).ready(function(){
-	$("#jquery_jplayer_1").jPlayer({
+	$("#<?php echo $playerId;?>").jPlayer({
 		ready: function (event) {
 			$(this).jPlayer("setMedia", {
 				title: "<?php echo addslashes($title); ?>",
@@ -36,7 +41,7 @@ $(document).ready(function(){
 });
 <?php $this->Html->scriptEnd(); ?>
 
-<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+<div id="<?php echo $playerId;?>" class="jp-jplayer"></div>
 <div id="jp_container_1" class="jp-audio panel panel-default" role="application" aria-label="media player">
 	<div class="jp-type-single">
 		<div class="jp-gui jp-interface">

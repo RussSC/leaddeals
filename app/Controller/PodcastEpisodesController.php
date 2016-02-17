@@ -13,7 +13,9 @@ class PodcastEpisodesController extends AppController {
 		$this->Crud->read($id, [
 			'public' => !$this->Auth->user('is_admin'),
 		]);
-		$this->set('neighbors', $this->PodcastEpisode->findNeighbors($id));
+		$this->set('neighbors', $this->PodcastEpisode->findNeighbors($id, [
+			'public' => !$this->Auth->user('is_admin'),
+		]));
 
 		$recentEpisodes = $this->PodcastEpisode->find('all', [
 			'public' => !$this->Auth->user('is_admin'),
@@ -21,7 +23,13 @@ class PodcastEpisodesController extends AppController {
 			'limit' => 10,
 		]);
 		$this->set(compact('recentEpisodes'));
+	}
 
+	public function player($id = null) {
+		$this->Crud->read($id, [
+			'public' => !$this->Auth->user('is_admin'),
+		]);
+		$this->layout = 'popup';
 	}
 
 	public function add($podcastId = null) {

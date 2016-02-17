@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "popup.css",
+	"sources": [
+		"../../scss/views/popup.scss"
+	],
+	"mappings": "AAAA,OAAO,CAAE,OAAO,CAAE,WAAW,AAAC,CAC7B,OAAO,CAAE,IAAK,CACd,KAAK,CAAE,CAAE,CACT,MAAM,CAAE,CAAE,CACV,QAAQ,CAAE,QAAS,CACnB,AACD,IAAI,AAAC,CACJ,MAAM,CAAE,CAAE,CACV",
+	"names": []
+}
