@@ -23,7 +23,8 @@ $this->Html->css([
 
 $this->Html->script([
 	'//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js',
-	'//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'
+	'//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js',
+	'script',
 ], ['inline' => false, 'block' => 'jsFirst']);
 
 // TypeKit
@@ -42,9 +43,6 @@ $this->Html->scriptStart(['inline' => false]); ?>
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
-
-		echo $this->Html->css('style');
-
 		echo $this->fetch('meta');
 		//echo $this->fetch('css');
 		//echo $this->fetch('script');

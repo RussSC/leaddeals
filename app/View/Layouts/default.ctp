@@ -1,4 +1,9 @@
 <?php
+
+$this->Html->css([
+	'style',
+], null, ['inline' => false, 'block' => 'cssFirst']);
+
 $socialMedia = [
 	'Facebook' => [
 		'icon' => '<i class="fa fa-facebook"></i>',
