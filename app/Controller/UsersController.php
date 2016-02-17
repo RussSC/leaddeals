@@ -2,6 +2,8 @@
 class UsersController extends AppController {
 	public $components = ['FormData.Crud'];
 	public $helpers = ['Uploadable.FieldUploadImage', 'Layout.Table'];
+	
+	public $layout = 'default_container';
 
 	public function beforeRender($options = []) {
 		parent::beforeRender($options);
@@ -12,6 +14,13 @@ class UsersController extends AppController {
 
 	private function _isEditor($id) {
 		return $this->User->isEditor($id, $this->Auth->user('id'));
+	}
+
+	public function _afterSaveData($created) {
+		if ($created) {
+			$user = $this->User->read();
+			$this->Auth->login($user['User']);
+		}
 	}
 
 	private function _authorizeEditor($id) {
@@ -36,7 +45,7 @@ class UsersController extends AppController {
 	}
 
 	public function view($id = null) {
-		$this->Crud->read($id);
+		$this->Crud->read($id, ['contain' => ['Podcast']]);
 	}
 
 	public function you() {
