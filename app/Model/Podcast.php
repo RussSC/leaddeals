@@ -39,6 +39,17 @@ class Podcast extends AppModel {
 		return $episodeCount + 1;
 	}
 
+	public function isEditor($id, $userId) {
+		$result = $this->find('first', [
+			'contain' => ['PodcastsUser' => [
+				'conditions' => ['PodcastsUser.user_id' => $userId],
+			]],
+			'conditions' => [
+				$this->escapeField() => $id,
+			]
+		]);
+		return !empty($result['PodcastsUser']);
+	}
 /**
  * Gets a slug of the podcast
  *
