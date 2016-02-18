@@ -53,6 +53,10 @@ class PodcastEpisode extends AppModel {
 		return $return;
 	}
 
+	public function isEditor($id, $userId) {
+		$result = $this->read('podcast_id', $id);
+		return $this->Podcast->isEditor($result['PodcastEpisode']['podcast_id'], $userId);
+	}
 /**
  * Records a download of a podcast episode
  *

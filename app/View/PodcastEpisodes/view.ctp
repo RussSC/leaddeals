@@ -44,7 +44,7 @@ $pagerNav = [
 					</div>
 
 					<?php echo $this->element('podcast_episodes/player'); ?>
-					
+
 					<div class="podcast-episode-view-body">
 						<?php echo nl2br($podcastEpisode['PodcastEpisode']['description']); ?>		
 					</div>
@@ -68,6 +68,11 @@ $pagerNav = [
 				</div>
 			</div>
 		</div>
+		<?php if (!empty($isEditor)): 
+			echo $this->element('editor_panel', [
+				'actions' => ['edit', 'delete'],
+			]);
+		endif ?>
 	</div>
 	<div class="col-sm-4">
 		<div class="panel panel-default">

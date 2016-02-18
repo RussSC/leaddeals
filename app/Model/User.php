@@ -43,11 +43,21 @@ class User extends AppModel {
 	}
 
 	public function isEditor($id, $currentUserId) {
-		$currentUser = $this->read('is_admin', $currentUserId);
-		if (!empty($currentUser[$this->primaryKey]['is_admin'])) {
+		if ($this->isAdmin($currentUserId)) {
 			return true;
 		}
 		$user = $this->read('id', $id);
 		return $currentUserId == $user[$this->alias][$this->primaryKey];
+	}
+
+	public function isAdmin($id) {
+		$result = $this->find('first', [
+			'recursive' => -1,
+			'conditions' => [
+				$this->escapeField() => $id,
+				$this->escapeField('is_admin') => 1,
+			]
+		]);
+		return !empty($result);
 	}
 }

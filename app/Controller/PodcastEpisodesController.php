@@ -22,7 +22,9 @@ class PodcastEpisodesController extends AppController {
 			'order' => ['PodcastEpisode.posted' => 'DESC'],
 			'limit' => 10,
 		]);
-		$this->set(compact('recentEpisodes'));
+
+		$isEditor = $this->PodcastEpisode->isEditor($id, $this->Auth->user('id'));
+		$this->set(compact('recentEpisodes', 'isEditor'));
 	}
 
 	public function player($id = null) {
@@ -51,8 +53,7 @@ class PodcastEpisodesController extends AppController {
 
 	public function edit($id = null) {
 		$result = $this->Crud->update($id);
-
-		if (!$this->PodcastEpisode->Podcast->isEditor($result['PodcastEpisode']['podcast_id'], $this->Auth->user('id'))) {
+		if (!$this->PodcastEpisode->isEditor($id, $this->Auth->user('id'))) {
 			$this->Flash->error('You do not have permission to edit this episode', ['redirect' => true]);
 		}
 	}

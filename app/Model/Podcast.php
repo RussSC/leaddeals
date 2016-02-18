@@ -40,6 +40,9 @@ class Podcast extends AppModel {
 	}
 
 	public function isEditor($id, $userId) {
+		if ($this->User->isAdmin($userId)) {
+			return true;
+		}
 		$result = $this->find('first', [
 			'contain' => ['PodcastsUser' => [
 				'conditions' => ['PodcastsUser.user_id' => $userId],
@@ -50,6 +53,7 @@ class Podcast extends AppModel {
 		]);
 		return !empty($result['PodcastsUser']);
 	}
+
 /**
  * Gets a slug of the podcast
  *
