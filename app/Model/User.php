@@ -7,7 +7,8 @@ class User extends AppModel {
 	public $actsAs = [
 		'Uploadable.FieldUpload' => [
 			'thumbnail' => []
-		]
+		],
+		'Uploadable.ContainFieldUpload',
 	];
 
 	public $hasAndBelongsToMany = [

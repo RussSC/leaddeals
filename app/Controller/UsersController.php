@@ -45,7 +45,7 @@ class UsersController extends AppController {
 	}
 
 	public function view($id = null) {
-		$this->Crud->read($id, ['contain' => ['Podcast']]);
+		$result = $this->Crud->read($id, ['contain' => ['Podcast']]);
 	}
 
 	public function you() {

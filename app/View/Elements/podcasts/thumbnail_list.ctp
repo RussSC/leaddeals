@@ -1,12 +1,15 @@
 <div class="thumbnail-list podcast-thumbnail-list">
 	<?php foreach ($podcasts as $podcast): 
-		$url = Router::url(['controller' => 'podcasts', 'action' => 'view', $podcast['Podcast']['id']]);
+		if (!empty($podcast['Podcast'])) {
+			$podcast = $podcast['Podcast'];
+		}
+		$url = Router::url(['controller' => 'podcasts', 'action' => 'view', $podcast['id']]);
 		?>
 		<a href="<?php echo $url; ?>" class="thumbnail-list-item">
-			<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'thumbnail', 'thumbnail-lg', ['class' => 'thumbnail-list-item-img']); ?>
+			<?php echo $this->FieldUploadImage->image($podcast, 'thumbnail', 'thumbnail-lg', ['class' => 'thumbnail-list-item-img']); ?>
 			<div class="thumbnail-list-item-caption">
-				<h2 class="thumbnail-list-item-title"><?php echo $podcast['Podcast']['title']; ?></h2>
-				<?php echo $podcast['Podcast']['description']; ?>
+				<h2 class="thumbnail-list-item-title"><?php echo $podcast['title']; ?></h2>
+				<?php echo $podcast['description']; ?>
 			</div>
 		</a>
 	<?php endforeach; ?>
