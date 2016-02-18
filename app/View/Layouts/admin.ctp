@@ -1,5 +1,5 @@
 <?php
-$this->extend('html');
+$this->extend('default');
 $this->start('header'); ?>
 <h1>Admin Section</h1>
 <?php $this->end();

@@ -9,6 +9,10 @@ class PodcastEpisodesController extends AppController {
 
 	public $layout = 'default_container';
 	
+	public function index() {
+		$this->redirect(['controller' => 'podcasts']);
+	}
+	
 	public function view($id = null) {
 		$this->Crud->read($id, [
 			'public' => !$this->Auth->user('is_admin'),
