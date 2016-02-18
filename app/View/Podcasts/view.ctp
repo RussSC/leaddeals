@@ -24,12 +24,16 @@
 							<?php if (!empty($podcast['User'])): ?>
 								<h3 class="podcast-view-subtitle">
 									<strong>Authors:</strong>
-									<?php foreach ($podcast['User'] as $user):
-										echo $this->Html->link(
+									<?php
+									$users = [];
+									foreach ($podcast['User'] as $user):
+										$users[] = $this->Html->link(
 											$user['name'], 
 											['controller' => 'users', 'action' => 'view', $user['id']]											
 										);
-									endforeach; ?>
+									endforeach; 
+									echo implode(', ', $users);
+									?>
 								</h3>
 							<?php endif; ?>
 
