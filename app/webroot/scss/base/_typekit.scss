@@ -1,0 +1,41 @@
+$loading-icon-size: 120px;
+
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.wf-loading {
+	* {
+		opacity:0;
+	}
+
+	//background: url("../img/icons/ajax-loader.gif") no-repeat center center;
+	height: 100%;
+	overflow: hidden;
+	&:before {
+		font-family: 'FontAwesome';
+		content: $fa-cog;
+		font-size: $loading-icon-size;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -1 * $loading-icon-size / 2;
+		margin-left: -1 * $loading-icon-size / 2;
+		animation: rotate 3s linear infinite;
+		opacity: .05;
+	}
+}
+
+$ease-out: opacity 1s ease-out;
+.wf-active *,
+.wf-inactive * {
+	-webkit-transition: $ease-out;
+	-moz-transition: $ease-out;
+	-o-transition: $ease-out;
+	transition: $ease-out;
+}
