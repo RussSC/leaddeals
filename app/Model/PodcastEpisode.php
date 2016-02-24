@@ -111,6 +111,18 @@ class PodcastEpisode extends AppModel {
 		return $this->save($data, ['callbacks' => false]);
 	}
 
+	public function publicQueryData($query) {
+		$query['joins'][] = [
+			'table' => 'podcasts',
+			'alias' => 'PublicPodcast',
+			'conditions' => [
+				'PublicPodcast.id = ' . $this->escapeField('podcast_id'),
+				'PublicPodcast.active' => 1,
+			]
+		];
+		return $query;
+	}
+
 	public function publicConditions($conditions) {
 		$conditions[$this->escapeField('active')] = 1;
 		return $conditions;
