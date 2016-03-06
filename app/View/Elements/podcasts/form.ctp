@@ -12,9 +12,18 @@ echo $this->Form->input('title');
 echo $this->Form->input('slug');
 echo $this->Form->input('auto_slug');
 
-echo $this->Form->input('description');
+echo $this->Form->input('description',[
+	'afterInput' => '<span class="help-block">NOTE: Avoid swearing or referencing bad stuff in the description. It makes iTunes sad</span>',
+]);
 
+echo $this->Form->input('keywords', [
+	'afterInput' => '<span class="help-block">To assist with finding the podcast</span>',
+]);
 echo $this->Form->input('active');
+echo $this->Form->input('explicit', [
+	'class' => 'checkbox',
+	'afterInput' => '<span class="help-block">Does this podcast contain explicit content?</span>',
+]);
 ?>
 
 <fieldset>
