@@ -20,6 +20,13 @@ class Podcast extends AppModel {
 	];
 
 	public $hasAndBelongsToMany = ['User'];
+
+	public $validate = [
+		'title' => [
+			'rule' => 'notEmpty',
+			'message' => 'Please give this podcast a title',
+		],
+	];
 	
 	public function afterSave($created, $options = []) {
 		$id = $this->id;

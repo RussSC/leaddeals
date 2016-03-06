@@ -17,6 +17,41 @@ class PodcastEpisode extends AppModel {
 
 	public $hasAndBelongsToMany = ['User'];
 
+	public $validate = [
+		'title' => [
+			'rule' => 'notEmpty',
+			'message' => 'Please enter an episode title',
+		],
+		'episode_number' => [
+			'rule' => 'notEmpty',
+			'message' => 'Please enter an episode number',
+		],
+		'posted' => [
+			'rule' => 'notEmpty',
+			'message' => 'Please pick a date when this should post',
+		],
+		'download_url' => [
+			'rule' => 'notEmpty',
+			'message' => 'Please provide a URL where the MP3 is located',
+		],
+		'duration_hh' => [
+			'rule' => 'notEmpty',
+			'message' => 'Please enter a duration',
+		],
+		'duration_mm' => [
+			'rule' => 'notEmpty',
+			'message' => 'Please enter a duration',
+		],
+		'duration_ss' => [
+			'rule' => 'notEmpty',
+			'message' => 'Please enter a duration',
+		],
+		'filesize' => [
+			'rule' => 'notEmpty',
+			'message' => 'Please enter a file size for the MP3',
+		],
+	];
+
 	public function afterSave($created, $options = []) {
 		$this->setTitle($this->id);
 		$this->setDuration($this->id);
