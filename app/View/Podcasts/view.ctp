@@ -14,7 +14,7 @@
 								<div class="pull-right">
 									<?php echo $this->Html->link(
 										'<i class="fa fa-rss"></i> FEED',
-										['controller' => 'podcasts', 'action' => 'feed', $podcast['Podcast']['id']],
+										['controller' => 'podcasts', 'action' => 'feed', 'id' => $podcast['Podcast']['id'], 'slug' => $podcast['Podcast']['slug']],
 										['escape' => false, 'class' => 'btn btn-default', 'title' => 'RSS Feed']
 									); ?>
 

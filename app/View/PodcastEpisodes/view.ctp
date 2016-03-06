@@ -30,7 +30,7 @@ $pagerNav = [
 								); ?>
 								<?php echo $this->Html->link(
 									'<i class="fa fa-rss"></i> FEED',
-									['controller' => 'podcasts', 'action' => 'feed', $podcastEpisode['PodcastEpisode']['podcast_id']],
+									['controller' => 'podcasts', 'action' => 'feed', 'id' => $podcastEpisode['PodcastEpisode']['podcast_id'], 'slug' => $podcastEpisode['Podcast']['slug']],
 									['escape' => false, 'class' => 'btn btn-default', 'title' => 'RSS Feed']
 								); ?>
 
