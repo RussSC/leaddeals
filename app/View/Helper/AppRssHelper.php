@@ -57,6 +57,9 @@ class AppRssHelper extends RssHelper {
 			unset($attrib['namespace']);
 		}
 		$xml = parent::elem($name, $attrib, $content, $endTag);
-		return str_replace($nsSplit, ':', $xml) . "\n";
+		debug(compact('xml'));
+		$xml = str_replace($nsSplit, ':', $xml) . "\n";
+		debug(compact('xml'));
+		return $xml;
 	}
 }
