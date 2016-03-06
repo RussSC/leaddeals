@@ -341,7 +341,7 @@ class RssHelper extends AppHelper {
 		$xml .= '>' . $content . '</' . $name . '>';
 		debug(compact('xml'));
 		$elem = Xml::build($xml, array('return' => 'domdocument'));
-		debug(compact('xml'));
+		
 		$nodes = $elem->getElementsByTagName($bareName);
 		if ($attrib) {
 			foreach ($attrib as $key => $value) {
@@ -354,7 +354,9 @@ class RssHelper extends AppHelper {
 		}
 
 		$xml = $elem->saveXml();
+		debug(compact('xml'));
 		$xml = trim(substr($xml, strpos($xml, '?>') + 2));
+		debug(compact('xml'));
 		return $xml;
 	}
 
