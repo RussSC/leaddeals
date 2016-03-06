@@ -48,7 +48,10 @@ class PodcastsController extends AppController {
 	}
 
 	public function feed($id = null) {
-		$this->Crud->read($id, ['contain' => ['PodcastEpisode']]);
+		$this->Crud->read($id, [
+			'contain' => ['PodcastEpisode'],
+			'public' => true,
+		]);
 		$this->layout = 'rss/default';
 		$this->render('rss/view');
 	}
