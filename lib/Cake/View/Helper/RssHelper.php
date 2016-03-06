@@ -153,8 +153,12 @@ class RssHelper extends AppHelper {
 				}
 			}
 			$elems .= $this->elem($elem, $attributes, $data);
+			debug($elems);
 		}
-		return $this->elem('channel', $attrib, $elems . $content, !($content === null));
+		debug($elems);
+		$out = $this->elem('channel', $attrib, $elems . $content, !($content === null));
+		debug($out);
+		return $out;
 	}
 
 /**
