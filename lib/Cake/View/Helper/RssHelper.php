@@ -153,12 +153,8 @@ class RssHelper extends AppHelper {
 				}
 			}
 			$elems .= $this->elem($elem, $attributes, $data);
-			debug($elems);
 		}
-		debug($elems);
-		$out = $this->elem('channel', $attrib, $elems . $content, !($content === null));
-		debug($out);
-		return $out;
+		return $this->elem('channel', $attrib, $elems . $content, !($content === null));
 	}
 
 /**
@@ -339,25 +335,20 @@ class RssHelper extends AppHelper {
 			$content = '<![CDATA[' . $content . ']]>';
 		}
 		$xml .= '>' . $content . '</' . $name . '>';
-		debug(compact('xml', 'name', 'bareName'));
 		$elem = Xml::build($xml, array('return' => 'domdocument'));
-		debug($elem->saveXml());
 		$nodes = $elem->getElementsByTagName($bareName);
 		if ($attrib) {
 			foreach ($attrib as $key => $value) {
 				$nodes->item(0)->setAttribute($key, $value);
 			}
 		}
-		debug($elem->saveXml());
 		foreach ($children as $child) {
 			$child = $elem->createElement($name, $child);
 			$nodes->item(0)->appendChild($child);
 		}
 
 		$xml = $elem->saveXml();
-		debug(compact('xml'));
 		$xml = trim(substr($xml, strpos($xml, '?>') + 2));
-		debug(compact('xml'));
 		return $xml;
 	}
 

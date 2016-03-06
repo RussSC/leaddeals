@@ -3,6 +3,7 @@ App::uses('RssHelper', 'View/Helper');
 class AppRssHelper extends RssHelper {
 
 	protected $_namespaces = [];
+	protected $_nsSplit = '_____________';
 
 	public function registerNamespaces($namespaces) {
 		foreach ($namespaces as $k => $v) {
@@ -50,16 +51,31 @@ class AppRssHelper extends RssHelper {
 			$attrib = $content['attrib'];
 			unset($content['attrib']);
 		}
-		$nsSplit = '_____________';
+		
 		if (!empty($attrib['namespace']) && is_string($attrib['namespace']) && !empty($this->_namespaces[$attrib['namespace']])) {
-			$name = $attrib['namespace'] . $nsSplit . $name;
+			$name = $attrib['namespace'] . $this->_nsSplit . $name;
 			//debug($name);
 			unset($attrib['namespace']);
 		}
+
+		if (is_string($content)) {
+			$content = $this->_preservePrefixes($content);
+		}
+		debug($content);
 		$xml = parent::elem($name, $attrib, $content, $endTag);
-		debug(compact('xml'));
-		$xml = str_replace($nsSplit, ':', $xml) . "\n";
+		$xml = str_replace($this->_nsSplit, ':', $xml) . "\n";
+		$xml = $this->_restorePrefixes($xml);
 		debug(compact('xml'));
 		return $xml;
+	}
+
+	protected function _preservePrefixes($text) {
+		$text = preg_replace('@<([/]*)([^:]+):@', '<$1$2' . $this->_nsSplit, $text);
+		return $text;
+	}
+
+	protected function _restorePrefixes($text) {
+		$text = preg_replace('@<([/]*)([^:]+)' . $this->_nsSplit . '@', '<$1$2:', $text);
+		return $text;
 	}
 }
