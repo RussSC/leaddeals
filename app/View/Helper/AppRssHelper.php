@@ -53,7 +53,7 @@ class AppRssHelper extends RssHelper {
 		$nsSplit = '_____________';
 		if (!empty($attrib['namespace']) && is_string($attrib['namespace']) && !empty($this->_namespaces[$attrib['namespace']])) {
 			$name = $attrib['namespace'] . $nsSplit . $name;
-			debug($name);
+			//debug($name);
 			unset($attrib['namespace']);
 		}
 		$xml = parent::elem($name, $attrib, $content, $endTag);

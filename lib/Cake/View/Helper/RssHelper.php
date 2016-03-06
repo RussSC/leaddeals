@@ -335,9 +335,7 @@ class RssHelper extends AppHelper {
 			$content = '<![CDATA[' . $content . ']]>';
 		}
 		$xml .= '>' . $content . '</' . $name . '>';
-		debug(compact('xml'));
 		$elem = Xml::build($xml, array('return' => 'domdocument'));
-		debug(compact('xml'));
 		$nodes = $elem->getElementsByTagName($bareName);
 		if ($attrib) {
 			foreach ($attrib as $key => $value) {
