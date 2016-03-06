@@ -34,6 +34,7 @@ class AppRssHelper extends RssHelper {
 		}
 		return parent::document($attrib, $content);
 	}
+
 /**
  * Generates an XML element
  *
@@ -56,6 +57,6 @@ class AppRssHelper extends RssHelper {
 			unset($attrib['namespace']);
 		}
 		$xml = parent::elem($name, $attrib, $content, $endTag);
-		return str_replace($nsSplit, ':', $xml);
+		return str_replace($nsSplit, ':', $xml) . "\n";
 	}
 }

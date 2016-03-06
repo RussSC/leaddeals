@@ -10,5 +10,5 @@ if (!isset($channelData['title'])) {
 }
 $channel = $this->Rss->channel(array(), $channelData, $this->fetch('content'));
 
-echo '<?xml version="1.0" encoding="UTF-8"?>';
+echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 echo $this->Rss->document($documentData, $channel);

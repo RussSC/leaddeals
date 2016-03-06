@@ -25,10 +25,12 @@ $thumbnail = $this->FieldUploadImage->src($podcast['Podcast'], 'thumbnail', 'thu
 $dateFormat = 'D, d Y H:i:s O';
 $this->set('channelData', [
 	'link' => [
-		'namespace' => 'atom',
+		'attrib' => [
+			'namespace' => 'atom',
+			'rel' => 'self',
+			'type' => 'application/rss+xml',
+		],
 		'url' => $feedUrl,
-		'rel' => 'self',
-		'type' => 'application/rss+xml',
 	],
 	'title' => __($podcast['Podcast']['title']),
 	'pubDate' => $this->Rss->time($podcast['Podcast']['created']),
@@ -77,7 +79,7 @@ $this->set('channelData', [
 	'owner' => [
 		'attrib' => ['namespace' => 'itunes'],
 		'value' => 
-			$this->Rss->elem('name', ['namespace' => 'itunes', 'cdata' => true], 'Lead Deals') .
+			$this->Rss->elem('name', ['namespace' => 'itunes'], ['cdata' => true, 'value' => 'Lead Deals']) .
 			$this->Rss->elem('email', ['namespace' => 'itunes'], 'podcasts@lead-deals.com')
 		
 	],
