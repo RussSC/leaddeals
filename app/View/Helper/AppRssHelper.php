@@ -15,6 +15,9 @@ class AppRssHelper extends RssHelper {
 		$this->_namespaces[$ns] = $url;
 	}
 
+	public function cdata($text) {
+		return '<![CDATA[' . $text . ']]>';
+	}
 /**
  * Returns an RSS document wrapped in `<rss />` tags
  *

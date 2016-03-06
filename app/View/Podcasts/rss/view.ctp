@@ -24,9 +24,8 @@ $thumbnail = $this->FieldUploadImage->src($podcast['Podcast'], 'thumbnail', 'thu
 
 $dateFormat = 'D, d Y H:i:s O';
 $this->set('channelData', [
-	'link' => [
+	'atom:link' => [
 		'attrib' => [
-			'namespace' => 'atom',
 			'rel' => 'self',
 			'type' => 'application/rss+xml',
 		],
@@ -35,11 +34,7 @@ $this->set('channelData', [
 	'title' => __($podcast['Podcast']['title']),
 	'pubDate' => $this->Rss->time($podcast['Podcast']['created']),
 	'lastBuildDate' => $this->Rss->time($podcast['Podcast']['modified']),
-	'copyright' => [
-		'attrib' => [], 
-		'cdata' => true, 
-		'value' => ''
-	],
+	'copyright' => $this->Rss->cdata(''),
 	'link' => $viewUrl,
 	'language' => 'en-us',
 	'managingEditor' => 'jamie@lead-deals.com (jamie@lead-deals.com)',
@@ -164,10 +159,6 @@ foreach ($podcast['PodcastEpisode'] as $episode):
 			'cdata' => true,
 			'value' => $subtitle,
 		],
-		'link' => [
-			'attrib' => [],
-			'cdata' => true,
-			'value' => $viewUrl,
-		]
+		'link' => $viewUrl,
 	]);
 endforeach;
