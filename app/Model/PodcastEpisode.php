@@ -78,10 +78,12 @@ class PodcastEpisode extends AppModel {
  * @return bool;
  **/
 	protected function setDuration($id) {
+		$data = compact('id');
 		$result = $this->read(['duration_hh', 'duration_mm', 'duration_ss'], $id);
 		$result = $result[$this->alias];
-		$duration = $result['duration_mm'] + 60 * $result['duration_hh'] + $result['duration_ss'] / 60;
-		return $this->save(compact('id', 'duration'), ['callbacks' => false]);
+		$data['duration'] = $result['duration_mm'] + 60 * $result['duration_hh'] + $result['duration_ss'] / 60;
+		$data['duration_format'] = sprintf('%02d:%02d:%02d', $result['duration_hh'], $result['duration_mm'], $result['duration_ss']);
+		return $this->save($data, ['callbacks' => false]);
 	}
 
 /**

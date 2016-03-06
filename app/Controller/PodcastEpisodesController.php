@@ -45,11 +45,16 @@ class PodcastEpisodesController extends AppController {
 			$this->Flash->error('You do not have permission to add a podcast episode', ['redirect' => true]);
 		}
 
+		$podcast = $this->PodcastEpisode->Podcast->read(null, $podcastId);
+		$podcast = $podcast['Podcast'];
+
 		$default = [
 			'PodcastEpisode' => [
 				'podcast_id' => $podcastId,
 				'episode_number' => $this->PodcastEpisode->Podcast->getNewEpisodeNumber($podcastId),
 				'posted' => date('Y-m-d H:i:s'),
+				'explicit' => $podcast['explicit'],
+				'keywords' => $podcast['keywords'],
 			]
 		];
 		$this->Crud->create(compact('default'));

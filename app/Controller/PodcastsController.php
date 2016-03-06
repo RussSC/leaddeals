@@ -3,7 +3,9 @@ class PodcastsController extends AppController {
 	public $name = 'Podcasts';
 	public $components = ['FormData.Crud'];
 	public $helpers = [
-		'Rss', 
+		'Rss' => [
+			'className' => 'AppRss',
+		], 
 		'Uploadable.FieldUploadImage',
 		'Time',
 	];
