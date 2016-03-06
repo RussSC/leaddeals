@@ -28,8 +28,8 @@ $this->set('channelData', [
 		'attrib' => [
 			'rel' => 'self',
 			'type' => 'application/rss+xml',
+			'href' => $feedUrl,
 		],
-		'url' => $feedUrl,
 	],
 	'title' => __($podcast['Podcast']['title']),
 	'pubDate' => $this->Rss->time($podcast['Podcast']['created']),
