@@ -2,7 +2,7 @@
 $iconReplace = [
 	'view' => '<i class="fa fa-search"></i>',
 	'edit' => '<i class="fa fa-edit"></i>',
-	'delete' => '<i class="fa fa-times"></i>',
+	'delete' => '<i class="fa fa-trash"></i>',
 	'index' => '<i class="fa fa-list"></i>',
 	'add' => '<i class="fa fa-plus"></i>',
 ];
@@ -40,7 +40,12 @@ extract(array_merge($default, compact(array_keys($default))));
 				}
 				$options = ['escape' => false, 'class' => $btnClass];
 				$onClick = $action == 'delete' ? 'Delete this?' : null;
-				echo $this->Html->link($title, $url, $options, $onClick);
+
+				if ($action == 'delete') {
+					echo $this->Form->postLink($title, $url, $options, $onClick);
+				} else {
+					echo $this->Html->link($title, $url, $options, $onClick);
+				}
 			endforeach; 
 			if (!empty($links)):
 				foreach ($links as $link):

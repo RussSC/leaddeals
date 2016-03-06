@@ -70,7 +70,7 @@ $pagerNav = [
 		</div>
 		<?php if (!empty($isEditor)): 
 			echo $this->element('editor_panel', [
-				'actions' => ['edit', 'delete'],
+				'actions' => ['edit', 'delete' => ['prefix' => 'admin']],
 			]);
 		endif ?>
 	</div>
