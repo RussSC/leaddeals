@@ -341,13 +341,14 @@ class RssHelper extends AppHelper {
 		$xml .= '>' . $content . '</' . $name . '>';
 		debug(compact('xml', 'name', 'bareName'));
 		$elem = Xml::build($xml, array('return' => 'domdocument'));
-		
+		debug($elem->saveXml());
 		$nodes = $elem->getElementsByTagName($bareName);
 		if ($attrib) {
 			foreach ($attrib as $key => $value) {
 				$nodes->item(0)->setAttribute($key, $value);
 			}
 		}
+		debug($elem->saveXml());
 		foreach ($children as $child) {
 			$child = $elem->createElement($name, $child);
 			$nodes->item(0)->appendChild($child);
