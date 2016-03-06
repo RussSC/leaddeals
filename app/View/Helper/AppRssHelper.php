@@ -61,11 +61,9 @@ class AppRssHelper extends RssHelper {
 		if (is_string($content)) {
 			$content = $this->_preservePrefixes($content);
 		}
-		debug($content);
 		$xml = parent::elem($name, $attrib, $content, $endTag);
 		$xml = str_replace($this->_nsSplit, ':', $xml) . "\n";
 		$xml = $this->_restorePrefixes($xml);
-		debug(compact('xml'));
 		return $xml;
 	}
 
