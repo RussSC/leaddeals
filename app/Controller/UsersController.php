@@ -53,7 +53,9 @@ class UsersController extends AppController {
 		if (empty($id)) {
 			$this->redirect(['action' => 'index']);
 		}
-		$this->Crud->read($id);
+		$result = $this->Crud->read($id, [
+			'contain' => ['Podcast'],
+		]);
 	}
 
 	/* LOGIN */

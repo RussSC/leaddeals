@@ -17,7 +17,14 @@ class PodcastsController extends AppController {
 			'public' => !$this->Auth->user('is_admin'),
 		];
 		$podcasts = $this->paginate();
-		$this->set(compact('podcasts'));
+		
+		$recentEpisodes = $this->Podcast->PodcastEpisode->find('all', [
+			'public' => !$this->Auth->user('is_admin'),
+			'order' => ['PodcastEpisode.posted' => 'DESC'],
+			'limit' => 10,
+		]);
+
+		$this->set(compact('podcasts', 'recentEpisodes'));
 	}
 
 	public function view($id = null) {

@@ -28,6 +28,24 @@ class Podcast extends AppModel {
 		],
 	];
 	
+	public function beforeFind($query) {
+		$oQuery = $query;
+		if (!empty($query['hasUser'])) {
+			$query['joins'][] = [
+				'table' => 'podcasts_users',
+				'alias' => 'PodcastsUserLink',
+				'conditions' => 'PodcastsUserLink.podcast_id = ' . $this->escapeField(),
+			];
+			$query['conditions']['PodcastsUserLink.user_id'] = $query['hasUser'];
+			unset($query['hasUser']);
+		}
+
+		if ($oQuery != $query) {
+			return $query;
+		}
+		return parent::beforeFind($query);
+	}
+
 	public function afterSave($created, $options = []) {
 		$id = $this->id;
 		$this->updateSlug($id);

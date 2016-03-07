@@ -2,8 +2,18 @@
 
 .podcast-view {
 	&-heading-banner {
-		> img {
+		position: relative;
+		&-img {
 			width: 100%;
+		}
+		&-title {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			padding: $padding-large-vertical $padding-large-horizontal;
+			background-color: rgba(#000, .5);
+			color: white !important;
 		}
 	}
 	&-subtitle {

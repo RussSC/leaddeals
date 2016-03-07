@@ -9,7 +9,7 @@
 			<?php echo $this->FieldUploadImage->image($podcast, 'thumbnail', 'thumbnail-lg', ['class' => 'thumbnail-list-item-img']); ?>
 			<div class="thumbnail-list-item-caption">
 				<h2 class="thumbnail-list-item-title"><?php echo $podcast['title']; ?></h2>
-				<?php echo $podcast['description']; ?>
+				<?php echo $podcast['subtitle']; ?>
 			</div>
 		</a>
 	<?php endforeach; ?>

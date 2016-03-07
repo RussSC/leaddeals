@@ -7,42 +7,54 @@
 				<div class="panel-body">
 					<div class="podcast-view-heading">
 						<div class="podcast-view-heading-banner">
-							<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'banner', 'banner'); ?>
+							<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'banner', 'banner', ['class' => 'podcast-view-heading-banner-img']); ?>
 						</div>
 						<div class="podcast-view-heading-body">
-							<h2 class="podcast-view-title">
-								<div class="pull-right">
-									<?php echo $this->Html->link(
-										'<i class="fa fa-rss"></i> FEED',
-										['controller' => 'podcasts', 'action' => 'feed', 'id' => $podcast['Podcast']['id'], 'slug' => $podcast['Podcast']['slug']],
-										['escape' => false, 'class' => 'btn btn-default', 'title' => 'RSS Feed']
-									); ?>
-
-								</div>
-								<?php echo $podcast['Podcast']['title']; ?>
-							</h2>
-							<?php if (!empty($podcast['User'])): ?>
-								<h3 class="podcast-view-subtitle">
-									<strong>Authors:</strong>
-									<?php
-									$users = [];
-									foreach ($podcast['User'] as $user):
-										$users[] = $this->Html->link(
-											$user['name'], 
-											['controller' => 'users', 'action' => 'view', $user['id']]											
-										);
-									endforeach; 
-									echo implode(', ', $users);
-									?>
-								</h3>
-							<?php endif; ?>
-
-						
 							<div class="media">
-								<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'thumbnail', 'thumbnail-md', ['class' => 'pull-left media-object']); ?>
+								<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'thumbnail', 'thumbnail-md', ['class' => 'pull-right media-object']); ?>
 								<div class="media-body">
+									<h2 class="podcast-view-title">
+										<?php echo $podcast['Podcast']['title']; ?>
+									</h2>
+									<?php if (!empty($podcast['Podcast']['subtitle'])): ?>
+										<h3 class="podcast-view-subtitle">
+											<?php echo $podcast['Podcast']['subtitle']; ?>
+										</h3>
+									<?php endif; ?>
+
 									<?php echo nl2br($podcast['Podcast']['description']); ?>
+									<?php if (!empty($podcast['User'])): ?>
+										<p>
+											<strong>Authors:</strong>
+											<?php
+											$users = [];
+											foreach ($podcast['User'] as $user):
+												$users[] = $this->Html->link(
+													$user['name'], 
+													['controller' => 'users', 'action' => 'view', $user['id']]											
+												);
+											endforeach; 
+											echo implode(', ', $users);
+											?>
+										</p>
+									<?php endif; ?>
 								</div>
+							</div>
+
+							<div class="text-center">
+								<?php echo $this->Html->link(
+									'<i class="fa fa-rss"></i> RSS Feed',
+									['controller' => 'podcasts', 'action' => 'feed', 'id' => $podcast['Podcast']['id'], 'slug' => $podcast['Podcast']['slug']],
+									['escape' => false, 'class' => 'btn btn-default', 'title' => 'RSS Feed', 'target' => '_blank']
+								); ?>
+
+								<?php if (!empty($podcast['Podcast']['itunes_url'])): ?>
+									<?php echo $this->Html->link(
+										'<i class="fa fa-apple"></i> Subscribe via iTunes',
+										$podcast['Podcast']['itunes_url'],
+										['escape' => false, 'class' => 'btn btn-default', 'title' => 'Subscribe via iTunes', 'target' => '_blank']
+									); ?>
+								<?php endif; ?>
 							</div>
 						</div>
 					</div>

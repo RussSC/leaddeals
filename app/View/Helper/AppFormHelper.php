@@ -51,6 +51,14 @@ class AppFormHelper extends BoostCakeFormHelper {
 			$options = $this->append('<i class="fa fa-at"></i>', $options);
 		}
 
+		if (!empty($options['help'])) {
+			if (empty($options['afterInput'])) {
+				$options['afterInput'] = '';
+			}
+			$options['afterInput'] .= '<span class="help-block">' . $options['help'] . '</span>';
+			unset($options['help']);
+		}
+		
 		return parent::input($fieldName, $options);
 	}
 
@@ -58,6 +66,7 @@ class AppFormHelper extends BoostCakeFormHelper {
 		$options = $this->addClass($options, 'btn btn-primary btn-lg');
 		return parent::submit($caption, $options);
 	}
+
 
 	/*
 	public function inputs($fields = null, $blacklist = null, $options = []) {

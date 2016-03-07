@@ -14,7 +14,14 @@ a.media {
 	text-decoration: none;
 	&:hover {
 		background-color: $gray-lighter;
+		.media-object {
+			opacity: .75;
+		}
 	}
+}
+
+.media-title {
+	margin-bottom: 0;
 }
 
 .media {
