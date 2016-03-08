@@ -162,6 +162,7 @@ class PodcastEpisode extends AppModel {
 
 	public function publicConditions($conditions) {
 		$conditions[$this->escapeField('active')] = 1;
+		$conditions[$this->escapeField('posted') . ' <='] = date('Y-m-d H:i:s');
 		return $conditions;
 	}	
 }
