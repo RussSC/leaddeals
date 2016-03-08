@@ -91,7 +91,8 @@ $this->set('channelData', [
 
 ]);
 
-foreach ($podcast['PodcastEpisode'] as $episode):
+foreach ($podcastEpisodes as $episode):
+	$episode = $episode['PodcastEpisode'];
 	$viewUrl = Router::url([
 		'controller' => 'podcast_episodes',
 		'action' => 'view',
