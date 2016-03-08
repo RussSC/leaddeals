@@ -55,7 +55,6 @@ class PodcastsController extends AppController {
 	}
 
 	public function feed($id = null) {
-		echo "TEST";
 		$this->Crud->read($id, [
 			'query' => [
 				'recursive' => -1,
