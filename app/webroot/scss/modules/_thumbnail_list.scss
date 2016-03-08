@@ -35,10 +35,24 @@
 		}
 	}
 }
+
+.thumbnail-list-sm {
+	.thumbnail-list-item {
+		width: 33%;
+		&-title {
+			font-size: $font-size-large;
+		}
+	}
+}
 @media (min-width: $screen-sm-min) {
 	.thumbnail-list {
 		&-item {
 			width: 33%;
+		}
+	}
+	.thumbnail-list-sm {
+		.thumbnail-list-item {
+			width: 25%;
 		}
 	}
 }

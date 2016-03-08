@@ -1,0 +1,9 @@
+.podcast-episode-title {
+	&-podcast-title {
+		color: #CCC;
+		margin-right: 5px;
+		&:after {
+			content: ':';
+		}
+	}
+}

@@ -76,6 +76,7 @@ class AppController extends Controller {
 		],
 		'Layout.Bootstrap',
 		'CakeAssets.Asset',
+		'Podcast',
 	];
 
 	public function beforeFilter($options = []) {

@@ -10,6 +10,9 @@
 		<div class="panel-title">Recent Episodes</div>
 	</div>
 	<div class="panel-body">
+		<?php echo $this->element('podcast_episodes/thumbnail_list', [
+			'podcastEpisodes' => $recentEpisodes,
+		]); ?>
 		<?php echo $this->element('podcast_episodes/thumbnail_media_list', [
 			'result' => $recentEpisodes,
 		]); ?>
