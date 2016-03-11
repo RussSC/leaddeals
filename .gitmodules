@@ -16,3 +16,6 @@
 [submodule "app/Plugin/Layout"]
 	path = app/Plugin/Layout
 	url = https://github.com/jamiebclark/Layout.git
+[submodule "app/Plugin/CenteredContent"]
+	path = app/Plugin/CenteredContent
+	url = https://github.com/jamiebclark/CenteredContent.git
