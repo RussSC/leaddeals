@@ -44,7 +44,7 @@
 							<div class="text-center">
 								<?php echo $this->Html->link(
 									'<i class="fa fa-rss"></i> RSS Feed',
-									['controller' => 'podcasts', 'action' => 'feed', 'id' => $podcast['Podcast']['id'], 'slug' => $podcast['Podcast']['slug']],
+									['controller' => 'podcasts', 'action' => 'feed', 'slug' => $podcast['Podcast']['slug']],
 									['escape' => false, 'class' => 'btn btn-default', 'title' => 'RSS Feed', 'target' => '_blank']
 								); ?>
 
@@ -85,7 +85,7 @@
 						['controller' => 'podcast_episodes', 'action' => 'add', $podcast['Podcast']['id']]
 					]
 				];
-				echo $this->element('editor_panel', compact('actions', 'prefix', 'links'));
+				echo $this->element('editor_panel', compact('actions', 'prefix', 'links') + ['id' => $podcast['Podcast']['id']]);
 			endif; ?>
 		</div>
 	</div>

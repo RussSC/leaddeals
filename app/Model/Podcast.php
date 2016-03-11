@@ -97,6 +97,22 @@ class Podcast extends AppModel {
 		return Inflector::slug($slug);
 	}
 
+	public function findIdFromSlug($slug) {
+		$result = $this->findFromSlug($slug, [
+			'fields' => [$this->escapeField()],
+			'recursive' => -1,
+		]);
+		return $result[$this->alias][$this->primaryKey];
+	}
+
+	public function findFromSlug($slug, $query = []) {
+		$query['conditions'][$this->escapeField('slug')] = trim($slug);
+		if (!($result = $this->find('first', $query))) {
+			throw new NotFoundException('Could not locate podcast slug');
+		}
+		return $result;
+	}
+
 	public function publicConditions($conditions) {
 		$conditions[$this->escapeField('active')] = 1;
 		return $conditions;

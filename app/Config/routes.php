@@ -31,11 +31,16 @@
 	Router::connect('/pages/*', ['controller' => 'pages', 'action' => 'display']);
 
 
-	Router::connect('/podcasts/:slug/:id/:action', 
-		['controller' => 'podcasts'], 
-		['pass' => ['id', 'slug'], 'id' => '[0-9]+']
+	Router::connect('/podcasts/:slug', 
+		['controller' => 'podcasts', 'action' => 'view'], 
+		['pass' => ['slug']]
 	);
-	
+
+	Router::connect('/podcasts/:slug/:action', 
+		['controller' => 'podcasts'], 
+		['pass' => ['slug']]
+	);
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

@@ -28,6 +28,21 @@ class PodcastsController extends AppController {
 	}
 
 	public function view($id = null) {
+		if (empty($id)) {
+			if (!empty($this->request->named['id'])) {
+				$id = $this->request->named['id'];
+			} else if (!empty($this->request->named['slug'])) {
+				$slug = $this->request->named['slug'];
+			}
+		}
+		if (!is_numeric($id) && empty($slug)) {
+			$slug = $id;
+			$id = null;
+		}
+		if (empty($id) && !empty($slug)) {
+			$id = $this->Podcast->findIdFromSlug($slug);
+		}
+	
 		$result = $this->Crud->read($id, [
 			'public' => !$this->Auth->user('is_admin'),
 		]);
@@ -54,7 +69,7 @@ class PodcastsController extends AppController {
 		$this->set(compact('podcastEpisodes', 'recentEpisodes', 'isEditor'));
 
 		$this->set([
-			'title_for_layout' => 'Podcast: ' . $result['Podcast']['title'],
+			'title_for_layout' => '"' . $result['Podcast']['title'] . '" Podcast',
 			'description_for_layout' => $result['Podcast']['description'],
 			'image_for_layout' => $result['Podcast']['uploadable']['banner']['sizes']['banner']['src'],
 		]);

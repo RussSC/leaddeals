@@ -1,6 +1,6 @@
 <div class="media-list">
 <?php foreach ($podcasts as $podcast): 
-	$url = Router::url(['controller' => 'podcasts', 'action' => 'view', $podcast['Podcast']['id']], true);
+	$url = Router::url(['controller' => 'podcasts', 'action' => 'view', 'slug' => $podcast['Podcast']['slug']], true);
 	?>
 	<a href="<?php echo $url; ?>" class="media">
 		<?php echo $this->FieldUploadImage->image(

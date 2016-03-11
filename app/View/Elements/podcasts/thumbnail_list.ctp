@@ -3,7 +3,7 @@
 		if (!empty($podcast['Podcast'])) {
 			$podcast = $podcast['Podcast'];
 		}
-		$url = Router::url(['controller' => 'podcasts', 'action' => 'view', 'id' => $podcast['id'], 'slug' => $podcast['slug']]);
+		$url = Router::url(['controller' => 'podcasts', 'action' => 'view', 'slug' => $podcast['slug']]);
 		?>
 		<a href="<?php echo $url; ?>" class="thumbnail-list-item">
 			<?php echo $this->FieldUploadImage->image($podcast, 'thumbnail', 'thumbnail-lg', ['class' => 'thumbnail-list-item-img']); ?>
