@@ -3,6 +3,8 @@
 .podcast-view {
 	&-heading-banner {
 		position: relative;
+		margin-bottom: $line-height-computed;
+
 		&-img {
 			width: 100%;
 		}
@@ -15,6 +17,9 @@
 			background-color: rgba(#000, .5);
 			color: white !important;
 		}
+	}
+	&-title {
+		margin-top: 0;
 	}
 	&-subtitle {
 		margin: 0;

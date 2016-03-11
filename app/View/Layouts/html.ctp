@@ -41,6 +41,34 @@ $this->Html->scriptStart(['inline' => false]); ?>
 	<title>
 		<?php echo $title_for_layout; ?>
 	</title>
+
+	<?php // Facebook sharing ?>
+	<?php echo $this->Html->meta(['property' => 'og:title', 'content' => trim($title_for_layout)]); ?>
+	<?php echo $this->Html->meta(['property' => 'og:type', 'content' => 'website']); ?>
+	<?php echo $this->Html->meta(['property' => 'og:url', 'content' => Router::url($this->request->here(false), true)]);  ?>
+
+	<?php if (!empty($description_for_layout)):
+			if (!empty($this->DisplayText)) {
+				$description_for_layout = $this->DisplayText->text($description_for_layout);
+			}
+			$description_for_layout = trim(str_replace("\n", '', strip_tags($description_for_layout)));
+			echo $this->Html->meta('description', $description_for_layout);
+			echo $this->Html->meta(['property' => 'og:description', 'content' => $description_for_layout]);
+		endif;
+		if (!empty($image_for_layout)) {
+			echo $this->Html->tag('link', '', array(
+				'rel' => 'image_src',
+				'href' => $image_for_layout
+			));
+			echo $this->Html->meta(['property' => 'og:image', 'content' => $image_for_layout]);
+			if (!empty($image_for_layout_properties)) {
+				foreach ($image_for_layout_properties as $key => $val) {
+					echo $this->Html->meta(['property' => 'og:image:' . $key, 'content' => $val]);
+				}
+			}
+		}
+	?>
+
 	<?php
 		echo $this->Html->meta('icon');
 		echo $this->fetch('meta');
@@ -66,6 +94,9 @@ $this->Html->scriptStart(['inline' => false]); ?>
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">	
+
+
+
 
 </head>
 <body>

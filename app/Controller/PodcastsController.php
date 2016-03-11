@@ -52,6 +52,12 @@ class PodcastsController extends AppController {
 
 		$isEditor = $this->Auth->user('is_admin');
 		$this->set(compact('podcastEpisodes', 'recentEpisodes', 'isEditor'));
+
+		$this->set([
+			'title_for_layout' => 'Podcast: ' . $result['Podcast']['title'],
+			'description_for_layout' => $result['Podcast']['description'],
+			'image_for_layout' => $result['Podcast']['uploadable']['banner']['sizes']['banner']['src'],
+		]);
 	}
 
 	public function feed($id = null) {
