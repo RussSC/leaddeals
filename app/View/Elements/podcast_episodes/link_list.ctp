@@ -13,11 +13,11 @@
 	?>
 	<a href="<?php echo $url; ?>" class="<?php echo $class; ?>">
 		<div class="media-body">
-			<h5 class="media-title">
+			<h4 class="media-title">
 				<?php echo $podcastEpisode['PodcastEpisode']['episode_number']; ?>. 
 				<?php echo $podcastEpisode['PodcastEpisode']['title']; ?>
-			</h5>
-			<?php echo $podcastEpisode['PodcastEpisode']['subtitle']; ?>
+			</h4>
+			<small><?php echo $podcastEpisode['PodcastEpisode']['subtitle']; ?></small>
 		</div>
 	</a>
 <?php endforeach; ?>

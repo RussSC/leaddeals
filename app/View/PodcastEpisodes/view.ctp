@@ -1,6 +1,6 @@
 <?php
 $this->Html->css('views/podcast-episode-view', null, ['inline' => false]);
-$podcastUrl = ['controller' => 'podcasts', 'action' => 'view', $podcastEpisode['Podcast']['id']];
+$podcastUrl = ['controller' => 'podcasts', 'action' => 'view', 'slug' => $podcastEpisode['Podcast']['slug']];
 $pagerNav = [
 	'prev' => ['class' => 'previous', 'title' => '<i class="fa fa-arrow-left"></i> Prev'], 
 	'next' => ['class' => 'next', 'title' => 'Next <i class="fa fa-arrow-right"></i>']
@@ -30,7 +30,7 @@ $pagerNav = [
 								); ?>
 								<?php echo $this->Html->link(
 									'<i class="fa fa-rss"></i> FEED',
-									['controller' => 'podcasts', 'action' => 'feed', 'id' => $podcastEpisode['PodcastEpisode']['podcast_id'], 'slug' => $podcastEpisode['Podcast']['slug']],
+									['controller' => 'podcasts', 'action' => 'feed', 'slug' => $podcastEpisode['Podcast']['slug']],
 									['escape' => false, 'class' => 'btn btn-default', 'title' => 'RSS Feed']
 								); ?>
 
