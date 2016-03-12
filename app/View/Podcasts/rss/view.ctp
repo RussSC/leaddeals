@@ -18,8 +18,8 @@ $ns = [
 	],
 ];
 
-$viewUrl = Router::url(['controller' => 'podcasts', 'action' => 'view', $podcast['Podcast']['id']], true);
-$feedUrl = Router::url(['controller' => 'podcasts', 'action' => 'feed', $podcast['Podcast']['id']], true);
+$viewUrl = Router::url(['controller' => 'podcasts', 'action' => 'view', 'slug' => $podcast['Podcast']['slug']], true);
+$feedUrl = Router::url(['controller' => 'podcasts', 'action' => 'feed', 'slug' => $podcast['Podcast']['slug']], true);
 $thumbnail = $this->FieldUploadImage->src($podcast['Podcast'], 'thumbnail', 'thumbnail-full');
 
 $dateFormat = 'D, d Y H:i:s O';
