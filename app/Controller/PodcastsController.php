@@ -28,21 +28,7 @@ class PodcastsController extends AppController {
 	}
 
 	public function view($id = null) {
-		if (empty($id)) {
-			if (!empty($this->request->named['id'])) {
-				$id = $this->request->named['id'];
-			} else if (!empty($this->request->named['slug'])) {
-				$slug = $this->request->named['slug'];
-			}
-		}
-		if (!is_numeric($id) && empty($slug)) {
-			$slug = $id;
-			$id = null;
-		}
-		if (empty($id) && !empty($slug)) {
-			$id = $this->Podcast->findIdFromSlug($slug);
-		}
-	
+		$id = $this->fetchId($id);	
 		$result = $this->Crud->read($id, [
 			'public' => !$this->Auth->user('is_admin'),
 		]);
@@ -76,6 +62,8 @@ class PodcastsController extends AppController {
 	}
 
 	public function feed($id = null) {
+		$id = $this->fetchId($id);
+
 		$this->Crud->read($id, [
 			'query' => [
 				'recursive' => -1,
@@ -124,4 +112,27 @@ class PodcastsController extends AppController {
 		$users = $this->Podcast->User->find('list');
 		$this->set(compact('users'));
 	}	
+
+	private function fetchId($id = null) {
+		$named = [];
+		if (!empty($this->request->named)) {
+			$named = $this->request->named;
+		}
+		
+		if (empty($id)) {
+			if (!empty($named['id'])) {
+				$id = $named['id'];
+			} else if (!empty($named['slug'])) {
+				$slug = $named['slug'];
+			}
+		}
+		if (!is_numeric($id) && empty($slug)) {
+			$slug = $id;
+			$id = null;
+		}
+		if (empty($id) && !empty($slug)) {
+			$id = $this->Podcast->findIdFromSlug($slug);
+		}
+		return $id;
+	}
 }
