@@ -52,6 +52,12 @@ $this->set('channelData', [
 			'value' => $viewUrl,
 		]
 	],
+	'category' => [
+		'attrib' => [
+			'namespace' => 'itunes',
+			'text' => $podcast['Podcast']['category'],
+		],
+	],
 	'author' => [
 		'attrib' => ['namespace' => 'itunes'],
 		'value' => 'Jamie Clark',

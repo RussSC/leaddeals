@@ -28,6 +28,10 @@ echo $this->Form->input('itunes_url', [
 	'label' => 'iTunes URL',
 	'help' => 'The URL to link back to the iTunes profile',
 ]);
+echo $this->Form->input('category', [
+	'help' => 'A category is needed to add it to iTunes',
+	'default' => 'Comedy',
+]);
 ?>
 
 <fieldset>
