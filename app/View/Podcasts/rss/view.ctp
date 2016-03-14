@@ -34,7 +34,7 @@ $this->set('channelData', [
 	'title' => __($podcast['Podcast']['title']),
 	'pubDate' => $this->Rss->time($podcast['Podcast']['created']),
 	'lastBuildDate' => $this->Rss->time($podcast['Podcast']['modified']),
-	'copyright' => $this->Rss->cdata(''),
+	'copyright' => $this->Rss->cdata('© Copyright ' . date('Y') . ' Lead Deals Productions'),
 	'link' => $viewUrl,
 	'language' => 'en-us',
 	'managingEditor' => 'jamie@lead-deals.com (jamie@lead-deals.com)',
