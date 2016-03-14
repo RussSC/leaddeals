@@ -51,7 +51,7 @@
 								<?php if (!empty($podcast['Podcast']['itunes_url'])): ?>
 									<?php echo $this->Html->link(
 										'<i class="fa fa-apple"></i> Subscribe via iTunes',
-										$podcast['Podcast']['itunes_url'],
+										str_replace('https://', 'itms://', $podcast['Podcast']['itunes_url']),
 										['escape' => false, 'class' => 'btn btn-default', 'title' => 'Subscribe via iTunes', 'target' => '_blank']
 									); ?>
 								<?php endif; ?>
