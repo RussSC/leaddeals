@@ -62,10 +62,6 @@ $this->set('channelData', [
 		'attrib' => ['namespace' => 'itunes'],
 		'value' => 'Lead Deals Productions',
 	],
-	'email' => [
-		'attrib' => ['namespace' => 'itunes'],
-		'value' => 'podcasts@lead-deals.com',
-	],
 	
 	'keywords' => [
 		'attrib' => ['namespace' => 'itunes'],
@@ -85,7 +81,7 @@ $this->set('channelData', [
 	'owner' => [
 		'attrib' => ['namespace' => 'itunes'],
 		'value' => 
-			$this->Rss->elem('name', ['namespace' => 'itunes'], ['cdata' => true, 'value' => 'Lead Deals']) .
+			$this->Rss->elem('name', ['namespace' => 'itunes'], ['cdata' => true, 'value' => 'Lead Deals Productions']) .
 			$this->Rss->elem('email', ['namespace' => 'itunes'], 'podcasts@lead-deals.com')
 		
 	],
@@ -133,9 +129,8 @@ foreach ($podcastEpisodes as $episode):
 
 		'pubDate' => $this->Rss->time($episode['posted']),
 		'guid' => [
-			'isPermalink' => 'true',
-			'cdata' => true,
-			'url' => $viewUrl,
+			'isPermaLink' => 'true',
+			'url' => $this->Rss->cdata($viewUrl),
 		],
 		'image' => [
 			'attrib' => [
