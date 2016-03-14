@@ -141,7 +141,7 @@ foreach ($podcastEpisodes as $episode):
 		'pubDate' => $this->Rss->time($episode['posted']),
 		'guid' => [
 			'isPermaLink' => 'true',
-			'url' => $this->Rss->cdata($viewUrl),
+			'url' => $viewUrl,
 		],
 		'image' => [
 			'attrib' => [
