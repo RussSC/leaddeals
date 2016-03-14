@@ -60,8 +60,13 @@ $this->set('channelData', [
 	],
 	'author' => [
 		'attrib' => ['namespace' => 'itunes'],
-		'value' => 'Jamie Clark',
+		'value' => 'Lead Deals Productions',
 	],
+	'email' => [
+		'attrib' => ['namespace' => 'itunes'],
+		'value' => 'podcasts@lead-deals.com',
+	],
+	
 	'keywords' => [
 		'attrib' => ['namespace' => 'itunes'],
 		'value' => $podcast['Podcast']['keywords'],
