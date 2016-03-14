@@ -41,7 +41,7 @@ $this->Html->scriptStart(['inline' => false]); ?>
 	<title>
 		<?php echo $title_for_layout; ?>
 	</title>
-
+	<meta name="google-site-verification" content="ZEhySQpPUlniu-VlpMjCxcYzVCoDAoVLfIy-YydnFFk" />
 	<?php // Facebook sharing ?>
 	<?php echo $this->Html->meta(['property' => 'og:title', 'content' => trim($title_for_layout)]); ?>
 	<?php echo $this->Html->meta(['property' => 'og:type', 'content' => 'website']); ?>
