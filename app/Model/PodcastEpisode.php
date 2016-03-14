@@ -30,10 +30,6 @@ class PodcastEpisode extends AppModel {
 			'rule' => 'notEmpty',
 			'message' => 'Please pick a date when this should post',
 		],
-		'download_url' => [
-			'rule' => 'notEmpty',
-			'message' => 'Please provide a URL where the MP3 is located',
-		],
 		'duration_hh' => [
 			'rule' => 'notEmpty',
 			'message' => 'Please enter a duration',
@@ -53,8 +49,10 @@ class PodcastEpisode extends AppModel {
 	];
 
 	public function afterSave($created, $options = []) {
-		$this->setTitle($this->id);
-		$this->setDuration($this->id);
+		$id = $this->id;
+		$this->setTitle($id);
+		$this->setDuration($id);
+		$this->setFilesize($id);
 		return parent::afterSave($created, $options);
 	}
 
@@ -148,6 +146,31 @@ class PodcastEpisode extends AppModel {
 		return $this->save($data, ['callbacks' => false]);
 	}
 
+	protected function setFilesize($id) {
+		return $this->save([
+			'id' => $id,
+			'filesize' => $this->getFilesize($id),
+		], ['callbacks' => false, 'validate' => false]);
+	}
+
+	protected function getFilesize($id) {
+		$result = $this->read('download_url', $id);
+		$url = $result[$this->alias]['download_url'];
+		$size = 0;
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_NOBODY, true);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HEADER, true);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		$data = curl_exec($ch);
+		curl_close($ch);
+		if (preg_match('/Content-Length: (\d+)/', $data, $matches)) {
+			// Contains file size in bytes
+			$size = (int)$matches[1];
+		}
+		return $size;
+	}
+
 	public function publicQueryData($query) {
 		$query['joins'][] = [
 			'table' => 'podcasts',
@@ -163,6 +186,7 @@ class PodcastEpisode extends AppModel {
 	public function publicConditions($conditions) {
 		$conditions[$this->escapeField('active')] = 1;
 		$conditions[$this->escapeField('posted') . ' <='] = date('Y-m-d H:i:s');
+		$conditions[]['NOT'][$this->escapeField('download_url')] = '';
 		return $conditions;
 	}	
 }
