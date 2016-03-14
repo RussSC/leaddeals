@@ -80,16 +80,21 @@ $this->set('channelData', [
 	],
 	'owner' => [
 		'attrib' => ['namespace' => 'itunes'],
-		'value' => [
+		'value' => /*
+		[
 			'name' => [
 				'attrib' => ['namespace' => 'itunes'],
-				'value' => $this->Rss->cdata('Lead Deals Productions'),
+				'value' => 'Lead Deals Productions',
 			],
 			'email' => [
 				'attrib' => ['namespace' => 'itunes'],
 				'value' => 'podcasts@lead-deals.com',
 			]
 		]
+		*/
+			$this->Rss->elem('name', ['namespace' => 'itunes'], ['cdata' => true, 'value' => 'Lead Deals Productions']) .
+			$this->Rss->elem('email', ['namespace' => 'itunes'], 'podcasts@lead-deals.com')
+		
 	],
 	'description' => [
 		'attrib' => [],
