@@ -94,8 +94,8 @@ $this->set('channelData', [
 		*/
 		//	$this->Rss->elem('name', ['namespace' => 'itunes'], ['cdata' => true, 'value' => 'Lead Deals Productions']) .
 		//	$this->Rss->elem('email', ['namespace' => 'itunes'], 'podcasts@lead-deals.com')
-		'<itunes:name>Lead Deals Productions</itunes:name>' .
-		'<itunes:email>' . 'podcasts@lead-deals.com' . '</itunes:email>'
+		'<itunes_____________name>Lead Deals Productions</itunes_____________name>' .
+		'<itunes_____________email>' . 'podcasts@lead-deals.com' . '</itunes_____________email>'
 		
 	],
 	'description' => [
