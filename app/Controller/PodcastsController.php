@@ -59,7 +59,7 @@ class PodcastsController extends AppController {
 		$this->set([
 			'title_for_layout' => '"' . $result['Podcast']['title'] . '" Podcast',
 			'description_for_layout' => $result['Podcast']['description'],
-			'image_for_layout' => $result['Podcast']['uploadable']['thumbnail']['sizes']['banner']['src'],
+			'image_for_layout' => $result['Podcast']['uploadable']['thumbnail']['sizes']['banner-share']['src'],
 		]);
 	}
 
