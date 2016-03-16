@@ -24,12 +24,14 @@
 				<?php echo $row['Podcast']['title']; ?>
 				<small><?php echo $podcastEpisode['numeric_title']; ?></small>
 			</h5>
+			<small>
 			<?php echo $this->Text->truncate($podcastEpisode['description'], 235, [
 				'ending' => '...',
 				'exact' => true,
 				'html' => true,
 			]);
-		?>
+			?>
+			</small>
 		</div>
 	</a>
 <?php endforeach; ?>
