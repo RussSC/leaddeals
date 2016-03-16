@@ -10,7 +10,7 @@ $config['Uploadable'] = [
 		'thumbnail-full' => ['square' => true, 'set' => [1800, 1800]],
 
 		'banner' => ['set' => [1200,400]],
-		'banner-share' => ['set' => [1200,300]],
+		'banner-share' => ['set' => [1200,630]],
 		'small' => ['setSoft' => [80,80]],
 		'mid' => ['max' => [120,240]],
 		'tiny' => ['set' => [20,20]]
