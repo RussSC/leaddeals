@@ -57,32 +57,30 @@ class PodcastEpisode extends AppModel {
 	}
 
 	public function findNeighbors($id, $query = []) {
-		$query['fields'] = '*';
-		$query['joins'][] = [
-			'table' => 'podcast_episodes',
-			'alias' => 'NextEpisode',
-			'type' => 'LEFT',
-			'conditions' => [
-				'NextEpisode.podcast_id = ' . $this->escapeField('podcast_id'),
-				'NextEpisode.episode_number = ' . $this->escapeField('episode_number') . ' + 1',
-			]
-		];
-		$query['joins'][] =  [
-			'table' => 'podcast_episodes',
-			'alias' => 'PrevEpisode',
-			'type' => 'LEFT',
-			'conditions' => [
-				'PrevEpisode.podcast_id = ' . $this->escapeField('podcast_id'),
-				'PrevEpisode.episode_number = ' . $this->escapeField('episode_number') . ' - 1',
-			]
-		];
-		$query['conditions'][$this->escapeField()] = $id;
-		$result = $this->find('first', $query);
-
-		$return = [];
-		foreach (['prev' => 'PrevEpisode', 'next' => 'NextEpisode'] as $key => $field) {
-			$return[$key] = !empty($result[$field]['id']) ? [$this->alias => $result[$field]] : null;
+		$currentQuery = $query;
+		$currentQuery['conditions'][$this->escapeField()] = $id;
+		$result = $this->find('first', $currentQuery);
+		if (empty($result)) {
+			return null;
 		}
+
+		$result = $result[$this->alias];
+		$return = [];
+
+		$query['conditions'][$this->escapeField('podcast_id')] = $result['podcast_id'];
+
+		// Find Previous
+		$prevQuery = $query;
+		$prevQuery['conditions'][$this->escapeField() . ' <'] = $result['id'];
+		$prevQuery['order'] = [$this->escapeField() => 'DESC'];
+		$return['prev'] = $this->find('first', $prevQuery);
+
+		// Find Next
+		$nextQuery = $query;
+		$nextQuery['conditions'][$this->escapeField() . ' >'] = $result['id'];
+		$nextQuery['order'] = [$this->escapeField() => 'ASC'];
+		$return['next'] = $this->find('first', $prevQuery);
+
 		return $return;
 	}
 

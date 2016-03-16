@@ -30,7 +30,9 @@ class PodcastsController extends AppController {
 	public function view($id = null) {
 		$id = $this->fetchId($id);	
 		$result = $this->Crud->read($id, [
-			'public' => !$this->Auth->user('is_admin'),
+			'query' => [
+				'public' => !$this->Auth->user('is_admin'),
+			]
 		]);
 		$this->paginate = [
 			'PodcastEpisode' => [
