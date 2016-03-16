@@ -94,10 +94,6 @@ $this->Html->scriptStart(['inline' => false]); ?>
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">	
-
-
-
-
 </head>
 <body>
 	<div id="container">
@@ -135,5 +131,16 @@ $this->Html->scriptStart(['inline' => false]); ?>
 		</div>
 	<?php endif; ?>
 	<?php echo $this->Asset->output(true, false); ?>
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-75192726-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
 </body>
 </html>
