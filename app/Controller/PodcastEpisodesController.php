@@ -14,7 +14,7 @@ class PodcastEpisodesController extends AppController {
 	}
 	
 	public function view($id = null) {
-		$this->Crud->read($id, [
+		$result = $this->Crud->read($id, [
 			'query' => [
 				'public' => !$this->Auth->user('is_admin'),
 				'contain' => ['Podcast'],

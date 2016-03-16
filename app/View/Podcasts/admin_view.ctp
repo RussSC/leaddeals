@@ -22,7 +22,10 @@ foreach ($resize as $field => $title): ?>
 			<div class="panel-title"><?php echo $title; ?></div>
 		</div>
 		<div class="panel-body">
-			<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'banner', $field, ['style' => 'max-width:600px', 'modified' => true]); ?>
+			<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'banner', $field, [
+				'style' => 'max-width:600px', 
+				'modified' => true
+			]); ?>
 		</div>
 		<div class="panel-footer">
 			<?php 
