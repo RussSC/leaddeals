@@ -11,7 +11,7 @@ echo $this->Html->link(
 	['class' => 'btn btn-default btn-lg']
 );
 
-echo $this->FieldUploadImage->image($podcast['Podcast'], 'thumbnail', 'banner-share', ['modified' => true]);
+echo $this->FieldUploadImage->image($podcast['Podcast'], 'banner', 'banner-share', ['modified' => true]);
 echo $this->Html->link(
 	'Resize',
 	[
@@ -19,7 +19,7 @@ echo $this->Html->link(
 		'action' => 'edit', 
 		'Podcast', 
 		$podcast['Podcast']['id'], 
-		'thumbnail', 
+		'banner', 
 		'banner-share',
 		'plugin' => 'uploadable',
 		'admin' => false,
