@@ -65,6 +65,9 @@ class Podcast extends AppModel {
 	}
 
 	public function isEditor($id, $userId) {
+		if (empty($userId)) {
+			return false;
+		}
 		if ($this->User->isAdmin($userId)) {
 			return true;
 		}
