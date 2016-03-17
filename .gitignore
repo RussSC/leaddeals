@@ -10,6 +10,10 @@
 /tags
 
 /app/webroot/.sass-cache/*
+/app/webroot/css/css-min/*
+!/app/webroot/css/css-min/empty
+/app/webroot/js/js-min/*
+!/app/webroot/js/js-min/empty
 
 # OS generated files #
 ######################
