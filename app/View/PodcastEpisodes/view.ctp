@@ -21,6 +21,17 @@ $pagerNav = [
 			<div class="panel-body">
 				<div class="podcast-episode-view">
 					<div class="podcast-episode-view-heading">
+						<?php 
+						$image = $this->FieldUploadImage->image($podcastEpisode['PodcastEpisode'], 'banner', 'banner', [
+							'class' => 'podcast-episode-view-heading-banner',
+						]); 
+						if ($isEditor) {
+							$image = $this->FieldUploadImage->resizeLink($image, 'PodcastEpisode', $podcastEpisode['PodcastEpisode']['id'], 'banner', 'banner', [
+								'escape' => false,
+							]);
+						}
+						echo $image;
+						?>
 						<h2 class="podcast-episode-view-title">
 							<div class="pull-right">
 								<?php echo $this->Html->link(
