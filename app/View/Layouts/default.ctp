@@ -21,12 +21,12 @@ $this->extend('html');
 $this->start('header'); ?>
 	<div class="layout-header">
 		<div class="layout-header-logo">
-			<?php echo $this->Html->image('layout/logo-sq.jpg', [
+			<?php echo $this->Html->image('layout/logo-banner.jpg', [
+				'alt' => 'Lead Deals Productions',
 				'url' => '/',
 			]); ?>
 		</div>
 		<div class="layout-header-body">
-			<h1 class="layout-header-title"><?php echo $this->Html->link('Lead Deals', '/'); ?></h1>
 			<?php echo $this->Bootstrap->linkList($navMenu, ['class' => 'layout-header-nav', 'urlActive' => true]); ?>
 
 			<div class="layout-header-login">

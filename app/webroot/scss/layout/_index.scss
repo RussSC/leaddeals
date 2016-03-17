@@ -1,6 +1,7 @@
 
 #content {
 	padding-top: $line-height-computed;
+	min-height: 600px;
 	> .breadcrumb {
 		margin-top: -$line-height-computed;
 	}
