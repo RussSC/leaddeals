@@ -6,6 +6,8 @@ $panel-admin-heading-bg: $orange;
   @include panel-variant($panel-admin-border, $panel-admin-text, $panel-admin-heading-bg, $panel-admin-border);
 }
 .panel-heading {
+	font-family: $headings-font-family;
+
 	.btn {
 		margin-top: -$padding-base-vertical;
 	}

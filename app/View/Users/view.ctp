@@ -1,14 +1,12 @@
 <?php
 $this->layout = 'default_slim';
+$this->Html->css('views/user-view', null, ['inline' => false]);
+
 ?>
 <div class="user-view">
 	<div class="user-view-heading">
-		<div class="media">
-			<?php echo $this->FieldUploadImage->image($user['User'], 'thumbnail', 'thumbnail-lg', ['class' => 'pull-left media-object']); ?>
-			<div class="media-body">
-				<h2 class="media-title"><?php echo $user['User']['name']; ?></h2>
-			</div>
-		</div>
+		<?php echo $this->FieldUploadImage->image($user['User'], 'thumbnail', 'banner', ['class' => 'user-view-heading-banner']); ?>
+		<h2 class="user-view-heading-title"><?php echo $user['User']['name']; ?></h2>
 	</div>
 
 	<div class="panel panel-default">
@@ -23,5 +21,22 @@ $this->layout = 'default_slim';
 </div>
 <?php if ($isEditor):
 	echo $this->element('editor_panel', ['actions' => ['edit']]);
-endif;
-?>
+	?>
+	<div class="panel panel-admin">
+		<div class="panel-heading">
+			<div class="panel-title">Resize Images</div>
+		</div>
+		<div class="panel-body">
+			<?php
+			$sizes = ['thumbnail', 'banner'];
+			echo $this->element('editor/image_resize', [
+				'model' => 'User',
+				'field' => 'thumbnail',
+				'result' => $user['User'],
+				'sizes' => $sizes,
+				'id' => $user['User']['id'],
+			]); 
+			?>
+		</div>
+	</div>
+<?php endif;

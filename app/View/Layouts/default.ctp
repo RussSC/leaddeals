@@ -33,7 +33,8 @@ $this->start('header'); ?>
 				<?php if ($this->Session->check('Auth.User.id')): ?>
 					<?php echo $this->Html->link(
 						$this->Session->read('Auth.User.name'),
-						['controller' => 'users', 'action' => 'view', $this->Session->read('Auth.User.id')]
+						['controller' => 'users', 'action' => 'view', $this->Session->read('Auth.User.id')],
+						['class' => 'layout-header-login-user']
 					); ?>
 
 					<?php echo $this->Html->link(

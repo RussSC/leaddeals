@@ -11,39 +11,32 @@ echo $this->Html->link(
 	['class' => 'btn btn-default btn-lg']
 );
 
-$resize = [
-	'banner' => 'Banner (Website)',
-	'banner-share' => 'Banner (Facebook)',
-];
-
-foreach ($resize as $field => $title): ?>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<div class="panel-title"><?php echo $title; ?></div>
-		</div>
-		<div class="panel-body">
-			<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'banner', $field, [
-				'style' => 'max-width:600px', 
-				'modified' => true
-			]); ?>
-		</div>
-		<div class="panel-footer">
-			<?php 
-			echo $this->Html->link(
-				'Resize',
-				[
-					'controller' => 'field_upload', 
-					'action' => 'edit', 
-					'Podcast', 
-					$podcast['Podcast']['id'], 
-					'banner', 
-					$field,
-					'plugin' => 'uploadable',
-					'admin' => false,
-				],
-				['class' => 'btn btn-primary']
-			);
-			?>
+?>
+<div class="row">
+	<div class="col-sm-6 col-sm-offset-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">Image Resizing</div>
+			</div>
+			<div class="panel-body">
+				<?php 
+				echo $this->element('editor/image_resize', [
+					'model' => 'Podcast',
+					'field' => 'banner',
+					'sizes' => [
+						[
+							'size' => 'banner',
+							'title' => 'Banner (Website)',
+						], [
+							'size' => 'banner-share',
+							'title' => 'Banner (Facebook)',
+						],
+					],
+					'result' => $podcast['Podcast'],
+					'id' => $podcast['Podcast']['id'],
+				]);
+				?>
+			</div>
 		</div>
 	</div>
-<?php endforeach;
+</div>
