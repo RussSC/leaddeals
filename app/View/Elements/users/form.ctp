@@ -3,7 +3,7 @@ $this->layout = 'CenteredContent.form';
 $this->set('centeredContent', [
 	'formOptions' => ['type' => 'file'],
 ]);
-echo $this->Form->create('User');
+echo $this->Form->create('User', ['type' => 'file']);
 echo $this->Form->hidden('id');
 echo $this->Form->hidden('is_admin');
 echo $this->FieldUploadImage->input('thumbnail');

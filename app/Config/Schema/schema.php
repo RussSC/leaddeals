@@ -121,6 +121,7 @@ class AppSchema extends CakeSchema {
 		'email' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 64, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
 		'password' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 64, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
 		'is_admin' => array('type' => 'boolean', 'null' => true, 'default' => null),
+		'thumbnail' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 128, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(

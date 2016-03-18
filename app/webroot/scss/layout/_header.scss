@@ -3,7 +3,10 @@ $layout-header-height: 60px;
 #header {
 	background-color: black;
 	color: white;
+	font-family: $headings-font-family;
+	font-size: $font-size-large;
 }
+
 @media (min-width: $grid-float-breakpoint) {
 	#header {
 		position: fixed;
@@ -25,6 +28,11 @@ $layout-header-height: 60px;
 			height: 100%;	
 		}
 		margin-right: 10px;
+	}
+	&-heading {
+		font-size: $font-size-small;
+		margin: 0;
+		padding: 0;
 	}
 	&-body {
 		overflow: hidden;
@@ -50,13 +58,15 @@ $layout-header-height: 60px;
 			margin: 0;
 			padding: 0;
 			list-style-type: none;
+
 		}
 		& > li > a {
 			display: block;
 			line-height: $layout-header-height;
 			text-decoration: none;
 			padding: 0 $padding-base-horizontal;
-			font-size: $font-size-large;
+			font-family: $headings-font-family;
+			font-size: $font-size-h2;
 			font-weight: normal;
 			color: white;
 			opacity: .75;
@@ -74,5 +84,9 @@ $layout-header-height: 60px;
 	&-login {
 		float: right;
 		line-height: $layout-header-height;
+
+		&-user {
+			color: #FFF;
+		}
 	}
 }
