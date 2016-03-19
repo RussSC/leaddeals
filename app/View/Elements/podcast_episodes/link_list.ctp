@@ -1,6 +1,11 @@
 <div class="media-list podcast-episode-media-list">
 <?php foreach ($podcastEpisodes as $podcastEpisode): 
-	$url = Router::url(['controller' => 'podcast_episodes', 'action' => 'view', $podcastEpisode['PodcastEpisode']['id']], true);
+	$url = Router::url([
+		'controller' => 'podcast_episodes', 
+		'action' => 'view', 
+		'id' => $podcastEpisode['PodcastEpisode']['id'],
+		'slug' => $podcastEpisode['PodcastEpisode']['slug'],
+	], true);
 	$class = 'media';
 	if (
 		!empty($layoutData['modelName']) && 

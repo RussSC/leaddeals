@@ -14,6 +14,7 @@ class PodcastEpisodesController extends AppController {
 	}
 	
 	public function view($id = null) {
+		$id = $this->fetchId($id);
 		$result = $this->Crud->read($id, [
 			'query' => [
 				'public' => !$this->Auth->user('is_admin'),
@@ -36,7 +37,7 @@ class PodcastEpisodesController extends AppController {
 		$this->set([
 			'title_for_layout' => $result['PodcastEpisode']['full_title'],
 			'description_for_layout' => $result['PodcastEpisode']['description'],
-			'image_for_layout' => $result['Podcast']['uploadable']['thumbnail']['sizes']['banner']['src'],
+			'image_for_layout' => $result['PodcastEpisode']['uploadable']['banner']['sizes']['banner-share']['src'],
 		]);
 
 	}

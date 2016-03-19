@@ -41,6 +41,14 @@
 		['pass' => ['slug']]
 	);
 
+	Router::connect('/podcast_episodes/:action/:id/:slug',
+		['controller' => 'podcast_episodes'],
+		[
+			'id' => '[0-9]+',
+			'pass' => ['id', 'slug']
+		]
+	);
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

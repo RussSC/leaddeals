@@ -1,6 +1,11 @@
 <div class="media-list podcast-episode-media-list">
 <?php foreach ($podcastEpisodes as $podcastEpisode): 
-	$url = ['controller' => 'podcast_episodes', 'action' => 'view', $podcastEpisode['PodcastEpisode']['id']];
+	$url = [
+		'controller' => 'podcast_episodes', 
+		'action' => 'view', 
+		'id' => $podcastEpisode['PodcastEpisode']['id'],
+		'slug' => $podcastEpisode['PodcastEpisode']['slug'],
+	];
 	?>
 	<div class="media">
 		<div class="pull-right">

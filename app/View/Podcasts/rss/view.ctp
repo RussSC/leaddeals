@@ -1,10 +1,10 @@
 <?php 
 $this->Rss->registerNamespaces([
-	'atom' => 'http://www.w3.org/2005/Atom',
-	'cc' => 'http://web.resource.org/cc/',
-	'itunes' => 'http://www.itunes.com/dtds/podcast-1.0.dtd',
-	'media' => 'http://search.yahoo.com/mrss/',
-	'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+	'atom' 		=> 'http://www.w3.org/2005/Atom',
+	'cc' 		=> 'http://web.resource.org/cc/',
+	'itunes' 	=> 'http://www.itunes.com/dtds/podcast-1.0.dtd',
+	'media' 	=> 'http://search.yahoo.com/mrss/',
+	'rdf' 		=> 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
 ]);
 
 $this->set('documentData', [
@@ -21,6 +21,9 @@ $ns = [
 $viewUrl = Router::url(['controller' => 'podcasts', 'action' => 'view', 'slug' => $podcast['Podcast']['slug']], true);
 $feedUrl = Router::url(['controller' => 'podcasts', 'action' => 'feed', 'slug' => $podcast['Podcast']['slug']], true);
 $thumbnail = $this->FieldUploadImage->src($podcast['Podcast'], 'thumbnail', 'thumbnail-full');
+if (($q = strpos($thumbnail, '?')) !== false) {
+	$thumbnail = substr($thumbnail, 0, $q);
+}
 
 $dateFormat = 'D, d Y H:i:s O';
 $this->set('channelData', [
@@ -116,12 +119,14 @@ foreach ($podcastEpisodes as $episode):
 	$viewUrl = Router::url([
 		'controller' => 'podcast_episodes',
 		'action' => 'view',
-		$episode['id'],
+		'id' => $episode['id'],
+		'slug' => $episode['slug'],
 	], true);
 	$downloadUrl = Router::url([
 		'controller' => 'podcast_episodes',
 		'action' => 'download',
-		$episode['id'],
+		'id' => $episode['id'],
+		'slug' => $episode['slug'],
 		'ext' => 'mp3',
 	], true);
 

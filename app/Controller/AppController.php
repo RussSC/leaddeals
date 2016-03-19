@@ -121,6 +121,32 @@ class AppController extends Controller {
 		return $allow;
 	}
 
+	protected function fetchId($id = null, $Model = null) {
+		if (empty($Model)) {
+			$Model = $this->{$this->modelClass};
+		}
+		$named = [];
+		if (!empty($this->request->named)) {
+			$named = $this->request->named;
+		}
+		
+		if (empty($id)) {
+			if (!empty($named['id'])) {
+				$id = $named['id'];
+			} else if (!empty($named['slug'])) {
+				$slug = $named['slug'];
+			}
+		}
+		if (!is_numeric($id) && empty($slug)) {
+			$slug = $id;
+			$id = null;
+		}
+		if (empty($id) && !empty($slug) && $Model->hasMethod('findIdFromSlug')) {
+			$id = $Model->findIdFromSlug($slug);
+		}
+		return $id;
+	}
+
 	private function setNavMenu() {
 		$menu = [
 			// ['News', ['controller' => 'articles', 'action' => 'index']],

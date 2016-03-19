@@ -56,6 +56,37 @@ class PodcastEpisode extends AppModel {
 		return parent::afterSave($created, $options);
 	}
 
+	public function afterFind($results, $primary = false) {
+		if (isset($results[0]['PodcastEpisode'])) {
+			foreach ($results as $k => $row) {
+				if (!empty($row['Podcast'])) {
+					$results[$k]['PodcastEpisode'] = $this->copyUploadable($row['PodcastEpisode'], $row['Podcast']);
+				}
+			}
+		} else if (isset($results['PodcastEpisode']) && isset($results['Podcast'])) {
+			$results['PodcastEpisode'] = $this->copyUploadable($results['PodcastEpisode'], $results['Podcast']);
+		}
+		return parent::afterFind($results, $primary);
+	}
+
+	private function copyUploadable($result, $podcastResult) {
+		if (!empty($podcastResult)) {
+			if (!empty($podcastResult['Podcast']['uploadable'])) {
+				$podcastResult = $podcastResult['Podcast'];
+			}
+		}
+		if (!empty($result['uploadable'])) {
+			foreach ($result['uploadable'] as $field => $config) {
+				foreach ($config['sizes'] as $size => $sizeConfig) {
+					if (empty($sizeConfig) && !empty($podcastResult['uploadable'][$field]['sizes'][$size])) {
+						$result['uploadable'][$field]['sizes'][$size] = $podcastResult['uploadable'][$field]['sizes'][$size];
+					}
+				}
+			}
+		}
+		return $result;
+	}
+
 	public function findNeighbors($id, $query = []) {
 		$currentQuery = $query;
 		$currentQuery['conditions'][$this->escapeField()] = $id;
@@ -141,6 +172,12 @@ class PodcastEpisode extends AppModel {
 			$result['PodcastEpisode']['episode_number'],
 			$result['PodcastEpisode']['title']
 		);
+		
+		$data['slug'] = Inflector::slug(sprintf('%s Episode %d"',
+			$result['Podcast']['title'],
+			$result['PodcastEpisode']['episode_number']
+		));
+
 		return $this->save($data, ['callbacks' => false]);
 	}
 

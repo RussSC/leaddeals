@@ -114,27 +114,4 @@ class PodcastsController extends AppController {
 		$users = $this->Podcast->User->find('list');
 		$this->set(compact('users'));
 	}	
-
-	private function fetchId($id = null) {
-		$named = [];
-		if (!empty($this->request->named)) {
-			$named = $this->request->named;
-		}
-		
-		if (empty($id)) {
-			if (!empty($named['id'])) {
-				$id = $named['id'];
-			} else if (!empty($named['slug'])) {
-				$slug = $named['slug'];
-			}
-		}
-		if (!is_numeric($id) && empty($slug)) {
-			$slug = $id;
-			$id = null;
-		}
-		if (empty($id) && !empty($slug)) {
-			$id = $this->Podcast->findIdFromSlug($slug);
-		}
-		return $id;
-	}
 }
