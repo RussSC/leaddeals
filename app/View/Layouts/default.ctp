@@ -7,11 +7,11 @@ $this->Html->css([
 $socialMedia = [
 	'Facebook' => [
 		'icon' => '<i class="fa fa-facebook"></i>',
-		'url' => 'https://',
+		'url' => 'https://www.facebook.com/Lead-Deals-Productions-111002299065/',
 	],
 	'Twitter' => [
 		'icon' => '<i class="fa fa-twitter"></i>',
-		'url' => 'htts://',
+		'url' => 'https://twitter.com/leaddeals',
 	]
 ];
 
