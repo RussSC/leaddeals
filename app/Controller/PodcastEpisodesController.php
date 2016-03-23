@@ -17,7 +17,9 @@ class PodcastEpisodesController extends AppController {
 		$id = $this->fetchId($id);
 		$result = $this->Crud->read($id, [
 			'query' => [
-				'public' => !$this->Auth->user('is_admin'),
+				'conditions' => [
+					'PodcastEpisode.active' => 1,
+				],
 				'contain' => ['Podcast'],
 			]
 		]);
