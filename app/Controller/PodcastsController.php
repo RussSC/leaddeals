@@ -7,6 +7,7 @@ class PodcastsController extends AppController {
 			'className' => 'AppRss',
 		], 
 		'Uploadable.FieldUploadImage',
+		'ShareLink',
 		'Time',
 	];
 
@@ -62,6 +63,20 @@ class PodcastsController extends AppController {
 			'image_for_layout' => $result['Podcast']['uploadable']['banner']['sizes']['banner-share']['src'],
 		]);
 	}
+
+	public function itunes($id = null) {
+		$id = $this->fetchId($id);
+		$result = $this->Crud->read($id, [
+			'query' => ['recursive' => -1]
+		]);
+		$result = $result['Podcast'];
+		if (!empty($result['itunes_url'])) {
+			$this->redirect($result['itunes_url']);
+		} else {
+			$this->redirect(Router::url(['action' => 'view', 'slug' => $result['slug']], true));
+		}
+	}
+
 
 	public function feed($id = null) {
 		$id = $this->fetchId($id);
