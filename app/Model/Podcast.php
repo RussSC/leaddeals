@@ -16,7 +16,8 @@ class Podcast extends AppModel {
 		'PodcastsUser',
 		'PodcastEpisode' => [
 			'dependent' => true,
-		]
+		],
+		'PodcastLink',
 	];
 
 	public $hasAndBelongsToMany = ['User'];

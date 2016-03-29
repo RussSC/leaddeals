@@ -42,10 +42,6 @@ class PodcastEpisode extends AppModel {
 			'rule' => 'notEmpty',
 			'message' => 'Please enter a duration',
 		],
-		'filesize' => [
-			'rule' => 'notEmpty',
-			'message' => 'Please enter a file size for the MP3',
-		],
 	];
 
 	public function afterSave($created, $options = []) {

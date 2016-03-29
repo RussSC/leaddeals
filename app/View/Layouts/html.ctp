@@ -115,7 +115,7 @@ $this->Html->scriptStart(['inline' => false]); ?>
 			<?php endif; ?>
 
 			<div class="container-fluid">
-				<?php echo $this->Session->flash(); ?>
+				<?php echo $this->Flash->render(); ?>
 				<?php echo $this->fetch('content'); ?>
 			</div>
 		</div>

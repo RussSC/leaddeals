@@ -1,4 +1,6 @@
 <?php 
+$View = $this;
+
 $this->layout = 'CenteredContent.form';
 $this->set('centeredContent', [
 	'formOptions' => ['type' => 'file'],
@@ -33,11 +35,26 @@ echo $this->Form->input('category', [
 	'default' => 'Comedy',
 ]);
 ?>
-
+<fieldset>
+	<legend>Links</legend>
+	<?php echo $this->element('Layout.form/element_input_list', [
+		'model' => 'PodcastLink',
+		'count' => 0,
+		'function' => function($count) use ($View) {
+			$prefix = "PodcastLink.$count";
+			$out = $View->Form->hidden("$prefix.id");
+			$out .= $View->Form->hidden("$prefix.podcast_id");
+			$out .= '<div class="row">';
+			$out .= '<div class="col-sm-4">' . $View->ShareLink->inputTypeSelect("$prefix.type") . '</div>';
+			$out .= '<div class="col-sm-8">' . $View->Form->input("$prefix.url") . '</div>';
+			$out .= '</div>';
+			return $out;
+		}
+	]); ?>
+</fieldset>
 <fieldset>
 	<legend>Authors</legend>
 	<?php 
-	$View = $this;
 	echo $this->element('Layout.form/element_input_list', [
 		'model' => 'PodcastsUser',
 		'count' => 0,

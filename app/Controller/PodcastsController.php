@@ -7,7 +7,7 @@ class PodcastsController extends AppController {
 			'className' => 'AppRss',
 		], 
 		'Uploadable.FieldUploadImage',
-		'ShareLink',
+		//'ShareLink',
 		'Time',
 	];
 

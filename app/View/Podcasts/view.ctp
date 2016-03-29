@@ -22,6 +22,14 @@
 										</h3>
 									<?php endif; ?>
 
+									<?php if (!empty($podcast['PodcastLink'])): ?>
+										<div class="share-link-list">
+										<?php foreach ($podcast['PodcastLink'] as $podcastLink):
+											echo $this->ShareLink->link($podcastLink['url'], $podcastLink['type']);
+										endforeach; ?>
+										</div>
+									<?php endif; ?>
+
 									<?php echo nl2br($podcast['Podcast']['description']); ?>
 									<?php if (!empty($podcast['User'])): ?>
 										<p>
