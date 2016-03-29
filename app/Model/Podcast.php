@@ -24,7 +24,7 @@ class Podcast extends AppModel {
 
 	public $validate = [
 		'title' => [
-			'rule' => 'notEmpty',
+			'rule' => 'notBlank',
 			'message' => 'Please give this podcast a title',
 		],
 	];

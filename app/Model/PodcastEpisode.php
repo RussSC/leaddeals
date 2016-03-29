@@ -19,27 +19,27 @@ class PodcastEpisode extends AppModel {
 
 	public $validate = [
 		'title' => [
-			'rule' => 'notEmpty',
+			'rule' => 'notBlank',
 			'message' => 'Please enter an episode title',
 		],
 		'episode_number' => [
-			'rule' => 'notEmpty',
+			'rule' => 'notBlank',
 			'message' => 'Please enter an episode number',
 		],
 		'posted' => [
-			'rule' => 'notEmpty',
+			'rule' => 'notBlank',
 			'message' => 'Please pick a date when this should post',
 		],
 		'duration_hh' => [
-			'rule' => 'notEmpty',
+			'rule' => 'notBlank',
 			'message' => 'Please enter a duration',
 		],
 		'duration_mm' => [
-			'rule' => 'notEmpty',
+			'rule' => 'notBlank',
 			'message' => 'Please enter a duration',
 		],
 		'duration_ss' => [
-			'rule' => 'notEmpty',
+			'rule' => 'notBlank',
 			'message' => 'Please enter a duration',
 		],
 	];
