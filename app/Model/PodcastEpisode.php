@@ -106,7 +106,7 @@ class PodcastEpisode extends AppModel {
 		$nextQuery = $query;
 		$nextQuery['conditions'][$this->escapeField() . ' >'] = $result['id'];
 		$nextQuery['order'] = [$this->escapeField() => 'ASC'];
-		$return['next'] = $this->find('first', $prevQuery);
+		$return['next'] = $this->find('first', $nextQuery);
 
 		return $return;
 	}
@@ -159,17 +159,17 @@ class PodcastEpisode extends AppModel {
 		]);
 
 		$data = compact('id');
-		$data['full_title'] = sprintf('%s Episode #%d: "%s"',
+		$data['full_title'] = sprintf('%s Episode #%s: "%s"',
 			$result['Podcast']['title'],
 			$result['PodcastEpisode']['episode_number'],
 			$result['PodcastEpisode']['title']
 		);
-		$data['numeric_title'] = sprintf('%d: %s', 
+		$data['numeric_title'] = sprintf('%s: %s', 
 			$result['PodcastEpisode']['episode_number'],
 			$result['PodcastEpisode']['title']
 		);
 		
-		$data['slug'] = Inflector::slug(sprintf('%s Episode %d"',
+		$data['slug'] = Inflector::slug(sprintf('%s Episode %s"',
 			$result['Podcast']['title'],
 			$result['PodcastEpisode']['episode_number']
 		));
