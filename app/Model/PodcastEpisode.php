@@ -110,7 +110,7 @@ class PodcastEpisode extends AppModel {
 		$nextQuery = $query;
 		$nextQuery['conditions'][$this->escapeField() . ' >'] = $result['id'];
 		$nextQuery['order'] = [$this->escapeField() => 'ASC'];
-		$return['next'] = $this->find('first', $prevQuery);
+		$return['next'] = $this->find('first', $nextQuery);
 
 		return $return;
 	}
