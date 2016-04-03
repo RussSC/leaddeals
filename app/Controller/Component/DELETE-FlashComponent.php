@@ -1,5 +1,5 @@
 <?php
-class FlashComponent extends Component {
+class FlashComponentDELETE extends Component {
 	public $name = 'Flash';
 	public $components = array('Session');
 

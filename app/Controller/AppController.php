@@ -74,6 +74,7 @@ class AppController extends Controller {
 		'Paginator' => [
 			'className' => 'BoostCake.BoostCakePaginator',
 		],
+		'Flash',
 		'Layout.Bootstrap',
 		'CakeAssets.Asset',
 		'Podcast',

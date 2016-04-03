@@ -3,7 +3,7 @@ $this->layout = 'CenteredContent.form';
 $this->set('centeredContent', [
 	'pageTitle' => 'Logged Out',
 	'submitText' => 'Log Back In',
-	'submitUrl' => ['controllers' => 'users', 'action' => 'login'],
+	'submitUrl' => ['controller' => 'users', 'action' => 'login', 'redirect' => 0],
 	'backText' => 'Home',
 	'backUrl' => '/',
 ]);

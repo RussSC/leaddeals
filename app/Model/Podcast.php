@@ -16,14 +16,15 @@ class Podcast extends AppModel {
 		'PodcastsUser',
 		'PodcastEpisode' => [
 			'dependent' => true,
-		]
+		],
+		'PodcastLink',
 	];
 
 	public $hasAndBelongsToMany = ['User'];
 
 	public $validate = [
 		'title' => [
-			'rule' => 'notEmpty',
+			'rule' => 'notBlank',
 			'message' => 'Please give this podcast a title',
 		],
 	];

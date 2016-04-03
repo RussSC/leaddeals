@@ -1,0 +1,1 @@
+<?php echo $this->element('Flash/default', compact('message') + ['type' => 'success']); ?>

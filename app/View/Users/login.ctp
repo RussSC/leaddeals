@@ -4,7 +4,9 @@ $this->set('centeredContent', [
 	'pageTitle' => 'Sign In',
 	'submitText' => 'Sign In',
 ]);
-echo $this->Form->create();
+$this->Form->create();
+
+echo $this->Form->hidden('redirect');
 echo $this->Form->input('email');
 echo $this->Form->input('password');
 echo $this->Form->input('remember_me', [
