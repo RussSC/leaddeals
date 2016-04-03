@@ -158,20 +158,25 @@ class PodcastEpisode extends AppModel {
 			]
 		]);
 
+		$episodeNumber = $result['PodcastEpisode']['episode_number'];
+		if ($episodeNumber == round($episodeNumber)) {
+			$episodeNumber = round($episodeNumber);
+		}
+		
 		$data = compact('id');
 		$data['full_title'] = sprintf('%s Episode #%s: "%s"',
 			$result['Podcast']['title'],
-			$result['PodcastEpisode']['episode_number'],
+			$episodeNumber,
 			$result['PodcastEpisode']['title']
 		);
 		$data['numeric_title'] = sprintf('%s: %s', 
-			$result['PodcastEpisode']['episode_number'],
+			$episodeNumber,
 			$result['PodcastEpisode']['title']
 		);
 		
 		$data['slug'] = Inflector::slug(sprintf('%s Episode %s"',
 			$result['Podcast']['title'],
-			$result['PodcastEpisode']['episode_number']
+			$episodeNumber
 		));
 
 		return $this->save($data, ['callbacks' => false]);

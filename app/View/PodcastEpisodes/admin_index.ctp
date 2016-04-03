@@ -18,7 +18,7 @@ foreach ($podcastEpisodes as $podcastEpisode):
 			),
 			'Title',
 		], [
-			$podcastEpisode['PodcastEpisode']['episode_number'],
+			$this->Podcast->episodeNumber($podcastEpisode['PodcastEpisode']['episode_number']),
 			'#',
 		], [
 			$this->Html->link(

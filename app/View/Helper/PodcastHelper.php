@@ -20,4 +20,15 @@ class PodcastHelper extends AppHelper {
 		$title .= $this->Html->tag('span', $podcastEpisode['title'], ['class' => 'podcast-episode-title-podcast-episode-title']);
 		return $this->Html->tag('span', $title, ['class' => 'podcast-episode-title']);
 	}
+
+	public function episodeNumber($number) {
+		if (is_array($number) && array_key_exists('episode_number', $number)) {
+			return $this->episodeNumber($number['episode_number']);
+		} else {
+			if ($number == round($number)) {
+				$number = round($number);
+			} 
+			return $number;
+		}
+	}
 }

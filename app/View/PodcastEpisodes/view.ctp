@@ -53,7 +53,7 @@ $pagerNav = [
 								); ?>
 
 							</div>
-							<?php echo $podcastEpisode['PodcastEpisode']['episode_number']; ?>. 
+							<?php echo $this->Podcast->episodeNumber($podcastEpisode['PodcastEpisode']['episode_number']); ?>. 
 							<?php echo $podcastEpisode['PodcastEpisode']['title']; ?>
 							<br/>
 							<small>Posted on: <?php echo date('F j, Y', strtotime($podcastEpisode['PodcastEpisode']['posted'])); ?></small>

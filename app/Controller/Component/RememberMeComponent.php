@@ -50,17 +50,18 @@ class RememberMeComponent extends Component {
 
 		if (!$this->Auth->loggedIn() && $this->Cookie->read($this->settings['cookieName'])) {
 			$cookie = $this->Cookie->read($this->settings['cookieName']);
+			if (is_array($cookie)) {
+				$User = ClassRegistry::init($this->_modelName);
+				$user = $User->find('first', array(
+					'conditions' => array(
+						$User->escapeField($this->_username) => $cookie[$this->_username],
+						$User->escapeField($this->_password) => $cookie[$this->_password],
+					)
+				));
 
-			$User = ClassRegistry::init($this->_modelName);
-			$user = $User->find('first', array(
-				'conditions' => array(
-					$User->escapeField($this->_username) => $cookie[$this->_username],
-					$User->escapeField($this->_password) => $cookie[$this->_password],
-				)
-			));
-
-			if ($user && !$this->Auth->login($user[$this->_className])) {
-				$this->controller->redirect($this->Auth->logoutRedirect);
+				if ($user && !$this->Auth->login($user[$this->_className])) {
+					$this->controller->redirect($this->Auth->logoutRedirect);
+				}
 			}
 		}
 		return parent::initialize($controller);

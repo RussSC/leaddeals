@@ -19,7 +19,7 @@
 	<a href="<?php echo $url; ?>" class="<?php echo $class; ?>">
 		<div class="media-body">
 			<h4 class="media-title">
-				<?php echo $podcastEpisode['PodcastEpisode']['episode_number']; ?>. 
+				<?php echo $this->Podcast->episodeNumber($podcastEpisode['PodcastEpisode']['episode_number']); ?>. 
 				<?php echo $podcastEpisode['PodcastEpisode']['title']; ?>
 			</h4>
 			<small><?php echo $podcastEpisode['PodcastEpisode']['subtitle']; ?></small>
