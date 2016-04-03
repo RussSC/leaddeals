@@ -23,6 +23,14 @@ class ShareLinkHelper extends AppHelper {
 			'title' => 'Google',
 			'icon' => 'google',
 		],
+		'itunes' => [
+			'title' => 'iTunes',
+			'icon' => 'apple',
+		],
+		'tumblr' => [
+			'title' => 'Tumblr',
+			'icon' => 'tumblr',
+		]
 	];
 
 	public function inputTypeSelect($name, $options = []) {
@@ -34,19 +42,22 @@ class ShareLinkHelper extends AppHelper {
 		return $this->Form->input($name, $options);
 	}
 
-	public function link($url, $type = '') {
+	public function link($url, $type = '', $options = []) {
+		if (strpos($url, '://') === false) {
+			$url = 'http://' . $url;
+		}
+		$options['target'] = '_blank';
 		if (!empty($this->linkTypes[$type])) {
 			$config = $this->linkTypes[$type];
 			$title = '<span class="share-link-title">' . $config['title'] . '</span>';
 			if (!empty($config['icon'])) {
-				$title = '<i class="fa fa-' . $config['icon'] . '"></i>' . $title;
+				$title = '<i class="fa fa-' . $config['icon'] . '"></i> ' . $title;
 			}
 		} else {
 			$title = $url;
 		}
-		return $this->Html->link($title, $url, [
-			'escape' => false,
-			'class' => 'share-link',
-		]);
+		$options['escape'] = false;
+		$options = $this->addClass($options, 'share-link');
+		return $this->Html->link($title, $url, $options);
 	}
 }

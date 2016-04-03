@@ -1,7 +1,31 @@
+<?php
+$mainButtons = [
+	[
+		'title' => 'RSS Feed',
+		'icon' => '<i class="fa fa-rss"></i>',
+		'url' => ['controller' => 'podcasts', 'action' => 'feed', 'slug' => $podcast['Podcast']['slug']],
+	]
+];
+if (!empty($podcast['Podcast']['itunes_url'])):
+	$mainButtons[] = [
+		'title' => 'Subscribe via iTunes',
+		'icon' => '<i class="fa fa-apple"></i>',
+		'url' => str_replace('https://', 'itms://', $podcast['Podcast']['itunes_url']),
+	];
+endif;
+?>
+
 <?php $this->Html->css('views/podcast-view', null, ['inline' => false]); ?>
+
+<?php if (empty($podcast['Podcast']['active'])): ?>
+	<div class="alert alert-danger lead">
+		<h2 class="alert-title">Podcast is Inactive</h2>
+		This podcast is listed as inactive, and can only be viewed by admins until it's activated.
+	</div>
+<?php endif; ?>
+
 <div class="row">
 	<div class="col-sm-8">
-
 		<div class="podcast-view">
 			<div class="panel panel-default">
 				<div class="panel-body">
@@ -10,6 +34,21 @@
 							<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'banner', 'banner', ['class' => 'podcast-view-heading-banner-img']); ?>
 						</div>
 						<div class="podcast-view-heading-body">
+							<div class="text-center">
+								<?php foreach ($mainButtons as $config):
+									echo $this->Html->link(
+										$config['icon'] . ' ' . $config['title'],
+										$config['url'],	[
+											'escape' => false, 
+											'class' => 'btn btn-info btn-lg', 
+											'title' => $config['title'], 
+											'target' => '_blank'
+										]
+									); 
+									echo ' ';
+								endforeach; ?>
+							</div>
+
 							<div class="media">
 								<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'thumbnail', 'thumbnail-md', ['class' => 'pull-right media-object']); ?>
 								<div class="media-body">
@@ -21,15 +60,6 @@
 											<?php echo $podcast['Podcast']['subtitle']; ?>
 										</h3>
 									<?php endif; ?>
-
-									<?php if (!empty($podcast['PodcastLink'])): ?>
-										<div class="share-link-list">
-										<?php foreach ($podcast['PodcastLink'] as $podcastLink):
-											echo $this->ShareLink->link($podcastLink['url'], $podcastLink['type']);
-										endforeach; ?>
-										</div>
-									<?php endif; ?>
-
 									<?php echo nl2br($podcast['Podcast']['description']); ?>
 									<?php if (!empty($podcast['User'])): ?>
 										<p>
@@ -49,21 +79,16 @@
 								</div>
 							</div>
 
-							<div class="text-center">
-								<?php echo $this->Html->link(
-									'<i class="fa fa-rss"></i> RSS Feed',
-									['controller' => 'podcasts', 'action' => 'feed', 'slug' => $podcast['Podcast']['slug']],
-									['escape' => false, 'class' => 'btn btn-default', 'title' => 'RSS Feed', 'target' => '_blank']
-								); ?>
+							<?php if (!empty($podcast['PodcastLink'])): ?>
+								<div class="share-link-list text-center">
+								<?php foreach ($podcast['PodcastLink'] as $podcastLink):
+									echo $this->ShareLink->link($podcastLink['url'], $podcastLink['type'], [
+										'class' => 'btn btn-default',
+									]) . ' ';
+								endforeach; ?>
+								</div>
+							<?php endif; ?>
 
-								<?php if (!empty($podcast['Podcast']['itunes_url'])): ?>
-									<?php echo $this->Html->link(
-										'<i class="fa fa-apple"></i> Subscribe via iTunes',
-										str_replace('https://', 'itms://', $podcast['Podcast']['itunes_url']),
-										['escape' => false, 'class' => 'btn btn-default', 'title' => 'Subscribe via iTunes', 'target' => '_blank']
-									); ?>
-								<?php endif; ?>
-							</div>
 						</div>
 					</div>
 				</div>

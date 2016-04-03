@@ -77,7 +77,18 @@ class UsersController extends AppController {
 		$data['email'] = $email;
 
 		// Looks for redirect
-		$redirect = ['controller' => 'users', 'action' => 'view'];
+		if (empty($data['redirect'])) {
+			$defaultRedirect = null;
+			if (!array_key_exists('redirect', $named) || $named['redirect'] != false) {
+				$redirect = $this->referer();
+			}
+			if (empty($redirect)) {
+				$redirect = $defaultRedirect;
+			}
+			$data['redirect'] = Router::url($redirect, true);
+		} else {
+			$redirect = $data['redirect'];
+		}
 
 		$loginOptions = [];
 		if (!empty($redirect)) {
@@ -98,13 +109,12 @@ class UsersController extends AppController {
 
 		$this->request->data['User'] = $data;
 
-		//debug(compact('loginOptions', 'redirect', 'data'));
+		debug(compact('loginOptions', 'redirect', 'data'));
 		//exit();
 		// Logs in user
 		if ($allowLogin && $this->request->is('post')) {
 			if ($user = $this->Auth->login()) {
-
-				if (!empty($redirect)) {
+				if (empty($redirect)) {
 					$redirect = $this->Auth->redirect();
 				}
 				return $this->redirect($redirect);

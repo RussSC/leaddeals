@@ -7,6 +7,13 @@ $pagerNav = [
 ];
 ?>
 
+<?php if (empty($podcastEpisode['PodcastEpisode']['active'])): ?>
+	<div class="alert alert-danger lead">
+		<h2 class="alert-title">Episode is Inactive</h2>
+		This podcast episode is listed as inactive, and can only be viewed by admins until it's activated.
+	</div>
+<?php endif; ?>
+
 <div class="row">
 	<div class="col-sm-8">
 		<div class="panel panel-default">
