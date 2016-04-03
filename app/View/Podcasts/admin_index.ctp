@@ -27,7 +27,7 @@
 				<td>
 					<?php echo $this->Html->link('View', $url); ?>
 					<?php echo $this->Html->link('Edit', ['action' => 'edit'] + $url); ?>
-					<?php echo $this->Html->link('Delete', ['action' => 'delete'] + $url); ?>
+					<?php echo $this->Form->postLink('Delete', ['action' => 'delete'] + $url); ?>
 					<?php echo $this->Html->link('Add', [
 						'controller' => 'podcast_episodes', 
 						'action' => 'add', 
