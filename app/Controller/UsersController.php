@@ -109,8 +109,6 @@ class UsersController extends AppController {
 
 		$this->request->data['User'] = $data;
 
-		debug(compact('loginOptions', 'redirect', 'data'));
-		//exit();
 		// Logs in user
 		if ($allowLogin && $this->request->is('post')) {
 			if ($user = $this->Auth->login()) {
