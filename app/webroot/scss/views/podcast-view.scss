@@ -26,4 +26,8 @@
 		font-size: $font-size-large;
 		font-weight: normal;
 	}
+	&-description {
+		font-size: $font-size-large;
+		padding: $padding-large-vertical $padding-large-horizontal;
+	}
 }

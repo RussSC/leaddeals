@@ -1,8 +1,16 @@
+@import "../utilities/index";
+
 .podcast-episode-podcast-heading {
 	&-title {
 		margin: 0;
 	}
 }
-.podcast-episode-view-heading-banner {
-	max-width: 100%;
+.podcast-episode-view {
+	&-heading-banner {
+		max-width: 100%;
+	}
+	&-body {
+		font-size: $font-size-large;
+		padding: $padding-large-vertical $padding-large-horizontal;
+	}
 }
