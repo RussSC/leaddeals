@@ -1,5 +1,11 @@
 <IfModule mod_rewrite.c>
    RewriteEngine on
+
+   # Remove www from host
+   RewriteCond %{HTTP_HOST} ^www\.(.+)
+   RewriteCond %{HTTPS}s/%1 ^(on(s)|offs)/(.+)
+   RewriteRule ^ http%2://%3%{REQUEST_URI} [L,R=301]
+   
    RewriteRule    ^$ app/webroot/    [L]
    RewriteRule    (.*) app/webroot/$1 [L]
 </IfModule>
