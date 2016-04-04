@@ -6,6 +6,7 @@ $alert-padding-vertical:		$padding-large-vertical;
 @mixin alert-icon ($class, $icon) {
 	.alert#{$class} {
 		padding-left: $alert-icon-size + 2 * $alert-padding-horizontal;
+		min-height: $alert-icon-size + 2 * $alert-padding-vertical;
 		&:before {
 			@include fa($icon);
 			font-size: $alert-icon-size;
