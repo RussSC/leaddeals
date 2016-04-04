@@ -7,6 +7,7 @@
 		"../../scss/utilities/_colors.scss",
 		"../../scss/utilities/_variables.scss",
 		"../../scss/utilities/_mixins.scss",
+		"../../scss/utilities/_font-awesome.scss",
 		"../../scss/utilities/lib/_index.scss",
 		"../../scss/utilities/lib/bootstrap3.3.6/bootstrap/_variables.scss",
 		"../../scss/utilities/lib/bootstrap3.3.6/bootstrap/_mixins.scss",
@@ -41,6 +42,6 @@
 		"../../scss/utilities/lib/bootstrap3.3.6/bootstrap/mixins/_grid-framework.scss",
 		"../../scss/utilities/lib/bootstrap3.3.6/bootstrap/mixins/_grid.scss"
 	],
-	"mappings": "AAEA,4BAAa,AACK,CAChB,QAAQ,CAAE,QAAS,CACnB,aAAa,CM4DW,IAAK,CN9C7B,AAjBF,gCAAa,AAKL,CACL,KAAK,CAAE,IAAK,CACZ,AAPH,kCAAa,AAQH,CACP,QAAQ,CAAE,QAAS,CACnB,IAAI,CAAE,CAAE,CACR,KAAK,CAAE,CAAE,CACT,MAAM,CAAE,CAAE,CACV,OAAO,CMkFkB,IAAI,CACJ,IAAI,CNlF7B,gBAAgB,CAAO,eAAI,CAC3B,KAAK,CAAE,gBAAiB,CACxB,AAhBH,mBAAa,AAkBJ,CACP,UAAU,CAAE,CAAE,CACd,AApBF,sBAAa,AAqBD,CACV,MAAM,CAAE,CAAE,CACV,SAAS,CM2Be,IAAI,CN1B5B,WAAW,CAAE,MAAO,CACpB,AAzBF,yBAAa,AA0BE,CACb,SAAS,CMuBe,IAAI,CNtB5B,OAAO,CMmEmB,IAAI,CACJ,IAAI,CNnE9B",
+	"mappings": "AAEA,4BAAa,AAEF,CACR,QAAQ,CAAE,QAAS,CACnB,aAAa,CO2DU,IAAK,CP7C5B,AAlBH,gCAAa,AAMJ,CACL,KAAK,CAAE,IAAK,CACZ,AARJ,kCAAa,AASF,CACP,QAAQ,CAAE,QAAS,CACnB,IAAI,CAAE,CAAE,CACR,KAAK,CAAE,CAAE,CACT,MAAM,CAAE,CAAE,CACV,OAAO,COiFiB,IAAI,CACJ,IAAI,CPjF5B,gBAAgB,CAAO,eAAI,CAC3B,KAAK,CAAE,gBAAiB,CACxB,AAjBJ,qBAAa,CAmBX,gBAAgB,AAAC,CAChB,UAAU,CAAE,MAAO,CACnB,UAAU,CO0Ca,IAAK,CPzC5B,aAAa,COyCU,IAAK,CPxC5B,AAvBH,mBAAa,AAyBJ,CACP,UAAU,CAAE,CAAE,CACd,AA3BF,sBAAa,AA4BD,CACV,MAAM,CAAE,CAAE,CACV,SAAS,COoBe,IAAI,CPnB5B,WAAW,CAAE,MAAO,CACpB,AAhCF,yBAAa,AAiCE,CACb,SAAS,COgBe,IAAI,CPf5B,OAAO,CO4DmB,IAAI,CACJ,IAAI,CP5D9B",
 	"names": []
 }

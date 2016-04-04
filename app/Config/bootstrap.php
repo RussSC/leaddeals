@@ -92,6 +92,8 @@ Configure::write('Dispatcher.filters', [
 	'CacheDispatcher'
 ]);
 
+App::uses('Icon', 'Utility');
+
 /**
  * Configures default file logging options
  */

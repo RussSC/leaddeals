@@ -5,13 +5,17 @@ echo $this->Layout->infoTable([
 	//'Downloads' => number_format($podcast['Podcast']['episode_downloads']),
 ]);
 */
-echo $this->Html->link(
-	'Public View', 
-	['action' => 'view', 'slug' => $podcast['Podcast']['slug'], 'admin' => false],
-	['class' => 'btn btn-default btn-lg']
-);
-
 ?>
+<div class="text-center">
+	<?php
+	echo $this->Html->link(
+		'Public View', 
+		['action' => 'view', 'slug' => $podcast['Podcast']['slug'], 'admin' => false],
+		['class' => 'btn btn-primary btn-lg']
+	);
+	?>
+</div>
+
 <div class="row">
 	<div class="col-sm-6 col-sm-offset-3">
 		<div class="panel panel-default">

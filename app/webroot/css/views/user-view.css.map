@@ -7,6 +7,7 @@
 		"../../scss/utilities/_colors.scss",
 		"../../scss/utilities/_variables.scss",
 		"../../scss/utilities/_mixins.scss",
+		"../../scss/utilities/_font-awesome.scss",
 		"../../scss/utilities/lib/_index.scss",
 		"../../scss/utilities/lib/bootstrap3.3.6/bootstrap/_variables.scss",
 		"../../scss/utilities/lib/bootstrap3.3.6/bootstrap/_mixins.scss",

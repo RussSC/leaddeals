@@ -2,14 +2,14 @@
 $mainButtons = [
 	[
 		'title' => 'RSS Feed',
-		'icon' => '<i class="fa fa-rss"></i>',
+		'icon' => Icon::rss(),
 		'url' => ['controller' => 'podcasts', 'action' => 'feed', 'slug' => $podcast['Podcast']['slug']],
 	]
 ];
 if (!empty($podcast['Podcast']['itunes_url'])):
 	$mainButtons[] = [
 		'title' => 'Subscribe via iTunes',
-		'icon' => '<i class="fa fa-apple"></i>',
+		'icon' => Icon::apple(),
 		'url' => str_replace('https://', 'itms://', $podcast['Podcast']['itunes_url']),
 	];
 endif;
@@ -40,7 +40,7 @@ endif;
 										$config['icon'] . ' ' . $config['title'],
 										$config['url'],	[
 											'escape' => false, 
-											'class' => 'btn btn-info btn-lg', 
+											'class' => 'btn btn-primary btn-lg', 
 											'title' => $config['title'], 
 											'target' => '_blank'
 										]
@@ -83,18 +83,17 @@ endif;
 									<?php endif; ?>
 								</div>
 							</div>
-
-							<?php if (!empty($podcast['PodcastLink'])): ?>
-								<div class="share-link-list text-center">
-								<?php foreach ($podcast['PodcastLink'] as $podcastLink):
-									echo $this->ShareLink->link($podcastLink['url'], $podcastLink['type'], [
-										'class' => 'btn btn-default',
-									]) . ' ';
-								endforeach; ?>
-								</div>
-							<?php endif; ?>
-
 						</div>
+
+						<?php if (!empty($podcast['PodcastLink'])): ?>
+							<div class="share-link-list">
+							<?php foreach ($podcast['PodcastLink'] as $podcastLink):
+								echo $this->ShareLink->link($podcastLink['url'], $podcastLink['type'], [
+									'class' => 'btn btn-default',
+								]) . ' ';
+							endforeach; ?>
+							</div>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>

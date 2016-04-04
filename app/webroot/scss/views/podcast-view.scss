@@ -1,21 +1,28 @@
 @import "../utilities/index";
 
 .podcast-view {
-	&-heading-banner {
-		position: relative;
-		margin-bottom: $line-height-computed;
+	&-heading {
+		&-banner {
+			position: relative;
+			margin-bottom: $line-height-computed;
 
-		&-img {
-			width: 100%;
+			&-img {
+				width: 100%;
+			}
+			&-title {
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				padding: $padding-large-vertical $padding-large-horizontal;
+				background-color: rgba(#000, .5);
+				color: white !important;
+			}
 		}
-		&-title {
-			position: absolute;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			padding: $padding-large-vertical $padding-large-horizontal;
-			background-color: rgba(#000, .5);
-			color: white !important;
+		.share-link-list {
+			text-align: center;
+			margin-top: $line-height-computed;
+			margin-bottom: $line-height-computed;
 		}
 	}
 	&-title {

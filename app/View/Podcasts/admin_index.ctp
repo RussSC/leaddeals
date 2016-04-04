@@ -8,7 +8,7 @@
 		<thead>
 			<tr>
 				<th>Title</th>
-				<th>Episodes</th>
+				<th class="text-center">Episodes</th>
 				<th>Last Posted</th>
 				<th>Actions</th>
 			</tr>
@@ -22,16 +22,22 @@
 					$podcast['Podcast']['title'],
 					$url
 				); ?></td>
-				<td><?php echo number_format($podcast['Podcast']['podcast_episode_count']); ?></td>
+				<td class="text-center">
+					<span class="label label-default"><?php echo number_format($podcast['Podcast']['podcast_episode_count']); ?></span>
+				</td>
 				<td><?php echo $this->Time->niceShort($podcast['Podcast']['last_episode_posted']); ?></td>
 				<td>
-					<?php echo $this->Html->link('View', $url); ?>
-					<?php echo $this->Html->link('Edit', ['action' => 'edit'] + $url); ?>
-					<?php echo $this->Form->postLink('Delete', ['action' => 'delete'] + $url); ?>
-					<?php echo $this->Html->link('Add', [
-						'controller' => 'podcast_episodes', 
-						'action' => 'add', 
-						$podcast['Podcast']['id']
+					<?php echo $this->Bootstrap->linkBtnGroup([
+						['View', $url],
+						['Edit', ['action' => 'edit'] + $url],
+						['Delete', ['action' => 'delete'] + $url, ['postLink' => true, 'confirm' => 'Delete this Podcast?']],
+						['Add', 
+							[
+								'controller' => 'podcast_episodes', 
+								'action' => 'add', 
+								$podcast['Podcast']['id']
+							],
+						]
 					]); ?>
 				</td>
 			</tr>

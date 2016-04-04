@@ -2,8 +2,8 @@
 $this->Html->css('views/podcast-episode-view', null, ['inline' => false]);
 $podcastUrl = ['controller' => 'podcasts', 'action' => 'view', 'slug' => $podcastEpisode['Podcast']['slug']];
 $pagerNav = [
-	'prev' => ['class' => 'previous', 'title' => '<i class="fa fa-arrow-left"></i> Prev'], 
-	'next' => ['class' => 'next', 'title' => 'Next <i class="fa fa-arrow-right"></i>']
+	'prev' => ['class' => 'previous', 'title' => Icon::arrowLeft() . ' Prev'], 
+	'next' => ['class' => 'next', 'title' => 'Next ' . Icon::arrowRight()]
 ];
 ?>
 
@@ -39,20 +39,20 @@ $pagerNav = [
 						}
 						echo $image;
 						?>
-						<h2 class="podcast-episode-view-title">
-							<div class="pull-right">
-								<?php echo $this->Html->link(
-									'<i class="fa fa-download"></i> DOWNLOAD',
-									['action' => 'download', $podcastEpisode['PodcastEpisode']['id']],
-									['escape' => false, 'class' => 'btn btn-default', 'title' => 'Dowload the Episode']
-								); ?>
-								<?php echo $this->Html->link(
-									'<i class="fa fa-rss"></i> FEED',
-									['controller' => 'podcasts', 'action' => 'feed', 'slug' => $podcastEpisode['Podcast']['slug']],
-									['escape' => false, 'class' => 'btn btn-default', 'title' => 'RSS Feed']
-								); ?>
+						<div class="text-center">
+							<?php echo $this->Html->link(
+								Icon::download() . ' Download',
+								['action' => 'download', $podcastEpisode['PodcastEpisode']['id']],
+								['escape' => false, 'class' => 'btn btn-info btn-lg', 'title' => 'Dowload the Episode']
+							); ?>
+							<?php echo $this->Html->link(
+								Icon::rss() . ' RSS Feed',
+								['controller' => 'podcasts', 'action' => 'feed', 'slug' => $podcastEpisode['Podcast']['slug']],
+								['escape' => false, 'class' => 'btn btn-info btn-lg', 'title' => 'RSS Feed']
+							); ?>
 
-							</div>
+						</div>
+						<h2 class="podcast-episode-view-title">
 							<?php echo $this->Podcast->episodeNumber($podcastEpisode['PodcastEpisode']['episode_number']); ?>. 
 							<?php echo $podcastEpisode['PodcastEpisode']['title']; ?>
 							<br/>

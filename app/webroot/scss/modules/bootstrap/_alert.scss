@@ -1,0 +1,36 @@
+$alert-width:					600px;
+$alert-icon-size:	 			40px;
+$alert-padding-horizontal:		$padding-large-horizontal;
+$alert-padding-vertical:		$padding-large-vertical;
+
+@mixin alert-icon ($class, $icon) {
+	.alert#{$class} {
+		padding-left: $alert-icon-size + 2 * $alert-padding-horizontal;
+		&:before {
+			@include fa($icon);
+			font-size: $alert-icon-size;
+			display: block;
+			position: absolute;
+			top: $alert-padding-vertical;
+			left: $alert-padding-horizontal;
+			width: $alert-icon-size;
+			text-align: center;
+		}
+	}
+}
+
+.alert {
+	max-width: $alert-width;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: $font-size-large;
+	padding: $padding-large-vertical $padding-large-horizontal;
+	position: relative;
+	&-title {
+		margin-top: 0;
+	}
+}
+
+@include alert-icon(".alert-success", $fa-check-circle);
+@include alert-icon(".alert-error", $fa-times-circle);
+@include alert-icon(".alert-warning", $fa-exclamation-triangle);
