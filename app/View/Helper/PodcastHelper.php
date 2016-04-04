@@ -31,4 +31,8 @@ class PodcastHelper extends AppHelper {
 			return $number;
 		}
 	}
+
+	public function iTunesUrl($url) {
+		return str_replace('https://', 'itms://', $url);
+	}
 }

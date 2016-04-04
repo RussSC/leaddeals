@@ -1,16 +1,18 @@
 <?php
 $mainButtons = [
 	[
-		'title' => 'RSS Feed',
+		'title' => 'Feed',
 		'icon' => Icon::rss(),
 		'url' => ['controller' => 'podcasts', 'action' => 'feed', 'slug' => $podcast['Podcast']['slug']],
+		'urlTitle' => 'RSS Feed',
 	]
 ];
 if (!empty($podcast['Podcast']['itunes_url'])):
 	$mainButtons[] = [
-		'title' => 'Subscribe via iTunes',
+		'title' => 'iTunes',
 		'icon' => Icon::apple(),
-		'url' => str_replace('https://', 'itms://', $podcast['Podcast']['itunes_url']),
+		'url' => $this->Podcast->iTunesUrl($podcast['Podcast']['itunes_url']),
+		'urlTitle' => 'Subscribe via iTunes',
 	];
 endif;
 ?>
@@ -41,7 +43,7 @@ endif;
 										$config['url'],	[
 											'escape' => false, 
 											'class' => 'btn btn-primary btn-lg', 
-											'title' => $config['title'], 
+											'title' => $config['urlTitle'], 
 											'target' => '_blank'
 										]
 									); 

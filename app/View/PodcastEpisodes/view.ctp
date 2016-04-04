@@ -5,6 +5,33 @@ $pagerNav = [
 	'prev' => ['class' => 'previous', 'title' => Icon::arrowLeft() . ' Prev'], 
 	'next' => ['class' => 'next', 'title' => 'Next ' . Icon::arrowRight()]
 ];
+
+$mainButtons = [
+	[
+		'title' => 'Download',
+		'icon' => Icon::download(),
+		'url' => ['action' => 'download', $podcastEpisode['PodcastEpisode']['id']],
+		'urlTitle' => 'Download the episode',
+	], [
+		'title' => 'Feed',
+		'icon' => Icon::rss(),
+		'url' => ['controller' => 'podcasts', 'action' => 'feed', 'slug' => $podcastEpisode['Podcast']['slug']],
+		'urlTitle' => 'RSS Feed',
+	],
+];
+
+if (!empty($podcastEpisode['Podcast']['itunes_url'])) {
+	$mainButtons[] = [
+		'title' => 'iTunes',
+		'icon' => Icon::apple(),
+		'url' => $this->Podcast->iTunesUrl($podcastEpisode['Podcast']['itunes_url']),
+		'options' => [
+			'title' => 'Subscribe in iTunes',
+			'target' => '_blank',
+		]
+	];
+}
+
 ?>
 
 <?php if (empty($podcastEpisode['PodcastEpisode']['active'])): ?>
@@ -40,17 +67,20 @@ $pagerNav = [
 						echo $image;
 						?>
 						<div class="text-center">
-							<?php echo $this->Html->link(
-								Icon::download() . ' Download',
-								['action' => 'download', $podcastEpisode['PodcastEpisode']['id']],
-								['escape' => false, 'class' => 'btn btn-info btn-lg', 'title' => 'Dowload the Episode']
-							); ?>
-							<?php echo $this->Html->link(
-								Icon::rss() . ' RSS Feed',
-								['controller' => 'podcasts', 'action' => 'feed', 'slug' => $podcastEpisode['Podcast']['slug']],
-								['escape' => false, 'class' => 'btn btn-info btn-lg', 'title' => 'RSS Feed']
-							); ?>
-
+							<?php foreach ($mainButtons as $btn):
+								$options = ['escape' => false, 'class' => 'btn btn-info btn-lg'];
+								if (!empty($btn['options'])) {
+									$options += $btn['options'];
+								}
+								if (!empty($btn['urlTitle'])) {
+									$options['title'] = $btn['urlTitle'];
+								}
+								echo $this->Html->link(
+									$btn['icon'] . ' ' . $btn['title'],
+									$btn['url'],
+									$options
+								) . ' ';
+							endforeach; ?>
 						</div>
 						<h2 class="podcast-episode-view-title">
 							<?php echo $this->Podcast->episodeNumber($podcastEpisode['PodcastEpisode']['episode_number']); ?>. 
