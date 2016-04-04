@@ -16,6 +16,8 @@ $alert-padding-vertical:		$padding-large-vertical;
 			left: $alert-padding-horizontal;
 			width: $alert-icon-size;
 			text-align: center;
+			line-height: $alert-icon-size;
+			opacity: .5;
 		}
 	}
 }
