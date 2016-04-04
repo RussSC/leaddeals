@@ -32,5 +32,5 @@ $alert-padding-vertical:		$padding-large-vertical;
 }
 
 @include alert-icon(".alert-success", $fa-check-circle);
-@include alert-icon(".alert-error", $fa-times-circle);
+@include alert-icon(".alert-danger", $fa-times-circle);
 @include alert-icon(".alert-warning", $fa-exclamation-triangle);

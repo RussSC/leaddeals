@@ -18,7 +18,7 @@ endif;
 <?php $this->Html->css('views/podcast-view', null, ['inline' => false]); ?>
 
 <?php if (empty($podcast['Podcast']['active'])): ?>
-	<div class="alert alert-danger lead">
+	<div class="alert alert-warning">
 		<h2 class="alert-title">Podcast is Inactive</h2>
 		This podcast is listed as inactive, and can only be viewed by admins until it's activated.
 	</div>
