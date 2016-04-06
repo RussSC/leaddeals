@@ -58,7 +58,7 @@ class PodcastsController extends AppController {
 		$this->set(compact('podcastEpisodes', 'recentEpisodes', 'isEditor'));
 
 		$this->set([
-			'title_for_layout' => '"' . $result['Podcast']['title'] . '" Podcast',
+			'title_for_layout' => $result['Podcast']['title'],
 			'description_for_layout' => $result['Podcast']['description'],
 			'image_for_layout' => $result['Podcast']['uploadable']['banner']['sizes']['banner-share']['src'],
 		]);

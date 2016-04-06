@@ -162,9 +162,9 @@ class PodcastEpisode extends AppModel {
 		if ($episodeNumber == round($episodeNumber)) {
 			$episodeNumber = round($episodeNumber);
 		}
-		
+
 		$data = compact('id');
-		$data['full_title'] = sprintf('%s Episode #%s: "%s"',
+		$data['full_title'] = sprintf('%s Episode #%s: %s',
 			$result['Podcast']['title'],
 			$episodeNumber,
 			$result['PodcastEpisode']['title']
