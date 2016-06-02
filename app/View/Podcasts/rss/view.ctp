@@ -109,7 +109,7 @@ $this->set('channelData', [
 	'subtitle' => [
 		'attrib' => ['namespace' => 'itunes'],
 		'cdata' => true,
-		'value' => $podcast['Podcast']['subtitle'],
+		'value' => html_entity_decode($podcast['Podcast']['subtitle']),
 	]
 
 ]);
@@ -141,6 +141,9 @@ foreach ($podcastEpisodes as $episode):
 		'exact' => true,
 		'html' => true,
 	]);
+
+	$body = htmlspecialchars_decode(html_entity_decode($body, ENT_QUOTES), ENT_QUOTES);
+	$subtitle = htmlspecialchars_decode(html_entity_decode($subtitle, ENT_QUOTES), ENT_QUOTES);
 
 	echo $this->Rss->item([], [
 		'title' => $episode['title'],
