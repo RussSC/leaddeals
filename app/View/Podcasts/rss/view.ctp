@@ -1,4 +1,6 @@
-<?php 
+<?php
+header('Content-Type: application/rss+xml; charset=utf-8');
+ 
 $this->Rss->registerNamespaces([
 	'atom' 		=> 'http://www.w3.org/2005/Atom',
 	'cc' 		=> 'http://web.resource.org/cc/',
@@ -144,6 +146,7 @@ foreach ($podcastEpisodes as $episode):
 
 	$body = htmlspecialchars_decode(html_entity_decode($body, ENT_QUOTES), ENT_QUOTES);
 	$subtitle = htmlspecialchars_decode(html_entity_decode($subtitle, ENT_QUOTES), ENT_QUOTES);
+	$subtitle = str_replace(["'", '"'], '', $subtitle);
 
 	echo $this->Rss->item([], [
 		'title' => $episode['title'],

@@ -79,6 +79,8 @@ class PodcastsController extends AppController {
 
 
 	public function feed($id = null) {
+		//header('Content-Type: application/rss+xml; charset=utf-8');
+		$this->response->type('rss');
 		$id = $this->fetchId($id);
 
 		$this->Crud->read($id, [
