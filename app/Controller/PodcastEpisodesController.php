@@ -13,7 +13,7 @@ class PodcastEpisodesController extends AppController {
 		$this->redirect(['controller' => 'podcasts']);
 	}
 	
-	public function view($id = null) {
+	public function view($id = null, $slug = null) {
 		$id = $this->fetchId($id);
 		$result = $this->Crud->read($id, [
 			'query' => [
@@ -21,6 +21,15 @@ class PodcastEpisodesController extends AppController {
 				'contain' => ['Podcast'],
 			]
 		]);
+
+		if (empty($slug) && !empty($result['PodcastEpisode']['slug'])) {
+			$this->redirect([
+				'action' => 'view',
+				$result['PodcastEpisode']['id'],
+				$result['PodcastEpisode']['slug']
+			]);
+		}
+
 		$this->set('neighbors', $this->PodcastEpisode->findNeighbors($id, [
 			'public' => !$this->Auth->user('is_admin'),
 		]));
