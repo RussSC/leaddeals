@@ -13,3 +13,12 @@
 	line-height: 1;
 	color: #CCC;
 }
+
+
+.podcast-episode-media-list {
+	> .media {
+		margin: 10px;
+		padding: $padding-large-vertical $padding-large-horizontal;
+		background-color: #F8F8F8;
+	}
+}

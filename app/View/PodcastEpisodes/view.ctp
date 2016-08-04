@@ -88,10 +88,15 @@ if (!empty($podcastEpisode['Podcast']['itunes_url'])) {
 							<br/>
 							<small>Posted on: <?php echo date('F j, Y', strtotime($podcastEpisode['PodcastEpisode']['posted'])); ?></small>
 						</h2>
-
 					</div>
 
-					<?php echo $this->element('podcast_episodes/player'); ?>
+					<?php if (!empty($podcastEpisode['PodcastEpisode']['libsyn_id'])):
+						echo $this->element('podcast_episodes/libsyn_player', [
+							'id' => $podcastEpisode['PodcastEpisode']['libsyn_id'],
+						]);
+					else:
+						echo $this->element('podcast_episodes/player');
+					endif; ?>
 
 					<div class="podcast-episode-view-body">
 						<?php echo nl2br($podcastEpisode['PodcastEpisode']['description']); ?>		

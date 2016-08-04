@@ -37,6 +37,12 @@ echo $this->Form->input('active', [
 		'afterInput' => '<span class="help-block">Paste the URL where the mp3 is stored</span>',
 	]);
 
+	echo $this->Form->input('libsyn_id', [
+		'label' => 'Libsyn ID',
+		'help' => 'If you want to use the Libsyn player, add the Libsyn episode ID',
+		'type' => 'number',
+	]);
+
 	$inputDefaults = $this->Form->inputDefaults();
 	$this->Form->inputDefaults([
 		'div' => 'form-group col col-xs-4',

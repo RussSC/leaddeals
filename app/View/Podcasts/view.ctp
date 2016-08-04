@@ -105,9 +105,7 @@ endif;
 					<div class="panel-heading">
 						<div class="panel-title">Episodes</div>
 					</div>
-					<div class="panel-body">
-						<?php echo $this->element('podcast_episodes/list'); ?>
-					</div>
+					<?php echo $this->element('podcast_episodes/list'); ?>
 				</div>
 			</div>
 
