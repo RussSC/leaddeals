@@ -64,7 +64,7 @@ endif;
 									<?php endif; ?>
 									<?php if (!empty($podcast['Podcast']['description'])): ?>
 										<div class="podcast-view-description">
-											<?php echo nl2br($podcast['Podcast']['description']); ?>
+											<?php echo $this->DisplayText->text($podcast['Podcast']['description']); ?>
 										</div>
 									<?php endif; ?>
 
