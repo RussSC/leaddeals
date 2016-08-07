@@ -9,6 +9,7 @@ class PodcastsController extends AppController {
 		'Uploadable.FieldUploadImage',
 		'ShareLink',
 		'Time',
+		'Layout.DisplayText',
 	];
 
 	public $layout = 'default_container';
