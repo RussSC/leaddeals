@@ -26,14 +26,26 @@ endif;
 	</div>
 <?php endif; ?>
 
+<div class="podcast-view-bg">
+	<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'banner', 'banner'); ?>
+</div>
+
+
 <div class="row">
-	<div class="col-sm-8">
+	<div class="col-md-8 col-md-offset-2">
 		<div class="podcast-view">
+
+			<div class="text-center">
+				<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'thumbnail', 'thumbnail-md'); ?>
+				<h1 class="podcast-view-title">
+					<?php echo $podcast['Podcast']['title']; ?>
+				</h1>
+			</div>
+
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="podcast-view-heading">
 						<div class="podcast-view-heading-banner">
-							<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'banner', 'banner', ['class' => 'podcast-view-heading-banner-img']); ?>
 						</div>
 						<div class="podcast-view-heading-body">
 							<div class="text-center">
@@ -52,11 +64,8 @@ endif;
 							</div>
 
 							<div class="media">
-								<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'thumbnail', 'thumbnail-md', ['class' => 'pull-right media-object']); ?>
 								<div class="media-body">
-									<h2 class="podcast-view-title">
-										<?php echo $podcast['Podcast']['title']; ?>
-									</h2>
+
 									<?php if (!empty($podcast['Podcast']['subtitle'])): ?>
 										<h3 class="podcast-view-subtitle">
 											<?php echo $podcast['Podcast']['subtitle']; ?>
@@ -126,6 +135,10 @@ endif;
 			endif; ?>
 		</div>
 	</div>
+</div>
+
+<?php
+/* Removing the right side to better improve the episodes below
 	<div class="col-sm-4">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -136,4 +149,5 @@ endif;
 			]); ?>
 		</div>
 	</div>
-</div>
+*/
+?>
