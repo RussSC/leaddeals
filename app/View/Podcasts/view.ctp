@@ -63,36 +63,33 @@ endif;
 								endforeach; ?>
 							</div>
 
-							<div class="media">
-								<div class="media-body">
+							<div>
+								<?php if (!empty($podcast['Podcast']['subtitle'])): ?>
+									<h3 class="podcast-view-subtitle">
+										<?php echo $podcast['Podcast']['subtitle']; ?>
+									</h3>
+								<?php endif; ?>
+								<?php if (!empty($podcast['Podcast']['description'])): ?>
+									<div class="podcast-view-description">
+										<?php echo nl2br($podcast['Podcast']['description']); ?>
+									</div>
+								<?php endif; ?>
 
-									<?php if (!empty($podcast['Podcast']['subtitle'])): ?>
-										<h3 class="podcast-view-subtitle">
-											<?php echo $podcast['Podcast']['subtitle']; ?>
-										</h3>
-									<?php endif; ?>
-									<?php if (!empty($podcast['Podcast']['description'])): ?>
-										<div class="podcast-view-description">
-											<?php echo nl2br($podcast['Podcast']['description']); ?>
-										</div>
-									<?php endif; ?>
-
-									<?php if (!empty($podcast['User'])): ?>
-										<p>
-											<strong>Authors:</strong>
-											<?php
-											$users = [];
-											foreach ($podcast['User'] as $user):
-												$users[] = $this->Html->link(
-													$user['name'], 
-													['controller' => 'users', 'action' => 'view', $user['id']]											
-												);
-											endforeach; 
-											echo implode(', ', $users);
-											?>
-										</p>
-									<?php endif; ?>
-								</div>
+								<?php if (!empty($podcast['User'])): ?>
+									<p>
+										<strong>Authors:</strong>
+										<?php
+										$users = [];
+										foreach ($podcast['User'] as $user):
+											$users[] = $this->Html->link(
+												$user['name'], 
+												['controller' => 'users', 'action' => 'view', $user['id']]											
+											);
+										endforeach; 
+										echo implode(', ', $users);
+										?>
+									</p>
+								<?php endif; ?>
 							</div>
 						</div>
 
