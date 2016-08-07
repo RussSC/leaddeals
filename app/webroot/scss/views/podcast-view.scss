@@ -1,6 +1,21 @@
 @import "../utilities/index";
 
 .podcast-view {
+	&-bg {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		opacity: .10;
+		> img {
+			height: 100%;
+			margin-left: 50%;
+			transform: translateX(-50%);
+			min-width: 100%;
+			min-height: 100%;
+		}
+	}
 	&-heading {
 		&-banner {
 			position: relative;
