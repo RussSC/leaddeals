@@ -46,7 +46,7 @@ $this->set('channelData', [
 	'summary' => [
 		'attrib' => ['namespace' => 'itunes'], 
 		'cdata' => true, 
-		'value' => $podcast['Podcast']['description']
+		'value' => $this->DisplayText->text($podcast['Podcast']['description'], ['html' => false])
 	],
 	'image' => [
 		'url' => $thumbnail,
@@ -106,7 +106,7 @@ $this->set('channelData', [
 	'description' => [
 		'attrib' => [],
 		'cdata' => true,
-		'value' => $podcast['Podcast']['description'],
+		'value' => $this->DisplayText->text($podcast['Podcast']['description'], ['html' => false]),
 	],
 	'subtitle' => [
 		'attrib' => ['namespace' => 'itunes'],
@@ -132,7 +132,7 @@ foreach ($podcastEpisodes as $episode):
 		'ext' => 'mp3',
 	], true);
 
-	$body = h(strip_tags($episode['description']));
+	$body = h($this->DisplayText->text($episode['description'], ['html' => false]));
 	$subtitle = $this->Text->truncate($body, 235, [
 		'ending' => '...',
 		'exact' => true,
