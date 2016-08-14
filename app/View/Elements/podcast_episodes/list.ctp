@@ -8,6 +8,11 @@
 	];
 	?>
 	<div class="media">
+		<div class="pull-left">
+			<?php echo $this->FieldUploadImage->image($podcastEpisode['PodcastEpisode'], 'banner', 'thumbnail-sm', [
+				'url' => $url,
+			]); ?>
+		</div>
 		<div class="pull-right">
 			<?php echo $this->Html->link(
 				'<i class="fa fa-play"></i><span class="sr-only">Play</span>',
@@ -24,7 +29,7 @@
 			<h4 class="media-title">
 				<?php echo $this->Html->link($podcastEpisode['PodcastEpisode']['numeric_title'], $url); ?>
 			</h4>
-			<?php echo $podcastEpisode['PodcastEpisode']['subtitle']; ?>
+			<?php echo $this->DisplayText->text($podcastEpisode['PodcastEpisode']['description']); ?>
 		</div>
 	</div>
 <?php endforeach; ?>

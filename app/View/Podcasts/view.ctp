@@ -75,7 +75,7 @@ endif;
 								<?php endif; ?>
 
 								<?php if (!empty($podcast['User'])): ?>
-									<p>
+									<p class="text-center">
 										<strong>Authors:</strong>
 										<?php
 										$users = [];
