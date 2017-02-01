@@ -30,5 +30,22 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+	public $actsAs = [
+		'CacheQuery',
+	];
+
+/**
+ * Extends existing find profile to include the option to cache data
+ *
+ **/
+	public function find($type = 'first', $query = []) {
+		if ($this->hasMethod('findCacheCheck') && ($result = $this->findCacheCheck($type, $query)) !== false) {
+			//Loaded from Cache
+			return $result;
+		} else {
+			// Not loading from Cache
+			return parent::find($type, $query);
+		}
+	}
 }
 

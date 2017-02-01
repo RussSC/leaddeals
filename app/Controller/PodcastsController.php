@@ -87,6 +87,7 @@ class PodcastsController extends AppController {
 		$this->Crud->read($id, [
 			'query' => [
 				'recursive' => -1,
+				'cache' => true,
 			]
 		]);
 		$podcastEpisodes = $this->Podcast->PodcastEpisode->find('all', [
