@@ -34,6 +34,7 @@ class PodcastsController extends AppController {
 		$result = $this->Crud->read($id, [
 			'query' => [
 				'public' => !$this->Auth->user('is_admin'),
+				'cache' => true,
 			]
 		]);
 		$this->paginate = [
@@ -45,6 +46,7 @@ class PodcastsController extends AppController {
 				'order' => [
 					'PodcastEpisode.episode_number' => 'DESC',
 				],
+				'cache' => true,
 				'limit' => 50,
 			]
 		];
@@ -92,6 +94,7 @@ class PodcastsController extends AppController {
 			]
 		]);
 		$podcastEpisodes = $this->Podcast->PodcastEpisode->find('all', [
+			'cache' => true,
 			'public' => true,
 			'conditions' => [
 				'PodcastEpisode.podcast_id' => $id,
