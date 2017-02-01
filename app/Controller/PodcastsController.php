@@ -39,6 +39,7 @@ class PodcastsController extends AppController {
 		]);
 		$this->paginate = [
 			'PodcastEpisode' => [
+				'recursive' => -1,
 				'public' => !$this->Auth->user('is_admin'),
 				'conditions' => [
 					'PodcastEpisode.podcast_id' => $id,
@@ -96,6 +97,7 @@ class PodcastsController extends AppController {
 		$podcastEpisodes = $this->Podcast->PodcastEpisode->find('all', [
 			'cache' => true,
 			'public' => true,
+			'recursive' => -1,
 			'conditions' => [
 				'PodcastEpisode.podcast_id' => $id,
 			],
