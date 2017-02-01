@@ -147,6 +147,7 @@ foreach ($podcastEpisodes as $episode):
 	$body = htmlspecialchars_decode(html_entity_decode($body, ENT_QUOTES), ENT_QUOTES);
 	$subtitle = htmlspecialchars_decode(html_entity_decode($subtitle, ENT_QUOTES), ENT_QUOTES);
 	$subtitle = str_replace(["'", '"'], '', $subtitle);
+	$subtitle = strip_tags($subtitle);
 
 	echo $this->Rss->item([], [
 		'title' => $episode['title'],
