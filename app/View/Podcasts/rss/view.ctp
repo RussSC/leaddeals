@@ -169,7 +169,7 @@ foreach ($podcastEpisodes as $episode):
 		],
 		'enclosure' => [
 			'length' => $episode['filesize'],
-			'type' => 'audo/mpeg',
+			'type' => 'audio/mpeg',
 			'url' => $downloadUrl,
 		],
 		'duration' => [
