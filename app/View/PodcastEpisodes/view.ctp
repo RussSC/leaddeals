@@ -111,7 +111,7 @@ if (!empty($podcastEpisode['Podcast']['itunes_url'])) {
 						if (!empty($neighbors[$key])) {
 							$neighbor = $neighbors[$key]['PodcastEpisode'];
 							$url = ['action' => 'view', $neighbor['id']];
-							$title = '<small>Episode ' . $neighbor['episode_number'] . '</small>';
+							$title = '<small>Episode ' . $this->Podcast->episodeNumber($neighbor['episode_number']) . '</small>';
 							$title .= '<br/>';
 							$title .= $neighbor['title'];
 						} else {
