@@ -61,11 +61,10 @@ if (!empty($podcastEpisode['Podcast']['itunes_url'])) {
 		]); ?>
 		<article>
 			<header>
-				<h3 class="podcast-episode-view-header-podcast-title">
-					<a href="<?php echo Router::url($podcastUrl); ?>" >
-						<?php echo $podcastEpisode['Podcast']['title']; ?>
-					</a> Episode #<?php echo $this->Podcast->episodeNumber($podcastEpisode['PodcastEpisode']['episode_number']); ?>
-				</h3>
+				<h4 class="podcast-episode-view-header-podcast-title">
+					<a href="<?php echo Router::url($podcastUrl); ?>" ><?php echo $podcastEpisode['Podcast']['title']; ?></a>
+					 : Episode #<?php echo $this->Podcast->episodeNumber($podcastEpisode['PodcastEpisode']['episode_number']); ?>
+				</h4>
 				<h2 class="podcast-episode-view-header-title">
 					<?php echo $podcastEpisode['PodcastEpisode']['title']; ?>
 				</h2>

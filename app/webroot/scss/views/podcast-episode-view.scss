@@ -26,6 +26,8 @@
 	}
 	&-date {
 		text-align: center;
+		font-weight: normal;
+		opacity: .75;
 	}
 
 	header {
@@ -48,7 +50,14 @@
 
 	&-header {
 		&-podcast-title {
-			margin-bottom: 0;
+			margin-bottom: $line-height-computed / 2;
+			
+			&, a {
+				color: $gray-light;
+			}
+			a {
+				text-decoration: underline;
+			}
 		}
 	}
 }
