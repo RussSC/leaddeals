@@ -60,6 +60,7 @@ $podcast-thumbnail-padding: $line-height-computed;
 	&-title {
 		margin-top: $line-height-computed;
 		margin-bottom: $line-height-computed;
+		color: $brand-primary;
 	}
 	&-subtitle {
 		margin: 0;

@@ -49,7 +49,7 @@ class PodcastsController extends AppController {
 					'PodcastEpisode.episode_number' => 'DESC',
 				],
 				'cache' => false,
-				'limit' => 50,
+				'limit' => 100,
 			]
 		];
 		$podcastEpisodes = $this->paginate('PodcastEpisode');

@@ -31,7 +31,7 @@
 	}
 
 	header {
-		margin-bottom: $line-height-computed;
+		margin-bottom: $line-height-computed * 2;
 		h1, h2, h3 {
 			margin: 0;
 		}
@@ -49,6 +49,9 @@
 	}
 
 	&-header {
+		&-title {
+			color: $brand-primary;
+		}
 		&-podcast-title {
 			margin-bottom: $line-height-computed / 2;
 			
