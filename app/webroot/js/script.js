@@ -1,4 +1,5 @@
 // Detect if this page is loaded inside an Iframe window
+/*
 function inIframe() {
 	try {
 		console.log(document.location.href);
@@ -42,7 +43,7 @@ function sendUrlToParent(url) {
 		}
 	});
 })(jQuery);
-
+*/
 (function($) {
 	$.fn.podcastPlayer = function() {
 		var windowHeight = 200,
