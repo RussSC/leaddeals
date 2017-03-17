@@ -6,6 +6,7 @@ $pager-icon-padding: $pager-icon-width + 10;
 	> li {
 		display: inline-block;
 		width: 50%;
+		vertical-align: top;
 		> a {
 			border-radius: 0;
 			border: 0;
