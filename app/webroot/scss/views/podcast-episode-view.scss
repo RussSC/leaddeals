@@ -52,9 +52,11 @@
 			color: $brand-primary;
 		}
 		&-podcast-title {
+			border-bottom: 1px dotted $gray-light;
+			display: inline-block;
 			margin-bottom: $line-height-computed / 2;
-			
-			&, a {
+			padding-bottom: $line-height-computed;	
+		&, a {
 				color: $gray-light;
 			}
 			a {
@@ -63,4 +65,3 @@
 		}
 	}
 }
-
