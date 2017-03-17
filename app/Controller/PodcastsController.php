@@ -39,6 +39,7 @@ class PodcastsController extends AppController {
 		]);
 		$this->paginate = [
 			'PodcastEpisode' => [
+				'contain' => ['Podcast'],
 				'recursive' => -1,
 				'public' => !$this->Auth->user('is_admin'),
 				'conditions' => [
@@ -47,12 +48,12 @@ class PodcastsController extends AppController {
 				'order' => [
 					'PodcastEpisode.episode_number' => 'DESC',
 				],
-				'cache' => true,
+				'cache' => false,
 				'limit' => 50,
 			]
 		];
 		$podcastEpisodes = $this->paginate('PodcastEpisode');
-		
+
 		$recentEpisodes = $this->Podcast->PodcastEpisode->find('all', [
 			'public' => !$this->Auth->user('is_admin'),
 			'order' => ['PodcastEpisode.posted' => 'DESC'],

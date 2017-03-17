@@ -51,7 +51,10 @@ class ShareLinkHelper extends AppHelper {
 			$config = $this->linkTypes[$type];
 			$title = '<span class="share-link-title">' . $config['title'] . '</span>';
 			if (!empty($config['icon'])) {
-				$title = '<i class="fa fa-' . $config['icon'] . '"></i> ' . $title;
+				$title = $this->Html->tag('span', 
+					'<i class="fa fa-fw fa-' . $config['icon'] . '"></i>',
+					['class' => 'btn-icon']
+				) . $title;
 			}
 		} else {
 			$title = $url;

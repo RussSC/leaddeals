@@ -1,11 +1,13 @@
 // Colors
 $brand-primary: $orange-dark;
+$brand-info: $blue;
 
 // Fonts
 $acumin-pro:			'acumin-pro';
 $acumin-pro-condensed:	'acumin-pro-condensed';
 
 $font-family-base:		$acumin-pro;
+$font-family-condensed: $acumin-pro-condensed;
 $headings-font-family:	$acumin-pro-condensed;
 $headings-font-weight: 	600;
 $text-color:			#666;
@@ -15,6 +17,10 @@ $fa-cog:				"\f013";
 $fa-spinner:			"\f110";
 
 // Bootstrap Customization
-$border-radius-base:	2px;
-$border-radius-large:	4px;
+$font-size-h1-lg:		64px;
+$font-size-h2-lg:		48px;
+$font-size-h3-lg: 		36px;
+
+$border-radius-base:	0px;
+$border-radius-large:	2px;
 $border-radius-small:	0px;

@@ -1,13 +1,21 @@
 @import "../utilities/index";
 
+$podcast-thumbnail-width: 240px;
+$podcast-thumbnail-padding: $line-height-computed;
+
 .podcast-view {
+	position: relative;
+	text-align: center;
+
+	padding-top: $podcast-thumbnail-width - $podcast-thumbnail-padding;
+
 	&-bg {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
 		bottom: 0;
+		left: 0;
 		opacity: .10;
+		position: fixed;
+		right: 0;
+		top: 0;
 		> img {
 			height: 100%;
 			margin-left: 50%;
@@ -15,6 +23,15 @@
 			min-width: 100%;
 			min-height: 100%;
 		}
+
+		&-wrap {
+			position: relative;
+			z-index: 1;
+		}
+	}
+	&-thumbnail {
+		width: $podcast-thumbnail-width;
+		margin-top: -#{$podcast-thumbnail-width - $podcast-thumbnail-padding};
 	}
 	&-heading {
 		&-banner {

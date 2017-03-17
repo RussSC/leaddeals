@@ -1,0 +1,55 @@
+.btn {
+	font-family: $font-family-condensed;
+}
+
+
+// Button Icon
+.btn-icon {
+	background-color: #FFF;
+	color: $link-color;
+}
+
+@mixin btn-icon-size($padding-v, $padding-h, $line-height) {
+	.btn-icon {
+		display: inline-block;
+		margin-left: -$padding-h;
+		margin-top: -$padding-v;
+		margin-bottom: -$padding-v;
+		margin-right: $padding-h;
+		line-height: $line-height;
+		padding: $padding-v $padding-h;
+	}
+}
+
+@include btn-icon-size($padding-base-vertical, $padding-base-horizontal, $line-height-base);
+
+.btn-lg {
+	@include btn-icon-size($padding-large-vertical, $padding-large-horizontal, $line-height-large);
+}
+.btn-sm {
+	@include btn-icon-size($padding-small-vertical, $padding-small-horizontal, $line-height-small);
+}
+
+.btn-group-actions {
+	text-align: center;
+	margin-bottom: $line-height-computed;
+	> a {
+		@extend .btn, .btn-info, .btn-lg;
+		.btn-icon {
+			color: $brand-primary;
+		}
+		&:hover {
+			.btn-icon {
+				color: $link-hover-color;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: $screen-md-min) {
+	.btn-group-actions {
+		> a {
+			font-size: $font-size-h1;
+		}
+	}
+}

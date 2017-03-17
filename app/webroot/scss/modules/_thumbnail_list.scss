@@ -3,7 +3,6 @@
 	clear: both;
 	&-item {
 		position: relative;
-		display: block;
 		width: 50%;
 		border: 1px solid $gray-lighter;
 		float: left;
@@ -34,6 +33,13 @@
 			}
 		}
 	}
+	&-center {
+		text-align: center;
+		.thumbnail-list-item {
+			float: none;
+			display: inline-block;
+		}
+	}
 }
 
 .thumbnail-list-sm {
@@ -55,4 +61,8 @@
 			width: 25%;
 		}
 	}
+}
+
+.podcast-thumbnail-list {
+	@extend .thumbnail-list-center;
 }

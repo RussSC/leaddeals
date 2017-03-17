@@ -1,4 +1,4 @@
-<div class="media-list podcast-episode-media-list">
+<div class="podcast-episode-list">
 <?php foreach ($podcastEpisodes as $podcastEpisode): 
 	$url = [
 		'controller' => 'podcast_episodes', 
@@ -6,31 +6,53 @@
 		'id' => $podcastEpisode['PodcastEpisode']['id'],
 		'slug' => $podcastEpisode['PodcastEpisode']['slug'],
 	];
-	?>
-	<div class="media">
-		<div class="pull-left">
-			<?php echo $this->FieldUploadImage->image($podcastEpisode['PodcastEpisode'], 'banner', 'thumbnail-sm', [
-				'url' => $url,
-			]); ?>
+
+	$number = $podcastEpisode['PodcastEpisode']['episode_number'];
+	if ($number == round($number)) {
+		$number = round($number);
+	}
+	$title = $podcastEpisode['PodcastEpisode']['title'];
+	$text = $this->Text->truncate($podcastEpisode['PodcastEpisode']['description'], 235, [
+		'ending' => '...',
+		'exact' => true,
+		'html' => true,
+	]);
+
+	if (!($thumbnail = $this->FieldUploadImage->image($podcastEpisode['PodcastEpisode'], 'thumbnail', 'thumbnail-lg')) && !empty($podcastEpisode['Podcast'])) {
+		$thumbnail = $this->FieldUploadImage->image($podcastEpisode['Podcast'], 'thumbnail', 'thumbnail-lg');
+	}
+
+	?><div class="podcast-episode-list-item">
+		<div class="podcast-episode-list-item-inner">
+			<div class="podcast-episode-list-item-banner">
+				<?php echo $thumbnail; ?>
+			</div>
+			<a class="podcast-episode-list-item-link" href="<?php echo Router::url($url, true); ?>">
+				<h4 class="podcast-episode-list-item-link-title">
+					<small>Episode <?php echo $number; ?></small><br/>
+					<?php echo $title; ?>
+				</h4>
+			</a>
+			<footer>
+				<?php echo $this->Html->link(
+					'<i class="fa fa-play"></i><span class="sr-only">Play</span>',
+					['action' => 'player'] + $url,
+					[
+						'escape' => false, 
+						'class' => 'btn btn-default podcast-player',
+						'title' => 'Play episode',
+					]
+				); ?>
+				<?php echo $this->Html->link(
+					'<i class="fa fa-download"></i><span class="sr-only">Download</span>',
+					['action' => 'download'] + $url,
+					[
+						'escape' => false, 
+						'class' => 'btn btn-default',
+						'title' => 'Download episode',
+					]
+				); ?>
+			</footer>
 		</div>
-		<div class="pull-right">
-			<?php echo $this->Html->link(
-				'<i class="fa fa-play"></i><span class="sr-only">Play</span>',
-				['action' => 'player'] + $url,
-				['escape' => false, 'class' => 'btn btn-default podcast-player']
-			); ?>
-			<?php echo $this->Html->link(
-				'<i class="fa fa-download"></i><span class="sr-only">Download</span>',
-				['action' => 'download'] + $url,
-				['escape' => false, 'class' => 'btn btn-default']
-			); ?>
-		</div>
-		<div class="media-body">
-			<h4 class="media-title">
-				<?php echo $this->Html->link($podcastEpisode['PodcastEpisode']['numeric_title'], $url); ?>
-			</h4>
-			<?php echo $this->DisplayText->text($podcastEpisode['PodcastEpisode']['description']); ?>
-		</div>
-	</div>
-<?php endforeach; ?>
+	</div><?php endforeach; ?>
 </div>

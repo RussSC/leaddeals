@@ -9,7 +9,17 @@ echo $this->Form->create();
 echo $this->Form->hidden('id');
 echo $this->Form->hidden('podcast_id');
 
-echo $this->FieldUploadImage->input('banner', ['size' => 'banner']);
+echo $this->FieldUploadImage->input('banner', [
+	'label' => 'Banner Image',
+	'size' => 'banner', 
+	'fromUrl' => true
+]);
+echo $this->FieldUploadImage->input('thumbnail', [
+	'label' => 'Thumbnail (Square Image)',
+	'size' => 'thumbnail', 
+	'fromUrl' => true
+]);
+
 echo $this->Form->input('episode_number');
 echo $this->Form->input('title');
 echo $this->Form->input('description', [

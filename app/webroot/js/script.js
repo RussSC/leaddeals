@@ -1,3 +1,48 @@
+// Detect if this page is loaded inside an Iframe window
+function inIframe() {
+	try {
+		console.log(document.location.href);
+		console.log(window.top.getAttribute("id"));
+		console.log(parent.getAttribute("id"));
+
+		return window.self !== window.top;
+	} catch (e) {
+		return true;
+	}
+}
+
+function sendUrlToParent(url) {
+	parent.window.postMessage('message-for-parent=' + url, '*');
+}
+(function($) {
+	$(document).ready(function() {
+		if(inIframe()) {
+			console.log("IN FRAME");
+			// click even on links that are clicked without the CTRL key pressed
+			$('a').on('click', function(e) {
+				e.preventDefault();
+
+				console.log("CLICKED");
+
+				// is this link local on the same domain as this page is?
+				if( window.location.hostname === this.hostname ) {
+					// new URL with ?sidebar=no appended to the URL of local links that are clicked on inside of an iframe
+					var linkUrl = $(this).attr('href');
+					var noSidebarUrl = $(this).attr('href')+'?sidebar=no';
+
+					// send URL to parent window
+					sendUrlToParent(linkUrl);
+
+					// load Iframe with clicked on URL content
+					document.location.href = linkUrl;
+					return false;
+				}
+			});
+			sendUrlToParent(document.location.href);
+		}
+	});
+})(jQuery);
+
 (function($) {
 	$.fn.podcastPlayer = function() {
 		var windowHeight = 200,

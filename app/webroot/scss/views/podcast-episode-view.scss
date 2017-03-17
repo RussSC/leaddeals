@@ -1,4 +1,7 @@
 @import "../utilities/index";
+@import "podcast-view";
+
+//$podcast-view-buttons
 
 .podcast-episode-podcast-heading {
 	&-title {
@@ -6,15 +9,43 @@
 	}
 }
 .podcast-episode-view {
-	&-heading {
-		&-banner {
-			display: block;
-			max-width: 100%;	
-			margin-bottom: $line-height-computed / 2;
-		}
+	font-size: $font-size-large;
+	text-align: center;
+	&-banner {
+		display: block;
+		margin-bottom: $line-height-computed / 2;
+		margin-top: -$line-height-computed;
+		max-width: 100%;	
 	}
 	&-body {
+		padding: $padding-large-vertical $padding-large-horizontal;
 		font-size: $font-size-large;
+		margin-top: $line-height-computed;
+		margin-bottom: $line-height-computed * 2;
+	}
+
+	header {
+		margin-bottom: $line-height-computed;
+		h1, h2, h3 {
+			margin: 0;
+		}
+	}
+
+	article {
+		background-color: #FFF;
 		padding: $padding-large-vertical $padding-large-horizontal;
 	}
+	section {
+		display: block;
+		margin: 0 auto;
+		max-width: $screen-sm-min;
+		text-align: left;
+	}
+
+	&-header {
+		&-podcast-title {
+			margin-bottom: 0;
+		}
+	}
 }
+

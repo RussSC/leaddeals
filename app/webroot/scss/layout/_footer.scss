@@ -41,3 +41,12 @@ $footer-color: $yellow;
 		}
 	}
 }
+
+#media-player {
+	position: fixed;
+	background: #FFF;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	color: $text-color;
+}

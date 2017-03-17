@@ -1,0 +1,132 @@
+$podcast-episode-list-thumb-xs: 80px;
+.podcast-episode-list {
+	&-item {
+		display: block;
+		position: relative;
+		overflow: hidden;
+		border-bottom: 1px solid $gray-lighter;
+		margin-bottom: $line-height-computed / 2;
+		padding: $padding-base-vertical $padding-base-horizontal;
+
+		&-banner {
+			width: $podcast-episode-list-thumb-xs;
+			float: left;
+			> img {
+				width: 100%;
+			}
+		}
+		&-link {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			padding: $padding-base-vertical $padding-base-horizontal;
+			padding-left: $podcast-episode-list-thumb-xs + 2 * $padding-base-horizontal;
+			text-align: left;
+			&:hover {
+				background-color: rgba(255,255,255,.25);
+				text-decoration: none;
+				color: $orange;
+			}
+			&-title {
+				margin: 0;
+				padding: 0;
+			}
+		}
+		footer {
+			display: none;
+		}
+	}
+}
+
+
+
+@media screen and (min-width: $screen-sm-min) {
+	.podcast-episode-list {
+		text-align: center;
+		&-item {
+			display: inline-block;
+			margin: 0;
+			padding: $padding-base-vertical $padding-base-horizontal;
+			padding: 0;
+			width: 33%;
+			&:before {
+				content: "";
+				display: block;
+				margin-top: 100%;
+			}
+			&-inner {
+				background-color: #000;
+				bottom: 0;
+				left: 0;
+				margin: 20px;
+				overflow: hidden;
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
+			&-banner {
+				bottom: 0;
+				height: 100%;
+				left: 0;
+				opacity: .5;
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: 100%;
+				> img {
+					width: 100%;
+					height: auto;
+					margin-top: 50%;
+					transform: translateY(-50%);
+				}
+
+			}
+			&-link {
+				color: #FFF;
+				padding: $padding-base-vertical $padding-base-horizontal #{$line-height-computed * 2} $padding-base-horizontal;
+				text-align: center;
+				text-shadow: 2px 2px 0 rgba(0,0,0,.5);
+				overflow: hidden;
+				&-title {
+					margin-top: 50%;
+					transform: translateY(-50%);
+					font-size: $font-size-large;
+					small {
+						color: white;
+					}
+				}
+			}
+			footer {
+				bottom: $padding-small-vertical;
+				display: block;
+				left: 0;
+				position: absolute;
+				right: 0;
+				text-align: center;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: $screen-md-min) {
+	.podcast-episode-list {
+		&-item {
+			//width: 33%;
+		}
+	}
+}
+
+@media screen and (min-width: $screen-lg-min) {
+	.podcast-episode-list {
+		&-item {
+			//width: 25%;
+			&-link {
+				&-title {
+					font-size: $font-size-large * 1.5;
+				}
+			}
+		}
+	}
+}

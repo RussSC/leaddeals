@@ -1,7 +1,7 @@
 <?php
 $mainButtons = [
 	[
-		'title' => 'Feed',
+		'title' => 'Subscribe',
 		'icon' => Icon::rss(),
 		'url' => ['controller' => 'podcasts', 'action' => 'feed', 'slug' => $podcast['Podcast']['slug']],
 		'urlTitle' => 'RSS Feed',
@@ -35,26 +35,23 @@ endif;
 	<div class="col-md-8 col-md-offset-2">
 		<div class="podcast-view">
 
-			<div class="text-center">
-				<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'thumbnail', 'thumbnail-md'); ?>
-				<h1 class="podcast-view-title">
-					<?php echo $podcast['Podcast']['title']; ?>
-				</h1>
-			</div>
-
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="podcast-view-heading">
-						<div class="podcast-view-heading-banner">
-						</div>
 						<div class="podcast-view-heading-body">
-							<div class="text-center">
+							<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'thumbnail', 'thumbnail-md', [
+								'class' => 'podcast-view-thumbnail',
+							]); ?>
+							<h1 class="podcast-view-title">
+								<?php echo $podcast['Podcast']['title']; ?>
+							</h1>
+
+							<div class="btn-group-actions">
 								<?php foreach ($mainButtons as $config):
 									echo $this->Html->link(
-										$config['icon'] . ' ' . $config['title'],
+										$this->Html->tag('span', $config['icon'], ['class' => 'btn-icon']) . $config['title'],
 										$config['url'],	[
 											'escape' => false, 
-											'class' => 'btn btn-primary btn-lg', 
 											'title' => $config['urlTitle'], 
 											'target' => '_blank'
 										]
@@ -92,25 +89,21 @@ endif;
 							</div>
 						</div>
 
-						<?php if (!empty($podcast['PodcastLink'])): ?>
-							<div class="share-link-list">
-							<?php foreach ($podcast['PodcastLink'] as $podcastLink):
-								echo $this->ShareLink->link($podcastLink['url'], $podcastLink['type'], [
-									'class' => 'btn btn-default',
-								]) . ' ';
-							endforeach; ?>
-							</div>
-						<?php endif; ?>
+						<?php if (!empty($podcast['PodcastLink'])):
+							echo $this->element('podcast_links/list', [
+								'podcastLinks' => $podcast['PodcastLink'],
+							]);
+						endif; ?>
 					</div>
 				</div>
 			</div>
 
 			<div class="podcast-view-body">
 				<div class="panel panel-default">
-					<div class="panel-heading">
-						<div class="panel-title">Episodes</div>
+					<div class="panel-body">
+						<h2 class="page-title">Episodes</h2>
+						<?php echo $this->element('podcast_episodes/list'); ?>
 					</div>
-					<?php echo $this->element('podcast_episodes/list'); ?>
 				</div>
 			</div>
 

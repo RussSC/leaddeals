@@ -5,6 +5,7 @@ class PodcastEpisode extends AppModel {
 		'Uploadable.ContainFieldUpload',
 		'Uploadable.FieldUpload' => [
 			'banner' => [],
+			'thumbnail' => []
 		],
 		'PublicConditions'
 	];

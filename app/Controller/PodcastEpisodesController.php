@@ -18,10 +18,10 @@ class PodcastEpisodesController extends AppController {
 		$result = $this->Crud->read($id, [
 			'query' => [
 				'public' => !$this->Auth->user('is_admin'),
-				'contain' => ['Podcast'],
+				'contain' => ['Podcast' => ['PodcastLink']],
 			]
 		]);
-
+		
 		if (empty($slug) && !empty($result['PodcastEpisode']['slug'])) {
 			$this->redirect([
 				'action' => 'view',
@@ -34,6 +34,15 @@ class PodcastEpisodesController extends AppController {
 			'public' => !$this->Auth->user('is_admin'),
 		]));
 
+		$podcastEpisodes = $this->PodcastEpisode->find('all', [
+			'public' => !$this->Auth->user('is_admin'),
+			'contain' => ['Podcast'],
+			'conditions' => [
+				'PodcastEpisode.podcast_id' => $result['Podcast']['id'],
+			],
+			'order' => ['PodcastEpisode.posted' => 'DESC'],
+		]);
+
 		$recentEpisodes = $this->PodcastEpisode->find('all', [
 			'public' => !$this->Auth->user('is_admin'),
 			'order' => ['PodcastEpisode.posted' => 'DESC'],
@@ -41,7 +50,7 @@ class PodcastEpisodesController extends AppController {
 		]);
 
 		$isEditor = $this->PodcastEpisode->isEditor($id, $this->Auth->user('id'));
-		$this->set(compact('recentEpisodes', 'isEditor'));
+		$this->set(compact('podcastEpisodes', 'recentEpisodes', 'isEditor'));
 
 		$this->set([
 			'title_for_layout' => $result['PodcastEpisode']['full_title'],

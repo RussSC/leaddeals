@@ -1,0 +1,54 @@
+$pager-icon-width: 20px;
+$pager-icon-padding: $pager-icon-width + 10;
+
+.pager {
+	> li {
+		display: inline-block;
+		width: 50%;
+		> a {
+			border-radius: 0;
+			border: 0;
+			display: block;
+			padding: $padding-large-vertical $padding-large-horizontal;
+			position: relative;
+			&:before, &:after {
+				bottom: 0;
+				height: $line-height-computed;
+				position: absolute;
+				text-align: center;
+				top: 50%;
+				transform: translateY(-50%);
+				width: $pager-icon-width;
+			}
+		}
+		&.previous, &.next {
+			> a {
+				float: none;
+			}
+		}
+
+		&.previous {
+			> a {
+				@include fa-bullet($fa-chevron-left);
+				padding-left: $pager-icon-padding;
+				text-align: left;
+				&:before {
+					left: 0;
+				}
+			}
+		}
+		&.next {
+			> a {
+				@include fa-bullet-after($fa-chevron-right);
+				padding-right: $pager-icon-padding;
+				text-align: right;
+				&:after {
+					right: 0;
+				}
+			}
+		}
+	}
+}
+
+
+

@@ -1,7 +1,11 @@
-@import "media";
-@import "panel";
 @import "alert";
+@import "btn";
+@import "media";
+@import "pager";
+@import "panel";
 
 .breadcrumb {
 	font-family: $headings-font-family;
+	position: relative;
+	z-index: 20;
 }
