@@ -58,7 +58,8 @@ $podcast-thumbnail-padding: $line-height-computed;
 		}
 	}
 	&-title {
-		margin-top: 0;
+		margin-top: $line-height-computed;
+		margin-bottom: $line-height-computed;
 	}
 	&-subtitle {
 		margin: 0;
@@ -67,6 +68,9 @@ $podcast-thumbnail-padding: $line-height-computed;
 	}
 	&-description {
 		font-size: $font-size-large;
-		padding: $padding-large-vertical $padding-large-horizontal;
+		padding: $line-height-computed $padding-large-horizontal;
+		max-width: $screen-md;
+		margin: 0 auto;
+		margin-bottom: $line-height-computed;
 	}
 }

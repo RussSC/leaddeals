@@ -2,6 +2,7 @@ $pager-icon-width: 20px;
 $pager-icon-padding: $pager-icon-width + 10;
 
 .pager {
+	border-top: 1px solid $gray-light;
 	> li {
 		display: inline-block;
 		width: 50%;
