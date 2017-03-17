@@ -4,6 +4,11 @@ if (empty($layoutData)) {
 	return '';
 }
 
+// Turn off default crumbs by setting $defaultCrumbs to false
+if (isset($defaultCrumbs) && $defaultCrumbs === false) {
+	return '';
+}
+
 extract($layoutData);
 $action = $this->request->params['action'];
 $prefix = null;
