@@ -51,15 +51,8 @@ $podcast-thumbnail-padding: $line-height-computed;
 				color: white !important;
 			}
 		}
-		.share-link-list {
-			text-align: center;
-			margin-top: $line-height-computed;
-			margin-bottom: $line-height-computed;
-			 a {
-				margin-bottom: 5px;
-			}
-		}
 	}
+	
 	&-title {
 		margin-top: $line-height-computed;
 		margin-bottom: $line-height-computed;
