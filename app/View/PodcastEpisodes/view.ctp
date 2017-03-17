@@ -64,13 +64,10 @@ if (!empty($podcastEpisode['Podcast']['itunes_url'])) {
 				<h3 class="podcast-episode-view-header-podcast-title">
 					<a href="<?php echo Router::url($podcastUrl); ?>" >
 						<?php echo $podcastEpisode['Podcast']['title']; ?>
-					</a>
+					</a> Episode #<?php echo $this->Podcast->episodeNumber($podcastEpisode['PodcastEpisode']['episode_number']); ?>
 				</h3>
 				<h2 class="podcast-episode-view-header-title">
-					<?php echo $this->Podcast->episodeNumber($podcastEpisode['PodcastEpisode']['episode_number']); ?>. 
 					<?php echo $podcastEpisode['PodcastEpisode']['title']; ?>
-					<br/>
-					<small><?php echo date('F j, Y', strtotime($podcastEpisode['PodcastEpisode']['posted'])); ?></small>
 				</h2>
 			</header>
 			<section>
@@ -92,11 +89,14 @@ if (!empty($podcastEpisode['Podcast']['itunes_url'])) {
 				</div>
 				<?php echo $this->element('podcast_episodes/player'); ?>
 
-				<?php if (!empty($podcastEpisode['PodcastEpisode']['description'])): ?>
-					<div class="podcast-episode-view-body">
+				<div class="podcast-episode-view-body">
+					<?php if (!empty($podcastEpisode['PodcastEpisode']['description'])): ?>
 						<?php echo nl2br($podcastEpisode['PodcastEpisode']['description']); ?>		
-					</div>
-				<?php endif; ?>
+					<?php endif; ?>
+					<h5 class="podcast-episode-view-date"><?php echo date('F j, Y', strtotime($podcastEpisode['PodcastEpisode']['posted'])); ?></h4>
+				</div>
+
+
 			</section>
 
 			<?php if (!empty($podcastEpisode['Podcast']['PodcastLink'])):

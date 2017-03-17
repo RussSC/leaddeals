@@ -20,8 +20,12 @@
 	&-body {
 		padding: $padding-large-vertical $padding-large-horizontal;
 		font-size: $font-size-large;
+		line-height: $line-height-large;
 		margin-top: $line-height-computed;
 		margin-bottom: $line-height-computed * 2;
+	}
+	&-date {
+		text-align: center;
 	}
 
 	header {
