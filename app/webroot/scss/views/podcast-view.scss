@@ -55,6 +55,9 @@ $podcast-thumbnail-padding: $line-height-computed;
 			text-align: center;
 			margin-top: $line-height-computed;
 			margin-bottom: $line-height-computed;
+			 a {
+				margin-bottom: 5px;
+			}
 		}
 	}
 	&-title {

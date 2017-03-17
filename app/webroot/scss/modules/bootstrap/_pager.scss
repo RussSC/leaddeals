@@ -13,6 +13,7 @@ $pager-icon-padding: $pager-icon-width + 10;
 			display: block;
 			padding: $padding-large-vertical $padding-large-horizontal;
 			position: relative;
+			font-size: $font-size-small;
 			&:before, &:after {
 				bottom: 0;
 				height: $line-height-computed;
@@ -47,6 +48,16 @@ $pager-icon-padding: $pager-icon-width + 10;
 				&:after {
 					right: 0;
 				}
+			}
+		}
+	}
+}
+
+@media (min-width: $screen-sm-min) {
+	.pager {
+		> li {
+			> a {
+				font-size: $font-size-base;
 			}
 		}
 	}
