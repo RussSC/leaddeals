@@ -1,0 +1,8 @@
+.podcast-description {
+	font-size: $font-size-large;
+	line-height: 1.5;
+	margin: 0 auto $line-height-computed auto;
+	max-width: 600px;
+	padding: $line-height-computed $padding-large-horizontal;
+	text-align: justify;
+}

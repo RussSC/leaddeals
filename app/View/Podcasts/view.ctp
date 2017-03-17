@@ -63,7 +63,7 @@ endif;
 							</h3>
 						<?php endif; ?>
 						<?php if (!empty($podcast['Podcast']['description'])): ?>
-							<div class="podcast-view-description">
+							<div class="podcast-view-description podcast-description">
 								<?php echo $this->DisplayText->text($podcast['Podcast']['description']); ?>
 							</div>
 						<?php endif; ?>

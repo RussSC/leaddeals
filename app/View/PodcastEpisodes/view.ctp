@@ -88,7 +88,7 @@ if (!empty($podcastEpisode['Podcast']['itunes_url'])) {
 				</div>
 				<?php echo $this->element('podcast_episodes/player'); ?>
 
-				<div class="podcast-episode-view-body">
+				<div class="podcast-episode-view-body podcast-description">
 					<?php if (!empty($podcastEpisode['PodcastEpisode']['description'])): ?>
 						<?php echo nl2br($podcastEpisode['PodcastEpisode']['description']); ?>		
 					<?php endif; ?>
