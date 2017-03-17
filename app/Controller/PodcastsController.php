@@ -12,7 +12,7 @@ class PodcastsController extends AppController {
 		'Layout.DisplayText',
 	];
 
-	public $layout = 'default_container';
+	//public $layout = 'default_container';
 	
 	public function index() {
 		$this->paginate = [

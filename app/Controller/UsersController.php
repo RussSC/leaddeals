@@ -3,7 +3,7 @@ class UsersController extends AppController {
 	public $components = ['FormData.Crud'];
 	public $helpers = ['Uploadable.FieldUploadImage', 'Layout.Table'];
 	
-	public $layout = 'default_container';
+	//public $layout = 'default_container';
 
 	public function beforeRender($options = []) {
 		parent::beforeRender($options);

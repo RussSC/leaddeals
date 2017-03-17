@@ -7,7 +7,7 @@ class PodcastEpisodesController extends AppController {
 		'Layout.Table',
 	];
 
-	public $layout = 'default_container';
+	//public $layout = 'default_container';
 	
 	public function index() {
 		$this->redirect(['controller' => 'podcasts']);
