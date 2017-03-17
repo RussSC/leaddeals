@@ -144,10 +144,16 @@ foreach ($podcastEpisodes as $episode):
 		'html' => true,
 	]);
 
+	$body = str_replace(["<br/>", "<br>", "<br />"], "\r\n", $body);
 	$body = htmlspecialchars_decode(html_entity_decode($body, ENT_QUOTES), ENT_QUOTES);
 	$subtitle = htmlspecialchars_decode(html_entity_decode($subtitle, ENT_QUOTES), ENT_QUOTES);
 	$subtitle = str_replace(["'", '"'], '', $subtitle);
 	$subtitle = strip_tags($subtitle);
+
+	$episodeThumbnail = $this->FieldUploadImage->src($episode['Podcast'], 'thumbnail', 'thumbnail-full');
+	if (empty($episodeThumbnail)) {
+		$episodeThumbnail = $thumbnail;
+	}
 
 	echo $this->Rss->item([], [
 		'title' => $episode['title'],
@@ -160,7 +166,7 @@ foreach ($podcastEpisodes as $episode):
 		'image' => [
 			'attrib' => [
 				'namespace' => 'itunes',
-				'href' => $thumbnail,	//TODO: Episode-specific images
+				'href' => $episodeThumbnail,
 			],
 		],
 		'description' => [
