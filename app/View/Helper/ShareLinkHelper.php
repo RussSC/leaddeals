@@ -30,6 +30,10 @@ class ShareLinkHelper extends AppHelper {
 		'tumblr' => [
 			'title' => 'Tumblr',
 			'icon' => 'tumblr',
+		],
+		'instagram' => [
+			'title' => 'Instagram',
+			'icon' => 'instagram',
 		]
 	];
 
