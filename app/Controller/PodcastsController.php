@@ -23,7 +23,7 @@ class PodcastsController extends AppController {
 		$recentEpisodes = $this->Podcast->PodcastEpisode->find('all', [
 			'public' => !$this->Auth->user('is_admin'),
 			'order' => ['PodcastEpisode.posted' => 'DESC'],
-			'limit' => 10,
+			'limit' => 12,
 		]);
 
 		$this->set(compact('podcasts', 'recentEpisodes'));
