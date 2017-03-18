@@ -60,6 +60,11 @@ class UsersController extends AppController {
 
 	/* LOGIN */
 	public function login() {
+		if ($this->Auth->user('id')) {
+			$this->Flash->info('You are already logged in');
+			$this->redirect('/');
+		}
+
 		$this->response->disableCache();
 		$this->set('title_for_layout','Please login to your account');
 		
@@ -115,6 +120,7 @@ class UsersController extends AppController {
 				if (empty($redirect)) {
 					$redirect = $this->Auth->redirect();
 				}
+				$this->RememberMe->set();
 				return $this->redirect($redirect);
 			} else {
 				$this->Flash->warning('Username or password is incorrect');
@@ -125,6 +131,7 @@ class UsersController extends AppController {
 	
 	public function logout() {
 		$this->response->disableCache();
+		$this->RememberMe->delete();
 		$this->Auth->logout(['redirect' => false]);
 	}	
 
