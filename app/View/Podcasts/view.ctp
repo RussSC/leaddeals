@@ -27,7 +27,7 @@ endif;
 <?php endif; ?>
 
 <div class="podcast-view-bg">
-	<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'banner', 'banner'); ?>
+	<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'banner', 'banner', ['modified' => true]); ?>
 </div>
 
 
@@ -38,6 +38,7 @@ endif;
 				<div class="podcast-view-heading-body">
 					<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'thumbnail', 'thumbnail-md', [
 						'class' => 'podcast-view-thumbnail',
+						'modified' => true,
 					]); ?>
 					<h1 class="podcast-view-title">
 						<?php echo $podcast['Podcast']['title']; ?>

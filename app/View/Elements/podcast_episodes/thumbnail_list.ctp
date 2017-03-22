@@ -9,7 +9,14 @@
 		]);
 		?>
 		<a href="<?php echo $url; ?>" class="thumbnail-list-item">
-			<?php echo $this->Podcast->episodeImage($row, 'thumbnail', 'thumbnail-lg', ['class' => 'thumbnail-list-item-img']); ?>
+			<?php echo $this->Podcast->episodeImage(
+				$row, 
+				'thumbnail', 
+				'thumbnail-lg', [
+					'class' => 'thumbnail-list-item-img',
+					'modified' => true,
+				]
+			); ?>
 			<div class="thumbnail-list-item-caption">
 				<h2 class="thumbnail-list-item-title"><?php echo $this->Podcast->episodeTitle($row); ?></h2>
 				<?php echo $podcastEpisode['subtitle']; ?>

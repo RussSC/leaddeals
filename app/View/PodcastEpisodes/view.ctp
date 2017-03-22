@@ -58,6 +58,7 @@ if (!empty($podcastEpisode['Podcast']['itunes_url'])) {
 	<div class="podcast-episode-view">
 		<?php echo $this->FieldUploadImage->image($podcastEpisode['PodcastEpisode'], 'banner', 'banner', [
 			'class' => 'podcast-episode-view-banner',
+			'modified' => true,
 		]); ?>
 		<article>
 			<header>
@@ -148,5 +149,5 @@ if (!empty($podcastEpisode['Podcast']['itunes_url'])) {
 </div>
 
 <div class="podcast-view-bg">
-	<?php echo $this->FieldUploadImage->image($podcastEpisode['Podcast'], 'banner', 'banner'); ?>
+	<?php echo $this->FieldUploadImage->image($podcastEpisode['Podcast'], 'banner', 'banner', ['modified' => true]); ?>
 </div>

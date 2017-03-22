@@ -1,3 +1,8 @@
+<?php
+$thumbField = 'thumbnail';
+$thumbSize = 'thumbnail-lg';
+$thumbOptions = ['modified' => true];
+?>
 <div class="podcast-episode-list">
 <?php foreach ($podcastEpisodes as $podcastEpisode): 
 	$url = [
@@ -18,8 +23,9 @@
 		'html' => true,
 	]);
 
-	if (!($thumbnail = $this->FieldUploadImage->image($podcastEpisode['PodcastEpisode'], 'thumbnail', 'thumbnail-lg')) && !empty($podcastEpisode['Podcast'])) {
-		$thumbnail = $this->FieldUploadImage->image($podcastEpisode['Podcast'], 'thumbnail', 'thumbnail-lg');
+	$thumbnail = $this->FieldUploadImage->image($podcastEpisode['PodcastEpisode'], $thumbField, $thumbSize, $thumbOptions);
+	if (!$thumbnail && !empty($podcastEpisode['Podcast'])) {
+		$thumbnail = $this->FieldUploadImage->image($podcastEpisode['Podcast'], $thumbField, $thumbSize, $thumbOptions);
 	}
 
 	?><div class="podcast-episode-list-item">
