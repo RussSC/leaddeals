@@ -48,7 +48,7 @@ class PodcastsController extends AppController {
 				'order' => [
 					'PodcastEpisode.episode_number' => 'DESC',
 				],
-				'cache' => false,
+				'cache' => true,
 				'limit' => 100,
 			]
 		];
@@ -58,6 +58,7 @@ class PodcastsController extends AppController {
 			'public' => !$this->Auth->user('is_admin'),
 			'order' => ['PodcastEpisode.posted' => 'DESC'],
 			'limit' => 10,
+			'cache' => true,
 		]);
 
 		$isEditor = $this->Auth->user('is_admin');

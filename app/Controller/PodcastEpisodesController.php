@@ -19,6 +19,7 @@ class PodcastEpisodesController extends AppController {
 			'query' => [
 				'public' => !$this->Auth->user('is_admin'),
 				'contain' => ['Podcast' => ['PodcastLink']],
+				'cache' => true,
 			]
 		]);
 		
@@ -32,6 +33,7 @@ class PodcastEpisodesController extends AppController {
 
 		$this->set('neighbors', $this->PodcastEpisode->findNeighbors($id, [
 			'public' => !$this->Auth->user('is_admin'),
+			'cache' => true,
 		]));
 
 		$podcastEpisodes = $this->PodcastEpisode->find('all', [
@@ -40,6 +42,7 @@ class PodcastEpisodesController extends AppController {
 			'conditions' => [
 				'PodcastEpisode.podcast_id' => $result['Podcast']['id'],
 			],
+			'cache' => true,
 			'order' => ['PodcastEpisode.posted' => 'DESC'],
 		]);
 
