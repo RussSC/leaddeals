@@ -18,7 +18,7 @@
 
 $this->Html->css([
 	'//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
-	'//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css', 
+	'//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.min.css', 
 ], null, ['inline' => false, 'block' => 'cssFirst']);
 
 $this->Html->script([
