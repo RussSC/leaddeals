@@ -66,12 +66,14 @@ class ResultFilterComponent extends Component {
 	}
 
 	public function filter($query = []) {
-		foreach ($this->_data as $key => $val) {
-			if (method_exists($this->controller, '_setResultFilterValue')) {
-				$oQuery = $query;
-				$query = $this->controller->_setResultFilterValue($key, $val, $query);
-				if ($query != $oQuery) {
-					$this->setFilterValue($key, $val);
+		if (!empty($this->_data)) {
+			foreach ($this->_data as $key => $val) {
+				if (method_exists($this->controller, '_setResultFilterValue')) {
+					$oQuery = $query;
+					$query = $this->controller->_setResultFilterValue($key, $val, $query);
+					if ($query != $oQuery) {
+						$this->setFilterValue($key, $val);
+					}
 				}
 			}
 		}
@@ -158,7 +160,7 @@ class ResultFilterComponent extends Component {
 		$this->controller->request->data[self::DATA_KEY] = $data;
 		$this->setData($data);
 	}
-	
+
 	protected function setData($data) {
 		$this->_data = $data;
 		foreach ((array) $data as $key => $val) {
