@@ -50,3 +50,8 @@ $footer-color: $yellow;
 	bottom: 0;
 	color: $text-color;
 }
+
+#admin-footer {
+	position: relative;
+	z-index: 1;
+}

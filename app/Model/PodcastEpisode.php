@@ -9,6 +9,9 @@ class PodcastEpisode extends AppModel {
 		],
 		'PublicConditions'
 	];
+
+	public $order = ['PodcastEpisode.created' => 'DESC'];
+	
 	public $hasMany = ['PodcastEpisodeDownload'];
 	public $belongsTo = [
 		'Podcast' => [
@@ -16,7 +19,7 @@ class PodcastEpisode extends AppModel {
 		]
 	];
 
-	public $hasAndBelongsToMany = ['User'];
+	public $hasAndBelongsToMany = ['User', 'Article'];
 
 	public $validate = [
 		'title' => [
@@ -27,7 +30,7 @@ class PodcastEpisode extends AppModel {
 			'rule' => 'notBlank',
 			'message' => 'Please enter an episode number',
 		],
-		'posted' => [
+		'published' => [
 			'rule' => 'notBlank',
 			'message' => 'Please pick a date when this should post',
 		],
@@ -51,6 +54,42 @@ class PodcastEpisode extends AppModel {
 		$this->setDuration($id);
 		$this->setFilesize($id);
 		return parent::afterSave($created, $options);
+	}
+
+	public function beforeFind($query = []) {
+		$oQuery = $query;
+
+		if (!empty($query['hasUser'])) {
+			$query['joins'][] = [
+				'type' => 'LEFT',
+				'table' => 'podcast_episodes_users',
+				'alias' => 'PodcastEpisodesUserLink',
+				'conditions' => 'PodcastEpisodesUserLink.podcast_episode_id = ' . $this->escapeField(),
+			];
+			$query['joins'][] = [
+				'type' => 'LEFT',
+				'table' => 'podcasts',
+				'alias' => 'PodcastLink',
+				'conditions' => 'PodcastLink.id = ' . $this->escapeField('podcast_id'),
+			];
+			$query['joins'][] = [
+				'type' => 'LEFT',
+				'table' => 'podcasts_users',
+				'alias' => 'PodcastUserLink',
+				'conditions' => 'PodcastUserLink.podcast_id = PodcastLink.id',
+			];
+			$query['conditions'][]['OR'] = [
+				'PodcastEpisodesUserLink.user_id' => $query['hasUser'],
+				'PodcastUserLink.user_id' => $query['hasUser']
+			];
+			$query['group'] = $this->escapeField();
+			unset($query['hasUser']);
+		}
+
+		if ($oQuery != $query) {
+			return $query;
+		}
+		return parent::beforeFind($query);
 	}
 
 	public function afterFind($results, $primary = false) {
@@ -222,7 +261,7 @@ class PodcastEpisode extends AppModel {
 
 	public function publicConditions($conditions) {
 		$conditions[$this->escapeField('active')] = 1;
-		$conditions[$this->escapeField('posted') . ' <='] = date('Y-m-d H:i:s');
+		$conditions[$this->escapeField('published') . ' <='] = date('Y-m-d H:i:s');
 		$conditions[]['NOT'][$this->escapeField('download_url')] = '';
 		return $conditions;
 	}	

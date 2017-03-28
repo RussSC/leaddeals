@@ -62,6 +62,7 @@ class AppController extends Controller {
 		'LayoutData',
 		'RememberMe',
 		'RequestHandler',
+		'FormData.Crud',
 	];
 
 	public $helpers = [
@@ -101,6 +102,7 @@ class AppController extends Controller {
 		if (empty($prefix)) {
 			//exit($prefix);
 			$this->Auth->allow();
+			$this->Auth->deny(['add', 'edit', 'delete']);
 		}
 		return parent::beforeFilter($options);
 	}
@@ -110,7 +112,7 @@ class AppController extends Controller {
 		return parent::beforeRender($options);
 	}
 
-	public function isAuthorized() {
+	public function isAuthorized($user) {
 		$allow = false;
 		if (empty($this->params['prefix'])) {
 			$allow = true;
@@ -150,7 +152,7 @@ class AppController extends Controller {
 
 	private function setNavMenu() {
 		$menu = [
-			// ['News', ['controller' => 'articles', 'action' => 'index']],
+			//['News', ['controller' => 'articles', 'action' => 'index']],
 			//['Projects', ['controller' => 'projects', 'action' => 'index']],
 			['Podcasts', ['controller' => 'podcasts', 'action' => 'index']],
 			['Contact', ['controller' => 'pages', 'action' => 'display', 'contact']],

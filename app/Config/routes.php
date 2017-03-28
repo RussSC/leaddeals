@@ -30,6 +30,13 @@
  */
 	Router::connect('/pages/*', ['controller' => 'pages', 'action' => 'display']);
 
+	Router::connect('/articles/:action/:id/:slug',
+		['controller' => 'articles'],
+		[
+			'id' => '[0-9]+',
+			'pass' => ['id', 'slug']
+		]
+	);
 
 	Router::connect('/podcasts/:slug', 
 		['controller' => 'podcasts', 'action' => 'view'], 

@@ -22,7 +22,7 @@ class PodcastsController extends AppController {
 		
 		$recentEpisodes = $this->Podcast->PodcastEpisode->find('all', [
 			'public' => !$this->Auth->user('is_admin'),
-			'order' => ['PodcastEpisode.posted' => 'DESC'],
+			'order' => ['PodcastEpisode.published' => 'DESC'],
 			'limit' => 12,
 		]);
 
@@ -54,15 +54,20 @@ class PodcastsController extends AppController {
 		];
 		$podcastEpisodes = $this->paginate('PodcastEpisode');
 
+		$articles = $this->Podcast->Article->find('all', [
+			'podcastId' => $id,
+			'public' => 1,
+		]);
+
 		$recentEpisodes = $this->Podcast->PodcastEpisode->find('all', [
 			'public' => !$this->Auth->user('is_admin'),
-			'order' => ['PodcastEpisode.posted' => 'DESC'],
+			'order' => ['PodcastEpisode.published' => 'DESC'],
 			'limit' => 10,
 			'cache' => true,
 		]);
 
 		$isEditor = $this->Auth->user('is_admin');
-		$this->set(compact('podcastEpisodes', 'recentEpisodes', 'isEditor'));
+		$this->set(compact('podcastEpisodes', 'recentEpisodes', 'isEditor', 'articles'));
 
 		$this->set([
 			'title_for_layout' => $result['Podcast']['title'],

@@ -1,7 +1,11 @@
 <?php
 class UsersController extends AppController {
 	public $components = ['FormData.Crud'];
-	public $helpers = ['Uploadable.FieldUploadImage', 'Layout.Table'];
+	public $helpers = [
+		'Layout.DisplayText',
+		'Layout.Table',
+		'Uploadable.FieldUploadImage', 
+	];
 	
 	//public $layout = 'default_container';
 
@@ -45,7 +49,12 @@ class UsersController extends AppController {
 	}
 
 	public function view($id = null) {
-		$result = $this->Crud->read($id, ['contain' => ['Podcast']]);
+		$result = $this->Crud->read($id, ['contain' => [
+			'Podcast', 
+			'PodcastEpisode' => [
+				'limit' => 5,
+			]
+		]]);
 	}
 
 	public function you() {
@@ -117,10 +126,10 @@ class UsersController extends AppController {
 		// Logs in user
 		if ($allowLogin && $this->request->is('post')) {
 			if ($user = $this->Auth->login()) {
+				$this->RememberMe->set();
 				if (empty($redirect)) {
 					$redirect = $this->Auth->redirect();
 				}
-				$this->RememberMe->set();
 				return $this->redirect($redirect);
 			} else {
 				$this->Flash->warning('Username or password is incorrect');

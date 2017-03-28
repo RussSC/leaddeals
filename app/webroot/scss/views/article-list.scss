@@ -1,0 +1,72 @@
+@import "../utilities/index";
+.article-list {
+	margin: 0;
+	padding: 0;
+	&-item {
+		margin: 0;
+		padding: 0;
+		list-style-type: 0;
+		> a {
+			display: block;
+			color: $text-color;
+			overflow: hidden;
+			padding: $padding-large-vertical $padding-base-horizontal;
+			text-align: justify;
+
+			border-bottom: 1px solid $gray-lighter;
+
+			&:active, &:hover {
+				text-decoration: none;
+				color: $link-hover-color;
+				background-color: $gray-lighter;
+				.article-list-item {
+					&-title {
+						text-decoration: underline;
+					}
+					&-thumb {
+						opacity: .95;
+					}
+				}
+			}
+		}
+		&-thumb {
+			float: left;
+			margin-right: $padding-base-horizontal;
+			max-width: 25%;
+		}
+		&-title {
+			margin: 0;
+			margin-bottom: $line-height-computed / 2;
+		}
+		&-byline {
+			font-weight: normal;
+			font-size: $font-size-base;
+			margin: 0;
+			margin-bottom: $line-height-computed / 2;
+			color: $gray-light;
+		}
+
+		&:last-of-type {
+			> a {
+				border-bottom: 0;
+			}
+		}
+		main {
+			overflow: hidden;
+		}
+	}
+}
+
+@media screen and (min-width: $screen-md-min) {
+	.article-list {
+		&-item {
+			> a {
+				font-size: $font-size-large;
+				line-height: $line-height-large;
+			}
+			&-thumb {
+				margin-right: $padding-large-horizontal;
+			}
+		}
+	}
+}

@@ -9,7 +9,7 @@
 			<tr>
 				<th>Title</th>
 				<th class="text-center">Episodes</th>
-				<th>Last Posted</th>
+				<th>Last Published</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -25,7 +25,7 @@
 				<td class="text-center">
 					<span class="label label-default"><?php echo number_format($podcast['Podcast']['podcast_episode_count']); ?></span>
 				</td>
-				<td><?php echo $this->Time->niceShort($podcast['Podcast']['last_episode_posted']); ?></td>
+				<td><?php echo $this->Time->niceShort($podcast['Podcast']['last_episode_published']); ?></td>
 				<td>
 					<?php echo $this->Bootstrap->linkBtnGroup([
 						['View', $url],

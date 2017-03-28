@@ -1,0 +1,68 @@
+@import "../utilities/index";
+.article-view {
+	max-width: $screen-sm-min;
+	margin: 0 auto;
+	&-header, &-body {
+		border-bottom: 1px solid $gray-lighter;
+		padding-bottom: $line-height-computed;
+		margin-bottom: $line-height-computed;
+	}
+	&-header {
+		text-align: center;
+		&-banner {
+			max-width: 100%;
+		}
+	}
+	&-body {
+		text-align: justify;
+		font-size: $font-size-large;
+		line-height: 1.5;
+		overflow: hidden;
+	}
+	&-footer {
+		text-align: center;
+		section {
+			margin-bottom: $line-height-computed / 2;
+			> .section-title {
+				text-align: left;
+				font-size: $font-size-base;
+			}
+			
+		}
+
+		&-credit {
+			display: block;
+			padding: $padding-large-vertical $padding-base-horizontal;
+			background-color: $gray-lighter;
+			margin-bottom: $line-height-computed / 2;
+			overflow: hidden;
+			&-title {
+				font-size: $font-size-large;
+			}
+			&-thumb {
+				float: left;
+				display: block;
+				margin-right: $padding-base-horizontal;
+				max-width: 15%;
+				border-radius: 50%;
+			}
+			> main {
+				overflow: hidden;
+				text-align: left;
+			}
+
+		}
+	}
+}
+
+@media screen and (min-width: $screen-md-min) {
+	.article-view {
+		&-footer {
+			&-credit {
+				&-title {
+					font-size: $font-size-large;
+				}
+			}
+		}
+	}
+}

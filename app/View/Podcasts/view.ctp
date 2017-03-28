@@ -34,72 +34,86 @@ endif;
 <div class="podcast-view">
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<div class="podcast-view-heading">
-				<div class="podcast-view-heading-body">
-					<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'thumbnail', 'thumbnail-md', [
-						'class' => 'podcast-view-thumbnail',
-						'modified' => true,
-					]); ?>
-					<h1 class="podcast-view-title">
-						<?php echo $podcast['Podcast']['title']; ?>
-					</h1>
+			<header class="podcast-view-heading">
+				<?php echo $this->FieldUploadImage->image($podcast['Podcast'], 'thumbnail', 'thumbnail-md', [
+					'class' => 'podcast-view-thumbnail',
+					'modified' => true,
+				]); ?>
+				<h1 class="podcast-view-title">
+					<?php echo $podcast['Podcast']['title']; ?>
+				</h1>
 
-					<div class="btn-group-actions">
-						<?php foreach ($mainButtons as $config):
-							echo $this->Html->link(
-								$this->Html->tag('span', $config['icon'], ['class' => 'btn-icon']) . $config['title'],
-								$config['url'],	[
-									'escape' => false, 
-									'title' => $config['urlTitle'], 
-									'target' => '_blank'
-								]
-							); 
-							echo ' ';
-						endforeach; ?>
-					</div>
-					<div>
-						<?php if (!empty($podcast['Podcast']['subtitle'])): ?>
-							<h3 class="podcast-view-subtitle">
-								<?php echo $podcast['Podcast']['subtitle']; ?>
-							</h3>
-						<?php endif; ?>
-						<?php if (!empty($podcast['Podcast']['description'])): ?>
-							<div class="podcast-view-description podcast-description">
-								<?php echo $this->DisplayText->text($podcast['Podcast']['description']); ?>
-							</div>
-						<?php endif; ?>
-
-						<?php if (!empty($podcast['User'])): ?>
-							<p class="text-center">
-								<strong>Authors:</strong>
-								<?php
-								$users = [];
-								foreach ($podcast['User'] as $user):
-									$users[] = $this->Html->link(
-										$user['name'], 
-										['controller' => 'users', 'action' => 'view', $user['id']]											
-									);
-								endforeach; 
-								echo implode(', ', $users);
-								?>
-							</p>
-						<?php endif; ?>
-					</div>
+				<div class="btn-group-actions">
+					<?php foreach ($mainButtons as $config):
+						echo $this->Html->link(
+							$this->Html->tag('span', $config['icon'], ['class' => 'btn-icon']) . $config['title'],
+							$config['url'],	[
+								'escape' => false, 
+								'title' => $config['urlTitle'], 
+								'target' => '_blank'
+							]
+						); 
+						echo ' ';
+					endforeach; ?>
 				</div>
+				<?php if (!empty($podcast['Podcast']['subtitle'])): ?>
+					<h3 class="podcast-view-subtitle">
+						<?php echo $podcast['Podcast']['subtitle']; ?>
+					</h3>
+				<?php endif; ?>
+			</header>
+			<section class="podcast-view-body">
+				<?php if (!empty($podcast['Podcast']['description'])): ?>
+					<div class="podcast-view-description podcast-description">
+						<?php echo $this->DisplayText->text($podcast['Podcast']['description']); ?>
+					</div>
+				<?php endif; ?>
+			</section>
 
+			<?php if (!empty($articles)): ?>
+				<section class="podcast-view-articles">
+					<?php echo $this->element('articles/small_list', compact('articles')); ?>
+					<?php echo $this->Html->link(
+						'View more',
+						['controller' => 'articles', 'action' => 'index', 'ResultFilter-podcast_id' => $podcast['Podcast']['id']]
+					); ?>
+				</section>
+			<?php endif; ?>
+
+			<footer>
+				<?php if (!empty($podcast['User'])): ?>
+					<p>
+						<strong>Authors:</strong>
+						<?php
+						$users = [];
+						foreach ($podcast['User'] as $user):
+							$users[] = $this->Html->link(
+								$user['name'], 
+								['controller' => 'users', 'action' => 'view', $user['id']]											
+							);
+						endforeach; 
+						echo implode(', ', $users);
+						?>
+					</p>
+				<?php endif; ?>
 				<?php if (!empty($podcast['PodcastLink'])):
 					echo $this->element('podcast_links/list', [
 						'podcastLinks' => $podcast['PodcastLink'],
 					]);
 				endif; ?>
-			</div>
+			</footer>
 		</div>
 	</div>
+
 	
 	<?php if (!empty($isEditor)): 
 		if ($this->Session->read('Auth.User.is_admin')) {
-			$prefix = 'admin';
-			$actions = ['view', 'edit', 'delete'];
+			//$prefix = 'admin';
+			$actions = [
+			//	'view', 
+				'edit', 
+				'delete'
+			];
 		} else {
 			$actions = ['edit'];
 		}
@@ -112,31 +126,14 @@ endif;
 		echo $this->element('editor_panel', compact('actions', 'prefix', 'links') + ['id' => $podcast['Podcast']['id']]);
 	endif; ?>
 
-	<div class="podcast-view-body">
+	<section>
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<h2 class="page-title">Episodes</h2>
 				<?php echo $this->element('podcast_episodes/list'); ?>
 			</div>
 		</div>
-	</div>
+	</section>
 </div>
 
-<?php
-/* Removing the right side to better improve the episodes below
-	<div class="col-sm-4">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="panel-title">Recent Episodes</div>
-			</div>
-			<?php echo $this->element('podcast_episodes/thumbnail_media_list', [
-				'result' => $recentEpisodes,
-			]); ?>
-		</div>
-	</div>
-
-</div>
-
-*/
-?>
 

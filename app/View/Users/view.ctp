@@ -4,20 +4,38 @@ $this->Html->css('views/user-view', null, ['inline' => false]);
 
 ?>
 <div class="user-view">
-	<div class="user-view-heading">
-		<?php echo $this->FieldUploadImage->image($user['User'], 'thumbnail', 'banner', ['class' => 'user-view-heading-banner']); ?>
-		<h2 class="user-view-heading-title"><?php echo $user['User']['name']; ?></h2>
-	</div>
+	<header>
+		<div class="user-view-heading">
+			<?php echo $this->FieldUploadImage->image($user['User'], 'thumbnail', 'banner', ['class' => 'user-view-heading-banner']); ?>
+			<h2 class="user-view-heading-title"><?php echo $user['User']['name']; ?></h2>
+			<?php echo $this->element('user_links/list', [
+				'userLinks' => $user['UserLink'],
+			]); ?>
+		</div>
+	</header>
 
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<div class="panel-title">Podcasts</div>
+	<?php if (!empty($user['User']['about'])): ?>
+		<div class="user-view-about">
+			<?php echo $this->DisplayText->text($user['User']['about']); ?>
 		</div>
-		<div class="panel-body">
-			<?php echo $this->element('podcasts/thumbnail_list', ['podcasts' => $user['Podcast']]); ?>
+	<?php endif; ?>
+
+	<?php if (!empty($user['Podcast']) || !empty($user['PodcastEpisode'])): ?>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">Podcasts</div>
+			</div>
+			<div class="panel-body">
+			<?php if (!empty($user['Podcast'])): ?>
+				<?php echo $this->element('podcasts/thumbnail_list', ['podcasts' => $user['Podcast']]); ?>
+			<?php endif; ?>	
+
+			<?php if (!empty($user['PodcastEpisode'])): ?>
+				<?php echo $this->element('podcasts/thumbnail_list', ['podcasts' => $user['Podcast']]); ?>
+			<?php endif; ?>	
+			</div>
 		</div>
-	</div>
-	
+	<?php endif; ?>	
 </div>
 <?php if ($isEditor):
 	echo $this->element('editor_panel', ['actions' => ['edit']]);

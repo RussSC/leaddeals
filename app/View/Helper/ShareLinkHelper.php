@@ -14,10 +14,13 @@ class ShareLinkHelper extends AppHelper {
 		'facebook' => [
 			'title' => 'Facebook',
 			'icon' => 'facebook',
+			'share' => 'https://www.facebook.com/sharer/sharer.php?u=$url',
 		],
 		'twitter' => [
 			'title' => 'Twitter',
 			'icon' => 'twitter',
+			'match' => ['/^[@]{0,1}([A-Za-z0-9]+)$/', 'https://twitter.com/$1'],
+			'share' => 'https://twitter.com/share?text=$title&url=$url',
 		],
 		'google' => [
 			'title' => 'Google',
@@ -34,6 +37,7 @@ class ShareLinkHelper extends AppHelper {
 		'instagram' => [
 			'title' => 'Instagram',
 			'icon' => 'instagram',
+			'match' => ['/^([A-Za-z0-9]+)$/', 'https://instagram.com/$1'],
 		]
 	];
 
@@ -46,9 +50,31 @@ class ShareLinkHelper extends AppHelper {
 		return $this->Form->input($name, $options);
 	}
 
+	public function share($url, $title = "") {
+		if(is_array($url)) {
+			$url = Router::url($url, true);
+		}
+
+		$out = '';
+		foreach ($this->linkTypes as $type => $linkType) {
+			if (!empty($linkType['share'])) {
+				$shareUrl = str_replace(['$url', '$title'], [$url, urlencode($title)], $linkType['share']);
+				$out .= $this->link($shareUrl, $type, ['class' => 'btn btn-default']) . "\r\n";
+			}
+		}
+		$title = $this->Html->tag('span', 'Share:', ['class' => 'share-link-list-title']) . "\r\n";
+		return $this->Html->div('share-link-list', $title . $out);
+	}
+
 	public function link($url, $type = '', $options = []) {
-		if (strpos($url, '://') === false) {
-			$url = 'http://' . $url;
+		$isLink = strpos($url, '://') !== false;
+		if (!$isLink) {
+			if (!empty($this->linkTypes[$type]['match'])) {
+				list($match, $replace) = $this->linkTypes[$type]['match'];
+				$url = preg_replace($match, $replace, $url);
+			} else {
+				$url = 'http://' . $url;
+			}
 		}
 		$options['target'] = '_blank';
 		if (!empty($this->linkTypes[$type])) {

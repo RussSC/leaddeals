@@ -158,7 +158,7 @@ foreach ($podcastEpisodes as $episode):
 	echo $this->Rss->item([], [
 		'title' => $episode['title'],
 
-		'pubDate' => $this->Rss->time($episode['posted']),
+		'pubDate' => $this->Rss->time($episode['published']),
 		'guid' => [
 			'isPermaLink' => 'true',
 			'url' => $viewUrl,

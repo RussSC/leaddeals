@@ -1,6 +1,11 @@
+<?php 
+if (empty($result) && !empty($podcastEpisodes)) {
+	$result = $podcastEpisodes;
+}
+?>
 <div class="media-list podcast-episode-media-list">
 <?php foreach ($result as $row): 
-	$podcastEpisode = $row['PodcastEpisode'];
+	$podcastEpisode = !empty($row['PodcastEpisode']) ? $row['PodcastEpisode'] : $row;
 	$url = Router::url([
 		'controller' => 'podcast_episodes', 
 		'action' => 'view', 

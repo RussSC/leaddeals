@@ -43,13 +43,18 @@ class PodcastEpisodesController extends AppController {
 				'PodcastEpisode.podcast_id' => $result['Podcast']['id'],
 			],
 			'cache' => true,
-			'order' => ['PodcastEpisode.posted' => 'DESC'],
+			'order' => ['PodcastEpisode.published' => 'DESC'],
 		]);
 
 		$recentEpisodes = $this->PodcastEpisode->find('all', [
 			'public' => !$this->Auth->user('is_admin'),
-			'order' => ['PodcastEpisode.posted' => 'DESC'],
+			'order' => ['PodcastEpisode.published' => 'DESC'],
 			'limit' => 10,
+		]);
+
+		$articles = $this->PodcastEpisode->Article->find('all', [
+			'podcastEpisodeId' => $id,
+			'public' => 1,
 		]);
 
 		$isEditor = $this->PodcastEpisode->isEditor($id, $this->Auth->user('id'));
@@ -84,7 +89,7 @@ class PodcastEpisodesController extends AppController {
 			'PodcastEpisode' => [
 				'podcast_id' => $podcastId,
 				'episode_number' => $this->PodcastEpisode->Podcast->getNewEpisodeNumber($podcastId),
-				'posted' => date('Y-m-d H:i:s'),
+				'published' => date('Y-m-d H:i:s'),
 				'explicit' => $podcast['explicit'],
 				'keywords' => $podcast['keywords'],
 			]
@@ -121,7 +126,7 @@ class PodcastEpisodesController extends AppController {
 			'PodcastEpisode' => [
 				'podcast_id' => $podcastId,
 				'episode_number' => $this->PodcastEpisode->Podcast->getNewEpisodeNumber($podcastId),
-				'posted' => date('Y-m-d H:i:s'),
+				'published' => date('Y-m-d H:i:s'),
 			]
 		];
 		$this->Crud->create(compact('default'));

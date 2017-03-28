@@ -98,12 +98,12 @@ $this->Html->scriptStart(['inline' => false]); ?>
 </head>
 <body>
 	<div id="container">
-		<div id="header">
+		<header id="header">
 			<div class="container-fluid">
 				<?php echo $this->fetch('header'); ?>
 			</div>
-		</div>
-		<div id="content">
+		</header>
+		<main id="content">
 			
 			<?php 
 			$open = '<li>';
@@ -119,17 +119,17 @@ $this->Html->scriptStart(['inline' => false]); ?>
 				<?php echo $this->Flash->render(); ?>
 				<?php echo $this->fetch('content'); ?>
 			</div>
-		</div>
-		<div id="footer">
+		</main>
+		<footer id="footer">
 			<div class="container-fluid">
 				<?php echo $this->fetch('footer'); ?>
 			</div>
-		</div>
+		</footer>
 	</div>
 	<?php if ($this->Session->read('Auth.User.is_admin')): ?>
-		<div class="container">
+		<section id="admin-footer" class="container">
 			<?php echo $this->element('sql_dump'); ?>
-		</div>
+		</section>
 	<?php endif; ?>
 	<?php echo $this->Asset->output(true, false); ?>
 

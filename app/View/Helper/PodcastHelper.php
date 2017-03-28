@@ -33,6 +33,8 @@ class PodcastHelper extends AppHelper {
 	}
 
 	public function iTunesUrl($url) {
-		return str_replace('https://', 'itms://', $url);
+		return $url;
+		// Removing iTunes specific protocol for now
+		//return str_replace('https://', 'itms://', $url);
 	}
 }

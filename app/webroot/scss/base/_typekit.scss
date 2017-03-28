@@ -10,7 +10,7 @@ $loading-icon-size: 120px;
 }
 
 .wf-loading {
-	* {
+	> * {
 		opacity:0;
 	}
 

@@ -1,0 +1,30 @@
+@import "../utilities/index";
+.TestStyle {
+	text-align: center;
+}
+
+.articles-small-list {
+	margin: 0;
+	padding: 0;
+	margin-bottom: $line-height-computed;
+	text-align: left;
+	> li {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+		> a {
+			display: block;
+			padding: $padding-large-vertical $padding-large-horizontal;
+			border-bottom: 1px solid $gray-lighter;
+			text-align: left;
+			line-height: $line-height-computed;
+
+			@include fa-bullet-after($fa-chevron-right);
+			&:after {
+				display: block;
+				float: right;
+				line-height: $line-height-computed;
+			}
+		}
+	}
+}

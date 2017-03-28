@@ -20,7 +20,7 @@ class Podcast extends AppModel {
 		'PodcastLink',
 	];
 
-	public $hasAndBelongsToMany = ['User'];
+	public $hasAndBelongsToMany = ['User', 'Article'];
 
 	public $validate = [
 		'title' => [

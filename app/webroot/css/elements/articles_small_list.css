@@ -1,0 +1,3 @@
+﻿.TestStyle{text-align:center}.articles-small-list{margin:0;padding:0;margin-bottom:20px;text-align:left}.articles-small-list>li{margin:0;padding:0;list-style-type:none}.articles-small-list>li>a{display:block;padding:10px 16px;border-bottom:1px solid #eee;text-align:left;line-height:20px}.articles-small-list>li>a:after{font-family:FontAwesome;content:"";font-style:normal;font-weight:normal;text-decoration:inherit;text-decoration:none !important;font-size:75%;display:inline-block;opacity:.5;vertical-align:baseline}.articles-small-list>li>a:hover:after{opacity:1}.articles-small-list>li>a:after{margin-left:10px;margin-right:0}.articles-small-list>li>a:after{display:block;float:right;line-height:20px}
+
+/*# sourceMappingURL=articles_small_list.css.map */

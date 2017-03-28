@@ -11,6 +11,8 @@ class User extends AppModel {
 		'Uploadable.ContainFieldUpload',
 	];
 
+	public $hasMany = ['UserLink'];
+
 	public $hasAndBelongsToMany = [
 		'Podcast',
 		'PodcastEpisode',

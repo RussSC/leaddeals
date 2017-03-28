@@ -2,6 +2,7 @@
 
 $podcast-thumbnail-width: 240px;
 $podcast-thumbnail-padding: $line-height-computed;
+$max-body-width: 600px;
 
 .podcast-view {
 	position: relative;
@@ -52,7 +53,15 @@ $podcast-thumbnail-padding: $line-height-computed;
 			}
 		}
 	}
+
+	&-body, &-articles {
+		max-width: $max-body-width;
+		margin: 0 auto;
+		vertical-align: top;
+		margin-bottom: $line-height-computed;
+	}
 	
+
 	&-title {
 		margin-top: $line-height-computed;
 		margin-bottom: $line-height-computed;
@@ -62,5 +71,21 @@ $podcast-thumbnail-padding: $line-height-computed;
 		margin: 0;
 		font-size: $font-size-large;
 		font-weight: normal;
+	}
+}
+
+@media screen and (min-width: $screen-lg-min) {
+	.podcast-view {
+		&-body, &-articles {
+			display: inline-block;
+			border-sizing: box-model;
+			padding: $padding-base-vertical $padding-base-horizontal;
+		}
+		&-body {
+			width: 75%;
+		}
+		&-articles {
+			width: 25%;
+		}
 	}
 }

@@ -26,7 +26,7 @@ echo $this->Form->input('description', [
 	'afterInput' => '<span class="help-block">NOTE: Avoid swearing or referencing bad stuff in the description. It makes iTunes sad</span>',
 ]);
 
-echo $this->Form->input('posted', [
+echo $this->Form->input('published', [
 	'div' => 'form-group input-date',
 	'label' => 'Date Posted',
 	'afterInput' => '<span class="help-block">Post in the future to delay posting</span>',
