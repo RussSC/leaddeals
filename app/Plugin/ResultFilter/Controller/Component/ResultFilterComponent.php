@@ -154,12 +154,16 @@ class ResultFilterComponent extends Component {
 		return $this->_dataWithDefaults($data);
 	}
 
+	protected function setRequestData($data) {
+		$this->controller->request->data[self::DATA_KEY] = $data;
+		$this->setData($data);
+	}
+	
 	protected function setData($data) {
 		$this->_data = $data;
 		foreach ((array) $data as $key => $val) {
 			$this->setFilterValue($key, $val);
 		}
-		$this->controller->request->data[self::DATA_KEY] = $data;
 		$this->setVars();
 	}
 
