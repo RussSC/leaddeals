@@ -11,7 +11,18 @@ $this->Form->create();
 
 echo $this->Form->hidden('id');
 echo $this->Form->hidden('user_id', ['default' => CakeSession::read('Auth.User.id')]);
-echo $this->Form->hidden('active');
+
+echo $this->Form->input('active', [
+	'label' => 'Active',
+	'help' => 'Is this ready to be published?',
+]);
+
+echo $this->Form->input('published', [
+	'label' => 'Publish',
+	'div' => 'form-group form-group-datetime',
+	'help' => 'When should this article be published',
+]);
+
 echo $this->FieldUploadImage->input('banner', [
 	'fromUrl' => true,
 	'size' => 'banner',

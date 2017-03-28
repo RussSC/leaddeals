@@ -9,3 +9,12 @@
 	position: relative;
 	z-index: 20;
 }
+
+.form-group {
+	&-datetime {
+		.form-control {
+			display: inline-block;
+			width: auto;
+		}
+	}
+}
