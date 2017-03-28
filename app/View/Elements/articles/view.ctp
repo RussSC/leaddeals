@@ -27,6 +27,7 @@ $body = $this->DisplayText->text($body);
 	<header class="article-view-header">
 		<?php if ($banner = $this->FieldUploadImage->image($article['Article'], 'banner', 'banner', [
 				'class' => 'article-view-header-banner',
+				'modified' => true
 			])):
 				echo $banner;
 		endif; ?>
