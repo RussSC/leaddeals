@@ -14,6 +14,9 @@ class ArticlesController extends AppController {
 	public function beforeFilter($options = []) {
 		parent::beforeFilter($options);
 		$this->Auth->deny(['add', 'edit']);
+	}
+
+	public function index() {
 		$this->ResultFilter->set([
 			'podcast_id' => [
 				'label' => 'Podcast',
@@ -24,9 +27,7 @@ class ArticlesController extends AppController {
 				'default' => null,
 			],
 		]);
-	}
 
-	public function index() {
 		$this->paginate = $this->ResultFilter->filter(['public' => 1]);
 
 		$articles = $this->paginate();
