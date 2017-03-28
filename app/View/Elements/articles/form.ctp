@@ -55,6 +55,7 @@ echo $this->EmbeddedImage->input();
 					'options' => ['' => ' -- Select an Episode -- '] + $podcastEpisodes,
 					'class' => 'element-input-list-key form-control',
 					'label' => false,
+					'required' => false,
 				]);
 				return $out;
 			}
