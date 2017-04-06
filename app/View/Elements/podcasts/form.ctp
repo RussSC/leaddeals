@@ -1,4 +1,5 @@
 <?php 
+
 $View = $this;
 
 $this->layout = 'CenteredContent.form';
@@ -30,6 +31,11 @@ echo $this->Form->input('itunes_url', [
 	'label' => 'iTunes URL',
 	'help' => 'The URL to link back to the iTunes profile',
 ]);
+echo $this->Form->input('store_url', [
+	'label' => 'Store URL',
+	'help' => 'The URL to link back to your online store',
+]);
+
 echo $this->Form->input('category', [
 	'help' => 'A category is needed to add it to iTunes',
 	'default' => 'Comedy',

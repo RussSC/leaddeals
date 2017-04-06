@@ -140,6 +140,7 @@ class AppSchema extends CakeSchema {
 		'active' => array('type' => 'boolean', 'null' => true, 'default' => null),
 		'explicit' => array('type' => 'boolean', 'null' => true, 'default' => null),
 		'itunes_url' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 128, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'store_url' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 128, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
 		'podcast_episode_count' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 6, 'unsigned' => false),
 		'last_episode_published' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),

@@ -93,7 +93,9 @@ if (!empty($podcastEpisode['Podcast']['itunes_url'])) {
 					<?php if (!empty($podcastEpisode['PodcastEpisode']['description'])): ?>
 						<?php echo nl2br($podcastEpisode['PodcastEpisode']['description']); ?>		
 					<?php endif; ?>
-					<h5 class="podcast-episode-view-date"><?php echo date('F j, Y', strtotime($podcastEpisode['PodcastEpisode']['published'])); ?></h4>
+					<h5 class="podcast-episode-view-date"><?php 
+						echo date('F j, Y', strtotime($podcastEpisode['PodcastEpisode']['published'])); 
+					?></h5>
 				</div>
 
 

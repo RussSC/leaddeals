@@ -10,6 +10,11 @@ $max-body-width: 600px;
 
 	padding-top: $podcast-thumbnail-width - $podcast-thumbnail-padding;
 
+	section {
+		padding: $padding-base-vertical $padding-base-horizontal;
+		margin-bottom: $line-height-computed;
+	}
+
 	&-bg {
 		bottom: 0;
 		left: 0;
@@ -60,7 +65,14 @@ $max-body-width: 600px;
 		vertical-align: top;
 		margin-bottom: $line-height-computed;
 	}
-	
+	&-articles {
+		background-color: $gray-lightest;
+		border-radius: $border-radius-large;
+	}
+
+	&-description {
+		@include text-width-ratio($font-size-large);
+	}
 
 	&-title {
 		margin-top: $line-height-computed;
@@ -78,7 +90,7 @@ $max-body-width: 600px;
 	.podcast-view {
 		&-body, &-articles {
 			display: inline-block;
-			border-sizing: box-model;
+			box-sizing: border-box;
 			padding: $padding-base-vertical $padding-base-horizontal;
 		}
 		&-body {

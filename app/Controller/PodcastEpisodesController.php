@@ -22,6 +22,10 @@ class PodcastEpisodesController extends AppController {
 				'cache' => true,
 			]
 		]);
+
+		if (empty($result['PodcastEpisode']['active']) && empty($result['PodcastEpisode']['download_url'])) {
+			$this->redirect(['action' => 'edit', $id]);
+		}
 		
 		if (empty($slug) && !empty($result['PodcastEpisode']['slug'])) {
 			$this->redirect([

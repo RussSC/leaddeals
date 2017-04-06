@@ -1,6 +1,6 @@
 @import "../utilities/index";
 .article-view {
-	max-width: $screen-sm-min;
+	max-width: $screen-lg-min;
 	margin: 0 auto;
 	&-header, &-body {
 		border-bottom: 1px solid $gray-lighter;
@@ -15,12 +15,18 @@
 	}
 	&-body {
 		text-align: justify;
-		font-size: $font-size-large;
+		@include text-width-ratio($font-size-large);
+
 		line-height: 1.5;
 		overflow: hidden;
 	}
-	&-footer {
+	&-header-title, &-header-byline, &-footer {
 		text-align: center;
+		max-width: $screen-sm-min;
+		margin: 0 auto;
+	}
+
+	&-footer {
 		section {
 			margin-bottom: $line-height-computed / 2;
 			> .section-title {

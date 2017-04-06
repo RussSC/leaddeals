@@ -1,0 +1,6 @@
+@mixin text-width-ratio($font-size) {
+	font-size: $font-size;
+	max-width: $font-size * 30;
+	margin-left: auto;
+	margin-right: auto;
+}

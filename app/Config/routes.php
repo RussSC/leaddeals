@@ -38,9 +38,20 @@
 		]
 	);
 
+	Router::connect('/podcasts/edit/:id', 
+		['controller' => 'podcasts', 'action' => 'edit'],
+		['pass' => ['id']]
+	);
+	Router::connect('/podcasts/view/:id', 
+		['controller' => 'podcasts', 'action' => 'view'],
+		['pass' => ['id']]
+	);
 	Router::connect('/podcasts/:slug', 
 		['controller' => 'podcasts', 'action' => 'view'], 
-		['pass' => ['slug']]
+		[
+			'slug' => '[A-Za-z][^\s/]+',
+			'pass' => ['slug']
+		]
 	);
 
 	Router::connect('/podcasts/:slug/:action', 

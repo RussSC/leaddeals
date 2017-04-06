@@ -29,14 +29,23 @@ class PodcastsController extends AppController {
 		$this->set(compact('podcasts', 'recentEpisodes'));
 	}
 
+	public function edit($id = null) {
+		$this->Crud->setSuccessRedirect([
+			'action' => 'view',
+			'slug' => '__ID__',
+		]);
+		$this->Crud->update($id);
+	}
+
 	public function view($id = null) {
-		$id = $this->fetchId($id);	
+		$id = $this->fetchId($id);
 		$result = $this->Crud->read($id, [
 			'query' => [
 				'public' => !$this->Auth->user('is_admin'),
 				'cache' => true,
 			]
 		]);
+
 		$this->paginate = [
 			'PodcastEpisode' => [
 				'contain' => ['Podcast'],
@@ -66,8 +75,15 @@ class PodcastsController extends AppController {
 			'cache' => true,
 		]);
 
+		$recentPodcastEpisode = $this->Podcast->PodcastEpisode->find('first', [
+			'public' => 1,
+			'conditions' => ['PodcastEpisode.podcast_id' => $id],
+			'order' => ['PodcastEpisode.published' => 'DESC'],
+			'cache' => true,
+		]);
+
 		$isEditor = $this->Auth->user('is_admin');
-		$this->set(compact('podcastEpisodes', 'recentEpisodes', 'isEditor', 'articles'));
+		$this->set(compact('podcastEpisodes', 'recentEpisodes', 'isEditor', 'articles', 'recentPodcastEpisode'));
 
 		$this->set([
 			'title_for_layout' => $result['Podcast']['title'],
@@ -146,4 +162,12 @@ class PodcastsController extends AppController {
 		$users = $this->Podcast->User->find('list');
 		$this->set(compact('users'));
 	}	
+
+	public function isAuthorized($user) {
+		if ($this->request->action == 'edit') {
+			$id = $this->request->params['pass'][0];
+			return $this->Podcast->isEditor($id, $this->Auth->user('id'));
+		}
+		return parent::isAuthorized($user);
+	}
 }

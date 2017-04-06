@@ -15,6 +15,16 @@ if (!empty($podcast['Podcast']['itunes_url'])):
 		'urlTitle' => 'Subscribe via iTunes',
 	];
 endif;
+
+if (!empty($podcast['Podcast']['store_url'])):
+	$mainButtons[] = [
+		'title' => 'Store',
+		'icon' => Icon::shoppingCart(),
+		'url' => $podcast['Podcast']['store_url'],
+		'urlTitle' => 'Shop products',
+	];
+endif;
+
 ?>
 
 <?php $this->Html->css('views/podcast-view', null, ['inline' => false]); ?>
@@ -77,6 +87,21 @@ endif;
 						'View more',
 						['controller' => 'articles', 'action' => 'index', 'ResultFilter-podcast_id' => $podcast['Podcast']['id']]
 					); ?>
+				</section>
+			<?php endif; ?>
+
+			<?php if (!empty($recentPodcastEpisode)): ?>
+				<section class="podcast-view-body">
+					<h5>Latest Episode: <?php echo $this->Html->link(
+						$recentPodcastEpisode['PodcastEpisode']['numeric_title'], [
+							'controller' => 'podcast_episodes', 
+							'action' => 'view', 
+							$recentPodcastEpisode['PodcastEpisode']['id']
+						]
+					); ?></h5>
+					<?php echo $this->element('podcast_episodes/player', [
+						'podcastEpisode' => $recentPodcastEpisode,
+					]); ?>
 				</section>
 			<?php endif; ?>
 
