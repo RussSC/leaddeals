@@ -67,6 +67,14 @@ class AppFormHelper extends BoostCakeFormHelper {
 		return parent::submit($caption, $options);
 	}
 
+	public function inputCopy($value, $options = []) {
+		$options['value'] = $value;
+		$name = 'input-copy-do-not-user';
+		$options['div'] = 'form-group form-group-copy';
+		$options = $this->append('Click text to select', $options);
+		$options['onClick'] = 'this.select()';
+		return $this->input($name, $options);
+	}
 
 	/*
 	public function inputs($fields = null, $blacklist = null, $options = []) {

@@ -24,8 +24,19 @@ if ($status == 'uploading'): ?>
 		<h3 class="alert-title">Add File Information</h3>
 		<div class="lead">
 			<p>Now you need to go upload your podcast file to your host. Be sure to copy over the title and description from below.</p>
+		</div>
+		<?= $this->Form->inputCopy($this->Form->value('PodcastEpisode.title'), ['label' => 'Copy the Title']); ?>
+		<?= $this->Form->inputCopy($this->Form->value('PodcastEpisode.description'), ['label' => 'Copy the Description']); ?>
+		<?= $this->Form->inputCopy(Router::url([
+			'action' => 'view', 
+			'id' => $this->Form->value('PodcastEpisode.id'), 
+			'slug' => Inflector::slug($this->Form->value('PodcastEpisode.title'))
+		], true), ['label' => 'Copy the Podcast URL']); ?>
+
+		<div class="lead">
 			<p>Once it's uploaded, copy some information from the Libsyn uploading page and paste it here:</p>
 		</div>
+
 		<?= $this->element('podcast_episodes/form/file_input') ?>
 		<?= $this->element('podcast_episodes/form/itunes_input'); ?>
 		<?= $this->element('podcast_episodes/form/active_input'); ?>
@@ -53,6 +64,9 @@ echo $this->Form->input('description', [
 
 if ($status == 'adding'):
 	echo $this->Form->hidden('active', ['value' => 0]);
+	echo $this->Form->hidden('explicit');
+	echo $this->Form->hidden('keywords');
+	
 	echo $this->element('podcast_episodes/form/published_input');
 	?>
 	<div class="alert alert-info">
