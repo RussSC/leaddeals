@@ -38,10 +38,12 @@ class PodcastsController extends AppController {
 	}
 
 	public function view($id = null) {
+		$isEditor = $this->Auth->user('is_admin') || $this->Podcast->isEditor($id);
+
 		$id = $this->fetchId($id);
 		$result = $this->Crud->read($id, [
 			'query' => [
-				'public' => !$this->Auth->user('is_admin'),
+				'public' => !$isEditor,
 				'cache' => true,
 			]
 		]);
@@ -50,7 +52,7 @@ class PodcastsController extends AppController {
 			'PodcastEpisode' => [
 				'contain' => ['Podcast'],
 				'recursive' => -1,
-				'public' => !$this->Auth->user('is_admin'),
+				'public' => !$isEditor,
 				'conditions' => [
 					'PodcastEpisode.podcast_id' => $id,
 				],
@@ -69,7 +71,7 @@ class PodcastsController extends AppController {
 		]);
 
 		$recentEpisodes = $this->Podcast->PodcastEpisode->find('all', [
-			'public' => !$this->Auth->user('is_admin'),
+			'public' => !$isEditor,
 			'order' => ['PodcastEpisode.published' => 'DESC'],
 			'limit' => 10,
 			'cache' => true,
@@ -82,14 +84,16 @@ class PodcastsController extends AppController {
 			'cache' => true,
 		]);
 
-		$isEditor = $this->Auth->user('is_admin');
 		$this->set(compact('podcastEpisodes', 'recentEpisodes', 'isEditor', 'articles', 'recentPodcastEpisode'));
 
 		$this->set([
 			'title_for_layout' => $result['Podcast']['title'],
-			'description_for_layout' => $result['Podcast']['description'],
-			'image_for_layout' => $result['Podcast']['uploadable']['banner']['sizes']['banner-share']['src'],
+			'description_for_layout' => $result['Podcast']['description']
 		]);
+
+		if (!empty($result['Podcast']['uploadable']['banner']['sizes']['banner-share']['src'])) {
+			$this->set('image_for_layout', $result['Podcast']['uploadable']['banner']['sizes']['banner-share']['src']);
+		}
 	}
 
 	public function itunes($id = null) {
