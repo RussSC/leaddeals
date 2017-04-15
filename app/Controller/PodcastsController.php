@@ -38,7 +38,7 @@ class PodcastsController extends AppController {
 	}
 
 	public function view($id = null) {
-		$isEditor = $this->Auth->user('is_admin') || $this->Podcast->isEditor($id);
+		$isEditor = $this->Auth->user('is_admin') || $this->Podcast->isEditor($id, $this->Auth->user('id'));
 
 		$id = $this->fetchId($id);
 		$result = $this->Crud->read($id, [
