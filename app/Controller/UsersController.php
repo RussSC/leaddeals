@@ -26,7 +26,7 @@ class UsersController extends AppController {
 	}
 
 	public function _afterSaveData($created) {
-		if ($created) {
+		if ($created && empty($this->request->params['prefix'])) {
 			$user = $this->User->read();
 			$this->Auth->login($user['User']);
 		}
@@ -75,10 +75,24 @@ class UsersController extends AppController {
 		$id = $this->Auth->user('id');
 		if (empty($id)) {
 			$this->redirect(['action' => 'index']);
+		} else {
+			$this->redirect(['action' => 'view', $id]);
 		}
-		$result = $this->Crud->read($id, [
-			'contain' => ['Podcast'],
+		/*
+		$result = $this->Crud->read($id);
+		$podcasts = $this->User->Podcast->find('all', [
+			'recursive' => -1,
+			'hasUser' => $id,
+			//'public' => $onlyPublic,
 		]);
+		$podcastEpisodes = $this->User->PodcastEpisode->find('all', [
+			'recursive' => -1,
+			//'public' => $onlyPublic,
+			'hasUser' => $id,
+			'limit' => 8,
+		]);		
+		$this->set(compact('podcasts', 'podcastEpisodes'));
+		*/
 	}
 
 	/* LOGIN */
@@ -172,6 +186,8 @@ class UsersController extends AppController {
 	}
 
 	public function admin_view($id = null) {
+		// Redirects for now until we need an admin view for users
+		$this->redirect(['admin' => false, 'action' => 'view', $id]);
 		$this->Crud->read($id);
 	}
 }
