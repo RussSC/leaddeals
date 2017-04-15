@@ -71,8 +71,13 @@ class AppFormHelper extends BoostCakeFormHelper {
 		$options['value'] = $value;
 		$name = 'input-copy-do-not-user';
 		$options['div'] = 'form-group form-group-copy';
-		$options = $this->append('Click text to select', $options);
-		$options['onClick'] = 'this.select()';
+		$options['readonly'] = true
+;		$options['beforeInput'] = '<div class="input-group">';
+		$options['afterInput'] = '<span class="input-group-btn">';
+		$options['afterInput'] .= '<button type="button" class="btn btn-default">Copy</button>';
+		$options['afterInput'] .= '</span>';
+		$options['afterInput'] .= '</div>';
+
 		return $this->input($name, $options);
 	}
 

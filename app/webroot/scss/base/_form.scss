@@ -9,6 +9,16 @@
 	}
 }
 
+.form-group.form-group-copy {
+	.form-control {
+		background-color: $gray-lighter;
+		font-style: italic;
+		&:hover {
+			cursor: pointer;
+		}
+	}
+}
+
 fieldset {
 	margin-bottom: $line-height-computed;
 	
