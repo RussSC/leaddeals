@@ -14,6 +14,7 @@
 		position: relative;
 		width: 50%;
 		border: 1px solid $gray-lighter;
+		background: linear-gradient($gray-lighter, $gray-light);
 		float: left;
 		@include min-height-to-width();
 
@@ -39,6 +40,7 @@
 		}
 		&:hover {
 			border-color: $link-hover-color;
+			background: $gray-lighter;
 			.thumbnail-list-item-caption {
 				color: $link-hover-color;
 			}
