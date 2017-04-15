@@ -55,15 +55,15 @@ class UsersController extends AppController {
 
 	public function view($id = null) {
 		$result = $this->Crud->read($id);
-		$isUser = $id == $this->Auth->user('id');
+		$onlyPublic = !$this->Auth->user('is_admin') && ($id != $this->Auth->user('id'));
 		$podcasts = $this->User->Podcast->find('all', [
 			'recursive' => -1,
 			'hasUser' => $id,
-			'public' => $isUser,
+			'public' => $onlyPublic,
 		]);
 		$podcastEpisodes = $this->User->PodcastEpisode->find('all', [
 			'recursive' => -1,
-			'public' => $isUser,
+			'public' => $onlyPublic,
 			'hasUser' => $id,
 			'limit' => 5,
 		]);
