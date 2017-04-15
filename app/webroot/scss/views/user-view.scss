@@ -1,6 +1,9 @@
 @import "../utilities/index";
 .user-view {
 	&-heading {
+		&-title {
+			text-align: center;
+		}
 		&-banner {
 			width: 100%;
 		}
