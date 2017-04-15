@@ -82,10 +82,14 @@ class AppController extends Controller {
 	];
 
 	public function beforeFilter($options = []) {
+		parent::beforeFilter($options);
+
 		$params = $this->request->params;
 
 		$action = $params['action'];
 		$prefix = null;
+
+		// Sets Layout based on Prefix
 		if (!empty($params['prefix'])) {
 			$prefix = $params['prefix'];
 			$this->layout = $prefix;
@@ -99,12 +103,12 @@ class AppController extends Controller {
 				}
 			}
 		}
+
+		// Allows all non-prefixed pages except forms
 		if (empty($prefix)) {
-			//exit($prefix);
 			$this->Auth->allow();
 			$this->Auth->deny(['add', 'edit', 'delete']);
 		}
-		return parent::beforeFilter($options);
 	}
 
 	public function beforeRender($options = []) {

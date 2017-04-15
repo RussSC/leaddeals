@@ -15,9 +15,11 @@ class PodcastEpisodesController extends AppController {
 	
 	public function view($id = null, $slug = null) {
 		$id = $this->fetchId($id);
+		$isEditor = $this->PodcastEpisode->isEditor($id, $this->Auth->user('id'));
+		
 		$result = $this->Crud->read($id, [
 			'query' => [
-				'public' => !$this->Auth->user('is_admin'),
+				'public' => !$isEditor,
 				'contain' => ['Podcast' => ['PodcastLink']],
 				'cache' => true,
 			]
@@ -36,12 +38,12 @@ class PodcastEpisodesController extends AppController {
 		}
 
 		$this->set('neighbors', $this->PodcastEpisode->findNeighbors($id, [
-			'public' => !$this->Auth->user('is_admin'),
+			'public' => !$isEditor,
 			'cache' => true,
 		]));
 
 		$podcastEpisodes = $this->PodcastEpisode->find('all', [
-			'public' => !$this->Auth->user('is_admin'),
+			'public' => !$isEditor,
 			'contain' => ['Podcast'],
 			'conditions' => [
 				'PodcastEpisode.podcast_id' => $result['Podcast']['id'],
@@ -51,7 +53,7 @@ class PodcastEpisodesController extends AppController {
 		]);
 
 		$recentEpisodes = $this->PodcastEpisode->find('all', [
-			'public' => !$this->Auth->user('is_admin'),
+			'public' => !$isEditor,
 			'order' => ['PodcastEpisode.published' => 'DESC'],
 			'limit' => 10,
 		]);
@@ -61,20 +63,22 @@ class PodcastEpisodesController extends AppController {
 			'public' => 1,
 		]);
 
-		$isEditor = $this->PodcastEpisode->isEditor($id, $this->Auth->user('id'));
 		$this->set(compact('podcastEpisodes', 'recentEpisodes', 'isEditor'));
 
 		$this->set([
 			'title_for_layout' => $result['PodcastEpisode']['full_title'],
-			'description_for_layout' => $result['PodcastEpisode']['description'],
-			'image_for_layout' => $result['PodcastEpisode']['uploadable']['banner']['sizes']['banner-share']['src'],
+			'description_for_layout' => $result['PodcastEpisode']['description']
 		]);
+
+		if (!empty($result['PodcastEpisode']['uploadable']['banner']['sizes']['banner-share']['src'])) {
+			$this->set('image_for_layout', $result['PodcastEpisode']['uploadable']['banner']['sizes']['banner-share']['src']);
+		}
 
 	}
 
 	public function player($id = null) {
 		$this->Crud->read($id, [
-			'public' => !$this->Auth->user('is_admin'),
+			'public' => !$this->PodcastEpisode->isEditor($id, $this->Auth->user('id')),
 		]);
 		$this->layout = 'popup';
 	}
@@ -110,7 +114,7 @@ class PodcastEpisodesController extends AppController {
 
 	public function download($id = null) {
 		$result = $this->Crud->read($id, [
-			'public' => !$this->Auth->user('is_admin'),
+			'public' => !$this->PodcastEpisode->isEditor($id, $this->Auth->user('id')),
 		]);
 		$this->PodcastEpisode->setDownloaded($id, $_SERVER['REMOTE_ADDR']);
 		$this->redirect($result['PodcastEpisode']['download_url']);
@@ -150,5 +154,19 @@ class PodcastEpisodesController extends AppController {
 	public function _setFormElements() {
 		$users = $this->PodcastEpisode->User->find('list');
 		$this->set(compact('users'));
+	}
+
+	public function isAuthorized($user) {
+		$action = $this->request->action;
+		$userId = $this->Auth->user('id');
+		if ($action == 'edit' || $action == 'delete') {
+			$id = $this->request->params['pass'][0];
+			return $this->PodcastEpisode->isEditor($id, $userId);
+		} else if ($action == 'add') {
+			$podcastId = $this->request->params['pass'][0];
+			return $this->PodcastEpisode->Podcast->isEditor($podcastId, $userId);
+		}
+		return parent::isAuthorized($user);
+
 	}
 }

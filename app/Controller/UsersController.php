@@ -9,6 +9,11 @@ class UsersController extends AppController {
 	
 	//public $layout = 'default_container';
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow(['add']);
+	}
+
 	public function beforeRender($options = []) {
 		parent::beforeRender($options);
 		if (!empty($this->viewVars['user']['User']['id'])) {
