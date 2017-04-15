@@ -9,8 +9,8 @@ class UsersController extends AppController {
 	
 	//public $layout = 'default_container';
 
-	public function beforeFilter() {
-		parent::beforeFilter();
+	public function beforeFilter($options = []) {
+		parent::beforeFilter($options);
 		$this->Auth->allow(['add']);
 	}
 
