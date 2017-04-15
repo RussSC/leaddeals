@@ -65,7 +65,7 @@ class UsersController extends AppController {
 			'recursive' => -1,
 			'public' => $onlyPublic,
 			'hasUser' => $id,
-			'limit' => 5,
+			'limit' => 8,
 		]);
 
 		$this->set(compact('podcasts', 'podcastEpisodes'));

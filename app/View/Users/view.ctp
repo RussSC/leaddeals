@@ -32,12 +32,12 @@ $this->Html->css('views/user-view', null, ['inline' => false]);
 	<?php if (!empty($podcastEpisodes)): ?>
 		<section>
 			<header>
-				<h3>Podcast Episodes</h3>
+				<h3>Latest Podcast Episodes</h3>
 			</header>
 			<?php echo $this->element('podcast_episodes/thumbnail_list', ['podcastEpisodes' => $podcastEpisodes]); ?>
 		</section>
 	<?php endif; ?>	
-	
+
 </div>
 <?php if ($isEditor):
 	echo $this->element('editor_panel', ['actions' => ['edit']]);
