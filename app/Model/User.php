@@ -11,6 +11,8 @@ class User extends AppModel {
 		'Uploadable.ContainFieldUpload',
 	];
 
+	public $order = ['User.name' => 'ASC'];
+
 	public $hasMany = ['UserLink'];
 
 	public $hasAndBelongsToMany = [

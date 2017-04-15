@@ -54,12 +54,20 @@ class UsersController extends AppController {
 	}
 
 	public function view($id = null) {
-		$result = $this->Crud->read($id, ['contain' => [
-			'Podcast', 
-			'PodcastEpisode' => [
-				'limit' => 5,
-			]
-		]]);
+		$result = $this->Crud->read($id);
+		$podcasts = $this->User->Podcast->find('all', [
+			'recursive' => -1,
+			'hasUser' => $id,
+			'public' => true,
+		]);
+		$podcastEpisodes = $this->User->PodcastEpisode->find('all', [
+			'recursive' => -1,
+			'public' => true,
+			'hasUser' => $id,
+			'limit' => 5,
+		]);
+
+		$this->set(compact('podcasts', 'podcastEpisodes'));
 	}
 
 	public function you() {

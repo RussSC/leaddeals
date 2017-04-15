@@ -107,20 +107,9 @@ endif;
 
 			<footer>
 				<?php if (!empty($podcast['User'])): ?>
-					<p>
-						<strong>Authors:</strong>
-						<?php
-						$users = [];
-						foreach ($podcast['User'] as $user):
-							$users[] = $this->Html->link(
-								$user['name'], 
-								['controller' => 'users', 'action' => 'view', $user['id']]											
-							);
-						endforeach; 
-						echo implode(', ', $users);
-						?>
-					</p>
+					<?= $this->element('users/list', ['title' => 'Authors', 'users' => $podcast['User']]) ?>
 				<?php endif; ?>
+
 				<?php if (!empty($podcast['PodcastLink'])):
 					echo $this->element('podcast_links/list', [
 						'podcastLinks' => $podcast['PodcastLink'],

@@ -1,4 +1,5 @@
 <?php
+$View = $this;
 
 if (!$this->Form->value('PodcastEpisode.id')) {
 	$status = 'adding';
@@ -61,12 +62,32 @@ echo $this->Form->input('title');
 echo $this->Form->input('description', [
 	'help' => 'NOTE: Avoid swearing or referencing bad stuff in the description. It makes iTunes sad',
 ]);
+?>
 
+<fieldset>
+	<legend>Appearing on this episode</legend>
+	<?php 
+	echo $this->element('Layout.form/element_input_list', [
+		'model' => 'PodcastEpisodesUser',
+		'count' => 0,
+		'function' => function($count) use ($View, $users) {
+			$out =  $View->Form->hidden('PodcastEpisodesUser.' . $count . '.id', ['class' => 'element-input-list-key']);
+			$out .= $View->Form->input('PodcastEpisodesUser.' . $count . '.user_id', [
+				'options' => ['' => ' -- Select a User -- '] + $users,
+				'label' => false,
+			]);
+			return $out;
+		}
+	]);
+	?>
+</fieldset>
+
+<?php
 if ($status == 'adding'):
 	echo $this->Form->hidden('active', ['value' => 0]);
 	echo $this->Form->hidden('explicit');
 	echo $this->Form->hidden('keywords');
-	
+
 	echo $this->element('podcast_episodes/form/published_input');
 	?>
 	<div class="alert alert-info">

@@ -12,7 +12,7 @@ class PodcastEpisode extends AppModel {
 
 	public $order = ['PodcastEpisode.created' => 'DESC'];
 	
-	public $hasMany = ['PodcastEpisodeDownload'];
+	public $hasMany = ['PodcastEpisodeDownload', 'PodcastEpisodesUser'];
 	public $belongsTo = [
 		'Podcast' => [
 			'counterCache' => 'podcast_episode_count',

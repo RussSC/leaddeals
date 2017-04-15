@@ -64,7 +64,9 @@ if (!empty($podcastEpisode['Podcast']['itunes_url'])) {
 			<header>
 				<h4 class="podcast-episode-view-header-podcast-title">
 					<a href="<?php echo Router::url($podcastUrl); ?>" ><?php echo $podcastEpisode['Podcast']['title']; ?></a>
-					 : Episode #<?php echo $this->Podcast->episodeNumber($podcastEpisode['PodcastEpisode']['episode_number']); ?>
+					 : Episode #<?php echo $this->Podcast->episodeNumber(
+					 	$podcastEpisode['PodcastEpisode']['episode_number']
+					 ); ?>
 				</h4>
 				<h2 class="podcast-episode-view-header-title">
 					<?php echo $podcastEpisode['PodcastEpisode']['title']; ?>
@@ -96,6 +98,13 @@ if (!empty($podcastEpisode['Podcast']['itunes_url'])) {
 					<h5 class="podcast-episode-view-date"><?php 
 						echo date('F j, Y', strtotime($podcastEpisode['PodcastEpisode']['published'])); 
 					?></h5>
+
+					<?php if (!empty($podcastEpisode['User'])): ?>
+						<?= $this->element('users/list', [
+							'title' => 'In this episode', 
+							'users' => $podcastEpisode['User']
+						]) ?>
+					<?php endif; ?>
 				</div>
 
 
@@ -114,7 +123,8 @@ if (!empty($podcastEpisode['Podcast']['itunes_url'])) {
 						if (!empty($neighbors[$key])) {
 							$neighbor = $neighbors[$key]['PodcastEpisode'];
 							$url = ['action' => 'view', $neighbor['id']];
-							$title = '<small>Episode ' . $this->Podcast->episodeNumber($neighbor['episode_number']) . '</small>';
+							$title = '<small>Episode ' . $this->Podcast->episodeNumber(
+								$neighbor['episode_number']) . '</small>';
 							$title .= '<br/>';
 							$title .= $neighbor['title'];
 						} else {

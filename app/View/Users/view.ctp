@@ -20,22 +20,24 @@ $this->Html->css('views/user-view', null, ['inline' => false]);
 		</div>
 	<?php endif; ?>
 
-	<?php if (!empty($user['Podcast']) || !empty($user['PodcastEpisode'])): ?>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="panel-title">Podcasts</div>
-			</div>
-			<div class="panel-body">
-			<?php if (!empty($user['Podcast'])): ?>
-				<?php echo $this->element('podcasts/thumbnail_list', ['podcasts' => $user['Podcast']]); ?>
-			<?php endif; ?>	
-
-			<?php if (!empty($user['PodcastEpisode'])): ?>
-				<?php echo $this->element('podcasts/thumbnail_list', ['podcasts' => $user['Podcast']]); ?>
-			<?php endif; ?>	
-			</div>
-		</div>
+	<?php if (!empty($podcasts)): ?>
+		<section>
+			<header>
+				<h3>Podcasts</h3>
+			</header>
+			<?php echo $this->element('podcasts/thumbnail_list', ['podcasts' => $podcasts]); ?>
+		</section>
 	<?php endif; ?>	
+
+	<?php if (!empty($podcastEpisodes)): ?>
+		<section>
+			<header>
+				<h3>Podcast Episodes</h3>
+			</header>
+			<?php echo $this->element('podcast_episodes/thumbnail_list', ['podcastEpisodes' => $podcastEpisodes]); ?>
+		</section>
+	<?php endif; ?>	
+	
 </div>
 <?php if ($isEditor):
 	echo $this->element('editor_panel', ['actions' => ['edit']]);

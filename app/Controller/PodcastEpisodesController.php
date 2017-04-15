@@ -20,7 +20,7 @@ class PodcastEpisodesController extends AppController {
 		$result = $this->Crud->read($id, [
 			'query' => [
 				'public' => !$isEditor,
-				'contain' => ['Podcast' => ['PodcastLink']],
+				'contain' => ['Podcast' => ['PodcastLink'], 'User'],
 				'cache' => true,
 			]
 		]);
@@ -90,7 +90,14 @@ class PodcastEpisodesController extends AppController {
 			$this->Flash->error('You do not have permission to add a podcast episode', ['redirect' => true]);
 		}
 
-		$podcast = $this->PodcastEpisode->Podcast->read(null, $podcastId);
+		$podcast = $this->PodcastEpisode->Podcast->find('first', [
+			'contain' => ['User'],
+			'conditions' => [
+				'Podcast.id' => $podcastId,
+			]
+		]);
+
+		$userIds = Hash::extract($podcast, 'User.{n}.id');
 		$podcast = $podcast['Podcast'];
 
 		$default = [
@@ -100,8 +107,13 @@ class PodcastEpisodesController extends AppController {
 				'published' => date('Y-m-d H:i:s'),
 				'explicit' => $podcast['explicit'],
 				'keywords' => $podcast['keywords'],
-			]
+			],
 		];
+
+		foreach ($userIds as $userId) {
+			$default['PodcastEpisodesUser'][] = ['user_id' => $userId];
+		}
+
 		$this->Crud->create(compact('default'));
 	}
 
