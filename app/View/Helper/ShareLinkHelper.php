@@ -69,7 +69,11 @@ class ShareLinkHelper extends AppHelper {
 	public function link($url, $type = '', $options = []) {
 		$isLink = strpos($url, '://') !== false;
 		if (!$isLink) {
-			if (!empty($this->linkTypes[$type]['match'])) {
+			if (strpos($url, '@') !== false) {
+				if (strpos($url, 'mailto:') === false) {
+					$url = 'mailto:' . $url;
+				}
+			} else if (!empty($this->linkTypes[$type]['match'])) {
 				list($match, $replace) = $this->linkTypes[$type]['match'];
 				$url = preg_replace($match, $replace, $url);
 			} else {

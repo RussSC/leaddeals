@@ -1,7 +1,7 @@
 <?php 
 class PodcastsController extends AppController {
 	public $name = 'Podcasts';
-	public $components = ['FormData.Crud'];
+	public $components = ['FormData.Crud', 'Layout.FormLayout'];
 	public $helpers = [
 		'Rss' => [
 			'className' => 'AppRss',
