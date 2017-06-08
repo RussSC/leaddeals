@@ -67,6 +67,9 @@
 		]
 	);
 
+	//Robots.txt
+	Router::connect('/robots.txt', array('controller' => 'seo', 'action' => 'robots', 'plugin' => 'CakeSeo')); 
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

@@ -19,3 +19,6 @@
 [submodule "app/Plugin/CenteredContent"]
 	path = app/Plugin/CenteredContent
 	url = https://github.com/jamiebclark/CenteredContent.git
+[submodule "app/Plugin/CakeSeo"]
+	path = app/Plugin/CakeSeo
+	url = https://github.com/jamiebclark/CakeSeo.git
