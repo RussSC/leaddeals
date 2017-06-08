@@ -22,4 +22,7 @@
 [submodule "app/Plugin/CakeSeo"]
 	path = app/Plugin/CakeSeo
 	url = https://github.com/jamiebclark/CakeSeo.git
+[submodule "app/Plugin/TwitterBootstrap"]
+	path = app/Plugin/TwitterBootstrap
+	url = https://github.com/slywalker/TwitterBootstrap.git
 
