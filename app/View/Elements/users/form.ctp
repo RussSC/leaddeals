@@ -42,7 +42,7 @@ echo $this->Form->hidden('is_admin');
 		'count' => 0,
 		'function' => function($count) use ($View) {
 			$prefix = "UserLink.$count";
-			$out = $View->Form->hidden("$prefix.id");
+			$out = $View->Form->hidden("$prefix.id", ['class' => 'element-input-list-key']);
 			$out .= $View->Form->hidden("$prefix.podcast_id");
 			$out .= '<div class="row">';
 			$out .= '<div class="col-sm-4">' . $View->ShareLink->inputTypeSelect("$prefix.type") . '</div>';
