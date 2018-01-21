@@ -60,7 +60,7 @@ class PodcastsController extends AppController {
 					'PodcastEpisode.episode_number' => 'DESC',
 				],
 				'cache' => true,
-				'limit' => 100,
+				'limit' => 200,
 			]
 		];
 		$podcastEpisodes = $this->paginate('PodcastEpisode');
