@@ -13,7 +13,7 @@ class PodcastsController extends AppController {
 	];
 
 	//public $layout = 'default_container';
-	public function json() {
+	public function admin_json() {
 		$result = $this->Podcast->find('all', [
 			'contain' => ['PodcastEpisode'],
 		]);
