@@ -16,9 +16,7 @@ class PodcastsController extends AppController {
 	public function admin_json() {
 		$result = $this->Podcast->find('all', [
 			'contain' => [
-				'PodcastEpisode' => [
-					'contain' => ['User'],
-				],
+				'PodcastEpisode' => ['User'],
 				'User'
 			],
 		]);
