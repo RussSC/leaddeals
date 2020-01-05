@@ -1,11 +1,11 @@
-<?php 
+<?php
 class PodcastsController extends AppController {
 	public $name = 'Podcasts';
 	public $components = ['FormData.Crud', 'Layout.FormLayout'];
 	public $helpers = [
 		'Rss' => [
 			'className' => 'AppRss',
-		], 
+		],
 		'Uploadable.FieldUploadImage',
 		'ShareLink',
 		'Time',
@@ -13,13 +13,21 @@ class PodcastsController extends AppController {
 	];
 
 	//public $layout = 'default_container';
-	
+	public function json() {
+		$result = $this->Podcast->find('all', [
+			'contain' => ['PodcastEpisode'],
+		]);
+
+		$this->autoRender = false;
+		return json_encode($result);
+	}
+
 	public function index() {
 		$this->paginate = [
 			'public' => !$this->Auth->user('is_admin'),
 		];
 		$podcasts = $this->paginate();
-		
+
 		$recentEpisodes = $this->Podcast->PodcastEpisode->find('all', [
 			'public' => !$this->Auth->user('is_admin'),
 			'order' => ['PodcastEpisode.published' => 'DESC'],
@@ -165,7 +173,7 @@ class PodcastsController extends AppController {
 	public function _setFormElements() {
 		$users = $this->Podcast->User->find('list');
 		$this->set(compact('users'));
-	}	
+	}
 
 	public function isAuthorized($user) {
 		if ($this->request->action == 'edit') {
